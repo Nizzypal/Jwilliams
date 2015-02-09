@@ -22,6 +22,57 @@ CSS Style Structure
 - Footer Section
 - Contact Section
 =======================*/
+/***  -------  Product details style 2   ------- ***/
+
+.style2 .sp-thumbs {
+  top: 0 !important;
+  width: 19% !important;
+}
+.style2 .sp-thumbs img {
+  height: auto !important;
+  width: 100px !important;
+  max-width: 100%;
+  width: 100px !important;
+}
+.style2 .sp-thumbs a:link,
+.style2 .sp-thumbs a:visited {
+  float: left !important;
+  width: 100%;
+}
+.style2 .sp-large {
+  max-width: 80%!important;
+  border: 1px solid #DDDDDD;
+}
+.product-title {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  line-height: 1;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+.product-price {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 10px;
+}
+.price-standard {
+  color: #999999;
+  font-size: 18px;
+  text-decoration: line-through;
+}
+.product-code {
+  font-family: oswald, Helvetica Neue, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: lighter;
+  letter-spacing: 1px;
+  margin: 0 0 5px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+
 
 /***  -------  Home look 2 || productShowCase section  ------- ***/
 
@@ -202,8 +253,7 @@ CSS Style Structure
   -webkit-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
   -ms-transition: all 0.3s ease 0s;
-  margin-bottom: 15px;
-  height: 480px;
+
 }
 #SimilarProductSlider .item {
   height: auto !important;
