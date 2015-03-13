@@ -1,203 +1,220 @@
-<div ng-controller="MyCtrl">
+<section id="units">
+  <div class="dark-overlay vision">
+    <div class="centered  wow bounceIn">
+      <h4>Welcome to</h4>
+      <h2>Bonifacio Global City</h2>
+      <h6></h6>
+    </div>
+  </div>
+</section>
+<div class="blog">
+  <div class="container " ng-controller="MyCtrl">
 
-  <!-- Portfolio Section
-    ================================================== -->
-  <section id="portfolio" class="grid">
-    <div id="productslider" class="owl-carousel owl-theme">
-      <div class="item">
-        <div class="product">
-          <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
-            <i class="glyphicon glyphicon-heart"></i>
-          </a>
 
-          <div class="image">
-            <div class="quickview">
-              <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
-            </div>
-            <a data-target="#product-details-modal" data-toggle="modal">
-              <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
-            </a>
-            <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
-          </div>
-          <div class="description">
-            <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
-            <p>999 sqm.</p>
-            <span class="size"> 3 Bedroom </span>
-          </div>
-          <div class="price"> <span>200,000php</span>
-          </div>
-          <div class="action-control">
-            <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Request Viewing </span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="product">
-          <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
-            <i class="glyphicon glyphicon-heart"></i>
-          </a>
+    <div class="row">
+      <div class="post wow fadeIn animated" data-wow-duration="2s" style="visibility: visible; -webkit-animation-duration: 2s;">
+        <h2 class="text-center">
 
-          <div class="image">
-            <div class="quickview">
-              <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
-            </div>
-            <a data-target="#product-details-modal" data-toggle="modal">
-              <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
-            </a>
-            <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
-          </div>
-          <div class="description">
-            <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
-            <p>999 sqm.</p>
-            <span class="size"> 3 Bedroom </span>
-          </div>
-          <div class="price"> <span>200,000php</span>
-          </div>
-          <div class="action-control">
-            <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Request Viewing </span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="product">
-          <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
-            <i class="glyphicon glyphicon-heart"></i>
-          </a>
-
-          <div class="image">
-            <div class="quickview">
-              <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
-            </div>
-            <a data-target="#product-details-modal" data-toggle="modal">
-              <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
-            </a>
-            <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
-          </div>
-          <div class="description">
-            <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
-            <p>999 sqm.</p>
-            <span class="size"> 3 Bedroom </span>
-          </div>
-          <div class="price"> <span>200,000php</span>
-          </div>
-          <div class="action-control">
-            <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Request Viewing </span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="product">
-          <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
-            <i class="glyphicon glyphicon-heart"></i>
-          </a>
-
-          <div class="image">
-            <div class="quickview">
-              <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
-            </div>
-            <a data-target="#product-details-modal" data-toggle="modal">
-              <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
-            </a>
-            <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
-          </div>
-          <div class="description">
-            <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
-            <p>999 sqm.</p>
-            <span class="size"> 3 Bedroom </span>
-          </div>
-          <div class="price"> <span>200,000php</span>
-          </div>
-          <div class="action-control">
-            <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Request Viewing </span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="product">
-          <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
-            <i class="glyphicon glyphicon-heart"></i>
-          </a>
-
-          <div class="image">
-            <div class="quickview">
-              <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
-            </div>
-            <a data-target="#product-details-modal" data-toggle="modal">
-              <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
-            </a>
-            <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
-          </div>
-          <div class="description">
-            <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
-            <p>999 sqm.</p>
-            <span class="size"> 3 Bedroom </span>
-          </div>
-          <div class="price"> <span>200,000php</span>
-          </div>
-          <div class="action-control">
-            <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Request Viewing </span>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="item">
-        <div class="product">
-          <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
-            <i class="glyphicon glyphicon-heart"></i>
-          </a>
-
-          <div class="image">
-            <div class="quickview">
-              <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
-            </div>
-            <a data-target="#product-details-modal" data-toggle="modal">
-              <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
-            </a>
-            <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
-          </div>
-          <div class="description">
-            <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
-            <p>999 sqm.</p>
-            <span class="size"> 3 Bedroom </span>
-          </div>
-          <div class="price"> <span>200,000php</span>
-          </div>
-          <div class="action-control">
-            <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> Request Viewing </span>
-            </a>
-          </div>
-        </div>
+    </h2>
       </div>
     </div>
-  </section>
-  <!-- End Portfolio Section -->
-  <!--
+    <!-- Portfolio Section
+    ================================================== -->
+    <section id="portfolio" class="grid">
+      <div id="productslider" class="owl-carousel owl-theme">
+        <div class="item">
+          <div class="product">
+            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+              <i class="glyphicon glyphicon-heart"></i>
+            </a>
+
+            <div class="image">
+              <div class="quickview">
+                <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+              </div>
+              <a data-target="#product-details-modal" data-toggle="modal">
+                <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
+              </a>
+              <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
+            </div>
+            <div class="description">
+              <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
+              <p>999 sqm.</p>
+              <span class="size"> 3 Bedroom </span>
+            </div>
+            <div class="price"> <span>200,000php</span>
+            </div>
+            <div class="action-control">
+              <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-earphone"> </i> Request Viewing </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="product">
+            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+              <i class="glyphicon glyphicon-heart"></i>
+            </a>
+
+            <div class="image">
+              <div class="quickview">
+                <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+              </div>
+              <a data-target="#product-details-modal" data-toggle="modal">
+                <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
+              </a>
+              <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
+            </div>
+            <div class="description">
+              <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
+              <p>999 sqm.</p>
+              <span class="size"> 3 Bedroom </span>
+            </div>
+            <div class="price"> <span>200,000php</span>
+            </div>
+            <div class="action-control">
+              <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-earphone"> </i> Request Viewing </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="product">
+            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+              <i class="glyphicon glyphicon-heart"></i>
+            </a>
+
+            <div class="image">
+              <div class="quickview">
+                <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+              </div>
+              <a data-target="#product-details-modal" data-toggle="modal">
+                <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
+              </a>
+              <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
+            </div>
+            <div class="description">
+              <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
+              <p>999 sqm.</p>
+              <span class="size"> 3 Bedroom </span>
+            </div>
+            <div class="price"> <span>200,000php</span>
+            </div>
+            <div class="action-control">
+              <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-earphone"> </i> Request Viewing </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="product">
+            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+              <i class="glyphicon glyphicon-heart"></i>
+            </a>
+
+            <div class="image">
+              <div class="quickview">
+                <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+              </div>
+              <a data-target="#product-details-modal" data-toggle="modal">
+                <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
+              </a>
+              <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
+            </div>
+            <div class="description">
+              <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
+              <p>999 sqm.</p>
+              <span class="size"> 3 Bedroom </span>
+            </div>
+            <div class="price"> <span>200,000php</span>
+            </div>
+            <div class="action-control">
+              <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-earphone"> </i> Request Viewing </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="product">
+            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+              <i class="glyphicon glyphicon-heart"></i>
+            </a>
+
+            <div class="image">
+              <div class="quickview">
+                <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+              </div>
+              <a data-target="#product-details-modal" data-toggle="modal">
+                <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
+              </a>
+              <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
+            </div>
+            <div class="description">
+              <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
+              <p>999 sqm.</p>
+              <span class="size"> 3 Bedroom </span>
+            </div>
+            <div class="price"> <span>200,000php</span>
+            </div>
+            <div class="action-control">
+              <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-earphone"> </i> Request Viewing </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="product">
+            <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+              <i class="glyphicon glyphicon-heart"></i>
+            </a>
+
+            <div class="image">
+              <div class="quickview">
+                <a title="Quick View" class="btn btn-xs  btn-quickview" data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+              </div>
+              <a data-target="#product-details-modal" data-toggle="modal">
+                <img src="/app/img/bgc/parklane/2.JPG" ng-click='toggleModal()' alt="img" class="img-responsive">
+              </a>
+              <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
+            </div>
+            <div class="description">
+              <h4><a href="product-details.html"> FORBESWOOD PARKLANE 2</a></h4>
+              <p>999 sqm.</p>
+              <span class="size"> 3 Bedroom </span>
+            </div>
+            <div class="price"> <span>200,000php</span>
+            </div>
+            <div class="action-control">
+              <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-earphone"> </i> Request Viewing </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Portfolio Section -->
+    <!--
 
 <button ng-click='toggleModal()'>Open Modal Dialog</button>
 <modal-dialog show='modalShown' width='750px' height='60%'>
   <p>Modal Content Goes here<p>
 </modal-dialog>
 -->
-  <modal-dialog show='modalShown' height="60%" width="90%">
-    <div class="portfolio-modal">
-      <div class="modal-content">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-              <div class="modal-body">
+    <modal-dialog show='modalShown' height="60%" width="60%">
+      <div class="portfolio-modal">
+        <div class="modal-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 col-lg-offset-2">
+                <div class="modal-body">
 
-                <wrap-owlcarousel class="owl-carousel owl-theme" data-options="{autoPlay: 1500,
+                  <wrap-owlcarousel class="owl-carousel owl-theme" data-options="{autoPlay: 3000,
         slideSpeed : 300, paginationSpeed : 400, singleItem : true}">
-                  <img width="100%" src="/app/img/bgc/parklane/1.JPG"></img>
-                  <img width="100%" src="/app/img/bgc/parklane/2.JPG"></img>
-                  <img width="100%" src="/app/img/bgc/parklane/3.JPG"></img>
-                  <img width="100%" src="/app/img/bgc/parklane/4.JPG"></img>
-                  <img width="100%" src="/app/img/bgc/parklane/5.JPG"></img>
-                </wrap-owlcarousel>
+                    <img width="100%" src="/app/img/bgc/parklane/2.JPG"></img>
+                    <img width="100%" src="/app/img/bgc/parklane/3.JPG"></img>
+                    <img width="100%" src="/app/img/bgc/parklane/4.JPG"></img>
+                    <img width="100%" src="/app/img/bgc/parklane/5.JPG"></img>
+                  </wrap-owlcarousel>
 
 
                   <h2> Forbeswood Parklane 2</h2>
@@ -223,20 +240,21 @@
                       </a>
                     </div>
                   </div>
+                </div>
               </div>
             </div>
+            <!--/ product Image-->
+
+
+            <!--/.modal-details-inner-->
+
           </div>
-          <!--/ product Image-->
-
-
-          <!--/.modal-details-inner-->
-
         </div>
       </div>
-    </div>
 
-    <!-- End Modal -->
-  </modal-dialog>
+      <!-- End Modal -->
+    </modal-dialog>
+  </div>
 </div>
 <!-- jQuery / JavaScript plugins
     ================================================== -->

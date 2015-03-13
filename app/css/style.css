@@ -1198,8 +1198,13 @@ opacity: .9;
     height: 160px;
     padding-top: 30px;
 }
+.medium-overlay {
+    background: rgba(49, 57, 75, 0.81);
+    height: 160px;
+    padding-top: 30px;
+}
 .ptitle {
-    color: #535353;
+    color: #fff;
     text-align: center;
 }
 .vision {
@@ -1235,6 +1240,12 @@ opacity: .9;
 /**************************
 ********** Blog ***********
 **************************/
+#units {
+    background-image: url('../img/units.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 420px;
+}
 #blog {
     background-image: url('../img/01_services.jpg');
     background-repeat: no-repeat;

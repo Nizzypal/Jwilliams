@@ -2,15 +2,16 @@
   "name": "jwilliams",
   "version": "0.0.0",
   "dependencies": {
+    "aws-sdk": "^2.1.10",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.10.2",
     "bower": "1.3.x",
     "crypto": "0.0.3",
+    "deferred": "^0.7.2",
     "express": "^4.11.1",
-    "grunt": "^0.4.5",
     "jade": "^1.9.1",
     "mongoose": "^3.8.22",
-    "nodemailer": "^1.3.0",
+    "q": "^1.2.0",
     "request": "^2.53.0"
   },
   "devDependencies": {
@@ -44,13 +45,6 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "bower install",
-    "start": "node server.js"
-  },
-  "main": "Gruntfile.js",
-  "directories": {
-    "test": "test"
-  },
-  "author": "",
-  "license": "ISC"
+    "postinstall": "bower install"
+  }
 }
