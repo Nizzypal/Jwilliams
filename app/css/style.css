@@ -49,7 +49,7 @@ CSS Style Structure
 }
 /*==============================*/
 .ng-modal-overlay {
-  /* A dark translucent div that covers the whole screen */
+   A dark translucent div that covers the whole screen 
   position:absolute;
   z-index:9999;
   top:0;

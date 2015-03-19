@@ -286,7 +286,7 @@ app.post('/editUser', function(req, res) {
 });
 
 
-app.get('/meals', function(req, res) {
+app.get('/items', function(req, res) {
   if (!req.headers.authorization) {
     return res.status(401).send({
       message: 'You are not authorized, please login'
@@ -314,25 +314,12 @@ app.get('/meals', function(req, res) {
 })
 
 
-app.get('/getMealsByType/:typeCode', function(req, res) {
-  if (!req.headers.authorization) {
-    return res.status(401).send({
-      message: 'You are not authorized, please login'
-    });
-  }
-
-  var token = req.headers.authorization.split(' ')[1];
-  var payload = jwt.decode(token, "shh..");
-
-  if (!payload.sub) {
-    res.status(401).send({
-      message: 'Authentication failed'
-    });
-  }
-  var typeCode = req.params.typeCode;
+app.get('/getItemsByCity/:cityCode', function(req, res) {
+  console.log(req.body);
+  var cityCode = req.params.cityCode;
 
   Item.find({
-    type: typeCode
+    city: cityCode
   }, function(err, items) {
     if (err) return console.error(err);
     //console.log(items);
@@ -895,7 +882,7 @@ app.post('/auth/google', function(req, res) {
   });
 })
 
-mongoose.connect('mongodb://skitchenAdmin:WYNE012!!!@ds053678.mongolab.com:53678/skitchen');
+mongoose.connect('mongodb://jwmgiadmin:WYNE012!!!@ds041561.mongolab.com:41561/jwmgi');
 
 //app.set('views', __dirname + '/app/');
 //app.set('view engine','jade');
