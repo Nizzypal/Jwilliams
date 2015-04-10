@@ -28,6 +28,13 @@ angular.module('jwilliams').controller('AreaCtrl', function($scope, city, API_UR
       keyboardControl: true,
       mousewheelControl: true,
       slidesPerView: 1,
+      scrollbar: '.swiper-scrollbar',
+        scrollbarHide: false,
+        centeredSlides: true,
+        spaceBetween: 30,
+        grabCursor: true,
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev'
         
      
    
