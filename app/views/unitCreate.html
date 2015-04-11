@@ -1,10 +1,118 @@
+<section id="units">
+  <div class="dark-overlay vision">
+    <div class="centered  wow bounceIn">
+      <h4>Subscribe to our</h4>
+      <h2>NEWSLETTER</h2>
+      <h6></h6>
+    </div>
+  </div>
+</section>
+<div class="blog">
+  <div class="container ">
+
+
+    <div class="row">
+      <div class="post wow fadeIn animated" data-wow-duration="2s" style="visibility: visible; -webkit-animation-duration: 2s;">
+        <h2 class="text-center"></h2>
+      </div>
+    </div>
+
+    <!-- Portfolio Section
+    ================================================== -->
+
+    <section id="userInfo" class="grid">
+      <h2>Your Info</h2>
+      <div id="productslider" class="owl-carousel owl-theme">
+        <div ng-repeat='unit in units'>
+          <div class="item">
+            <div class="product">
+              <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+                <i class="glyphicon glyphicon-heart"></i>
+              </a>
+
+              <div class="image">
+                <div class="quickview">
+                  <a title="Quick View" class="btn btn-xs  btn-quickview" ng-click='toggleModal(unit)' data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+                </div>
+                <a data-target="#product-details-modal" data-toggle="modal">
+                  <img ng-src="{{unit.photos[0]}}" ng-click='toggleModal(unit)' alt="img" class="img-responsive">
+                </a>
+                <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
+              </div>
+              <div class="description">
+                <h4><a href="product-details.html"> {{unit.name}}</a></h4>
+                <!--                  <p>{{unit.type}} type, {{unit.floorCount}} floors, {{unit.condominiumName}} building </p>-->
+                <p>{{unit.address}}</p>
+                <p>{{unit.size}}, {{unit.bedroomCount}} Bedrooms, {{unit.quartersCount}} Maid's Quarters, {{unit.bathroomCount}} Bathrooms, {{unit.powderCount}} Powder rooms</p>
+              </div>
+              <div class="price"> <span>{{unit.price}}</span>
+              </div>
+              <div class="action-control">
+                <a class="btn btn-primary"> <span class="add2cart"><i class="glyphicon glyphicon-envelope"> </i> Request Viewing </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Portfolio Section -->
+
     <modal-dialog show='modalShown' height="60%" width="60%">
       <div class="portfolio-modal">
         <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal" ng-click='toggleModal(currentUnit)'>
+            <div class="lr">
+              <div class="rl">
+              </div>
+            </div>
+          </div>
           <div class="container">
             <div class="row">
               <div class="col-lg-8 col-lg-offset-2">
                 <div class="modal-body">
+
+                  <div class="swiper-container" max-height="500px">
+                    <div class="swiper-wrapper">
+                      <div ng-repeat="photo in currentUnit.photos" end-repeat class="swiper-slide">
+                        <img height="600px"  ng-src="{{photo}}"></img>
+                      </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-scrollbar"></div>
+                  </div>
+
+                  <h2> {{currentUnit.name}}</h2>
+                  <h3 class="product-code"> {{currentUnit.size}},
+                 {{currentUnit.bedroomCount}} Bedrooms,
+                 {{currentUnit.quartersCount}} Maid's Quarters,
+                   {{currentUnit.bathroomCount}} Bathrooms,
+                  {{currentUnit.powderCount}} Powder rooms </h3>
+                  <div class="product-price"> <span class="price-sales"> 199998php/month</span>  <span class="price-standard">2200000php</span>
+                  </div>
+                  <div class="details-description">
+                    <p>Beautiful home. Furnished by interior designer William Sanchez.</p>
+                  </div>
+
+                  <!--/.cart-actions-->
+
+                  <div class="product-share clearfix">
+                    <p>SHARE</p>
+                    <div class="socialIcon">
+                      <a href="#"> <i class="fa fa-facebook"></i>
+                      </a>
+                      <a href="#"> <i class="fa fa-twitter"></i>
+                      </a>
+                      <a href="#"> <i class="fa fa-google-plus"></i>
+                      </a>
+                      <a href="#"> <i class="fa fa-pinterest"></i>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -16,5 +124,15 @@
           </div>
         </div>
       </div>
+
       <!-- End Modal -->
     </modal-dialog>
+  </div>
+</div>
+
+<!-- jQuery / JavaScript plugins
+    ================================================== -->
+
+
+<script type="text/javascript" src="/app/js/script.js"></script>
+<script type="text/javascript" src="/app/js/main.js"></script>
