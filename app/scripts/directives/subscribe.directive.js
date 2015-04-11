@@ -2,7 +2,7 @@
 	'use strict';
 
 
-	function unitCreate(){
+	function subscribe(){
 		return {
 			restrict: 'AE',
 			 templateUrl: '/views/unitCreate.html',
@@ -105,6 +105,6 @@
 		};
 	};	
 
-  	dir.directive('jwUnitCreate', unitCreate);
+  	dir.directive('jwSubscribe', subscribe);
 
 })(angular.module('jwUnit.Directive',[]));

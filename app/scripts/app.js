@@ -38,9 +38,10 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     }
   });
 
-  $stateProvider.state('unitCreate', {
-    url: '/unitCreate',
-    templateUrl: '/views/unitCreate.html'
+  $stateProvider.state('subscribe', {
+    url: '/subscribe',
+    templateUrl: '/views/subscribe.html',
+    controller:  'SubscribeCtrl'
   });
 
   //    $stateProvider.state('logout',{
