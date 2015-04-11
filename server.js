@@ -257,6 +257,7 @@ app.post('/editUser', function(req, res) {
   var address1 = req.body.editFields.address1;
   var address2 = '';
   var address3 = '';
+  var subscribed = false;
 
   if (req.body.editFields.address2) address2 = req.body.editFields.address2;
   if (req.body.editFields.address3) address3 = req.body.editFields.address3;
