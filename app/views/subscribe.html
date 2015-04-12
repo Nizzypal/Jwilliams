@@ -22,18 +22,17 @@
 
     <section id="userInfo" class="grid">
       <h2>Your Info</h2>
-      <form role="form">
+      <form id="subscribe" role="form" style="background-color:#FFF">
         <div class="form-group">
-          <label for="usr" style="float:left"><h4 style="margin-bottom:0px">Name:</h4></label>
-          <input type="text" class="form-control" style="color:#000" id="usr">
+          <label for="usr" style="float:left"><h4 style="color:#000;margin-bottom:0px">Name:</h4></label>
+          <input type="text" class="form-control" style="color:#000" id="usr" name="usr">
         </div>
         <div class="form-group">
-          <label for="email" style="float:left"><h4 style="margin-bottom:0px">Email:</h4></label>
-          <input type="text" class="form-control" style="color:#000" id="email">
+          <label for="email" style="float:left"><h4 style="color:#000;margin-bottom:0px">Email:</h4></label>
+          <input type="text" class="form-control" style="color:#000" id="email"  name="email">
         </div>
-      </form>
-
-      <button type="button" class="btn btn-primary btn-md" ng-click="clicked()">Subscribe</button>      
+        <button type="submit" class="btn btn-primary btn-md" ng-click="clicked()">Subscribe</button> 
+      </form>     
     </section>
     <!-- End Portfolio Section -->
 

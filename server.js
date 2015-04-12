@@ -57,6 +57,7 @@ app.post('/register', function(req, res) {
     contact1: user.contact1,
     password: user.password,
     address1: user.address1,
+    subscribed: false,
     role: 'user'
   })
 
@@ -285,6 +286,44 @@ app.post('/editUser', function(req, res) {
 
 
 });
+
+app.post('/subscriber', function(req, res) {
+
+  var subscribed = true;
+
+  var user = req.body.usr;
+  var email = req.body.email;
+
+  var searchUser = {
+    email: email
+  };
+
+  User.findOne(searchUser, function(err, user) {
+
+    if (user) {
+      res.status(401).send({
+        message: 'Email already used by another account'
+      });
+      return;
+    }
+  });
+
+  var newUser = new User({
+    name: user.name,
+    email: user.email,
+    contact1: user.contact1,
+    password: user.password,
+    address1: user.address1,
+    subscribed: true,
+    role: 'user'
+  })
+
+  newUser.save(function(err) {
+    createSendToken(newUser, res);
+  });
+
+});
+
 
 
 app.get('/items', function(req, res) {
@@ -834,7 +873,7 @@ app.get('/meal', function(req, res) {
   })
 })
 
-app.post('/auth/google', function(req, res) {
+app.post('/auth/google/auth/google', function(req, res) {
 
   var url = 'https://accounts.google.com/o/oauth2/token';
   var apiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';

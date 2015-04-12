@@ -1,4 +1,4 @@
-angular.module('jwilliams').controller('SubscribeCtrl', function($scope) {
+angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, API_URL) {
 
 	// $scope.city = city.value;
 	// $scope.units = [];
@@ -11,7 +11,13 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope) {
 	// });
 
 	$scope.clicked = function() {
-    	alert("test");
+    	$( "#subscribe" ).submit(function() {
+			alert( "Handler for .submit() called." );
+			$http.post(API_URL + 'subscriber').success(function() {
+			}).error(function(err) {
+			    alert('warning', "Unable to get meals");
+			});
+		});
     };
 });
 
