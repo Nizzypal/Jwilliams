@@ -102,7 +102,7 @@ function createSendToken(user, res) {
   var payload = {
     sub: user.id,
     name: user.name,
-    type: user.getUserType()
+    type: user.role
   }
 
   var token = jwt.encode(payload, "shh..");
@@ -294,26 +294,26 @@ app.post('/subscriber', function(req, res) {
   var user = req.body.usr;
   var email = req.body.email;
 
-  var searchUser = {
-    email: email
-  };
+  // var searchUser = {
+  //   email: email
+  // };
 
-  User.findOne(searchUser, function(err, user) {
+  // User.findOne(searchUser, function(err, user) {
 
-    if (user) {
-      res.status(401).send({
-        message: 'Email already used by another account'
-      });
-      return;
-    }
-  });
+  //   if (user) {
+  //     res.status(401).send({
+  //       message: 'Email already used by another account'
+  //     });
+  //     return;
+  //   }
+  // });
 
   var newUser = new User({
-    name: user.name,
-    email: user.email,
-    contact1: user.contact1,
-    password: user.password,
-    address1: user.address1,
+    name: user,
+    email: email,
+    contact1: 'asdas',
+    password: 'asdas',
+    address1: '',
     subscribed: true,
     role: 'user'
   })
