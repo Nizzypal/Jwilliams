@@ -57,6 +57,7 @@ app.post('/register', function(req, res) {
     contact1: user.contact1,
     password: user.password,
     address1: user.address1,
+    subscribed: false,
     role: 'user'
   })
 
@@ -101,7 +102,7 @@ function createSendToken(user, res) {
   var payload = {
     sub: user.id,
     name: user.name,
-    type: user.getUserType()
+    type: user.role
   }
 
   var token = jwt.encode(payload, "shh..");
@@ -257,6 +258,7 @@ app.post('/editUser', function(req, res) {
   var address1 = req.body.editFields.address1;
   var address2 = '';
   var address3 = '';
+  var subscribed = false;
 
   if (req.body.editFields.address2) address2 = req.body.editFields.address2;
   if (req.body.editFields.address3) address3 = req.body.editFields.address3;
@@ -284,6 +286,44 @@ app.post('/editUser', function(req, res) {
 
 
 });
+
+app.post('/subscriber', function(req, res) {
+
+  var subscribed = true;
+
+  var user = req.body.usr;
+  var email = req.body.email;
+
+  // var searchUser = {
+  //   email: email
+  // };
+
+  // User.findOne(searchUser, function(err, user) {
+
+  //   if (user) {
+  //     res.status(401).send({
+  //       message: 'Email already used by another account'
+  //     });
+  //     return;
+  //   }
+  // });
+
+  var newUser = new User({
+    name: user,
+    email: email,
+    contact1: 'asdas',
+    password: 'asdas',
+    address1: '',
+    subscribed: true,
+    role: 'user'
+  })
+
+  newUser.save(function(err) {
+    createSendToken(newUser, res);
+  });
+
+});
+
 
 
 app.get('/items', function(req, res) {
@@ -833,7 +873,7 @@ app.get('/meal', function(req, res) {
   })
 })
 
-app.post('/auth/google', function(req, res) {
+app.post('/auth/google/auth/google', function(req, res) {
 
   var url = 'https://accounts.google.com/o/oauth2/token';
   var apiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';

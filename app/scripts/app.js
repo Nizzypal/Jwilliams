@@ -38,6 +38,12 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     }
   });
 
+  $stateProvider.state('subscribe', {
+    url: '/subscribe',
+    templateUrl: '/views/subscribe.html',
+    controller:  'SubscribeCtrl'
+  });
+
   //    $stateProvider.state('logout',{
   //        url:'/logout',
   //        controller: 'LogoutCtrl'
@@ -45,6 +51,7 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
 
   $urlRouterProvider.otherwise('/');
 });
+
 
 angular.module('jwilliams').directive('modalDialog', function() {
   return {
