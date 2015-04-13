@@ -1,0 +1,141 @@
+<section id="units">
+  <div class="dark-overlay vision">
+    <div class="centered  wow bounceIn">
+      <h2>Create A Unit</h2>
+      <h6></h6>
+    </div>
+  </div>
+</section>
+<div class="blog">
+  <div class="container " ng-controller="MyCtrl">
+
+
+    <div class="row">
+      <div class="post wow fadeIn animated" data-wow-duration="2s" style="visibility: visible; -webkit-animation-duration: 2s;">
+        <h2 class="text-center">
+        </h2>
+      </div>
+    </div>
+    <!-- Portfolio Section
+    ================================================== -->
+    <section id="portfolio" class="grid">
+      <h2>UNIT INORMATION</h2>
+<!--       <form id="subscribe" role="form" style="background-color:#FFF"> -->
+
+            <form name="sentMessage" id="contactForm" novalidate>  <!-- Contact form -->
+              <div class="row">
+                <div class="col-md-6"> <!-- 6 column grid left form -->
+                  <div class="form-group"> <!-- Your name input -->
+                    <label for="name" style="float:left"><h4 style="color:#000;margin-bottom:0px">Name:</h4></label>
+                    <input type="text" class="form-control" style="color:#000" id="name" name="name">
+                  </div> 
+
+                    <div class="col-md-3"> <!-- Your message input -->
+                      <div class="form-group">
+                        <label for="type" style="float:left"><h4 style="color:#000;margin-bottom:0px">Type:</h4></label>
+                        <input type="text" class="form-control" style="color:#000" id="type"  name="type">
+                      </div>
+                    </div>
+
+                    <div class="col-md-3"> <!-- Your message input -->
+                      <div class="form-group">
+                        <label for="floor" style="float:left"><h4 style="color:#000;margin-bottom:0px">Floor:</h4></label>
+                        <input type="text" class="form-control" style="color:#000" id="floor"  name="floor">
+                      </div>
+                    </div>
+
+                </div> <!-- End 6 column grid left form -->
+                <div class="col-md-6"> <!-- 6 column grid right form-->
+                  <div class="form-group"> <!-- Your message input -->
+                    <textarea class="form-control" placeholder="Your Message *" id="message" required data-validation-required-message="Please enter a message."></textarea>
+                    <p class="help-block text-danger"></p>
+                  </div>
+                </div> <!-- End 6 column grid right form-->
+                <div class="clearfix"></div>
+                <div class="col-lg-12 text-center">
+                  <div id="success"></div>
+                  <button type="submit" class="btn btn-send">Send Message</button> <!-- Send button -->
+                </div>
+              </div>
+            </form> <!-- End contact form -->
+
+<!--         <div class="form-group">
+          <label for="name" style="float:left"><h4 style="color:#000;margin-bottom:0px">Name:</h4></label>
+          <input type="text" class="form-control" style="color:#000" id="name" name="name">
+        </div>
+        <div class="form-group">
+        </div>
+        <button type="submit" class="btn btn-primary btn-md" ng-click="clicked()">Subscribe</button> 
+      </form>  -->
+    </section>
+    <!-- End Portfolio Section -->
+    <!--
+
+<button ng-click='toggleModal()'>Open Modal Dialog</button>
+<modal-dialog show='modalShown' width='750px' height='60%'>
+  <p>Modal Content Goes here<p>
+</modal-dialog>
+-->
+    <modal-dialog show='modalShown' height="60%" width="60%">
+      <div class="portfolio-modal">
+        <div class="modal-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 col-lg-offset-2">
+                <div class="modal-body">
+
+                  <wrap-owlcarousel class="owl-carousel owl-theme" data-options="{autoPlay: 3000,
+        slideSpeed : 300, paginationSpeed : 400, singleItem : true}">
+                    <img width="100%" src="/app/img/bgc/parklane/2.JPG"></img>
+                    <img width="100%" src="/app/img/bgc/parklane/3.JPG"></img>
+                    <img width="100%" src="/app/img/bgc/parklane/4.JPG"></img>
+                    <img width="100%" src="/app/img/bgc/parklane/5.JPG"></img>
+                  </wrap-owlcarousel>
+
+
+                  <h2> Forbeswood Parklane 2</h2>
+                  <h3 class="product-code"> 999 sqm. 3 Bedroom Unit </h3>
+                  <div class="product-price"> <span class="price-sales"> 199998php/month</span>  <span class="price-standard">2200000php</span>
+                  </div>
+                  <div class="details-description">
+                    <p>Beautiful home. Furnished by interior designer William Sanchez.</p>
+                  </div>
+
+                  <!--/.cart-actions-->
+
+                  <div class="product-share clearfix">
+                    <p>SHARE</p>
+                    <div class="socialIcon">
+                      <a href="#"> <i class="fa fa-facebook"></i>
+                      </a>
+                      <a href="#"> <i class="fa fa-twitter"></i>
+                      </a>
+                      <a href="#"> <i class="fa fa-google-plus"></i>
+                      </a>
+                      <a href="#"> <i class="fa fa-pinterest"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--/ product Image-->
+
+
+            <!--/.modal-details-inner-->
+
+          </div>
+        </div>
+      </div>
+
+      <!-- End Modal -->
+    </modal-dialog>
+  </div>
+</div>
+<!-- jQuery / JavaScript plugins
+    ================================================== -->
+
+
+<script type="text/javascript" src="/app/js/script.js"></script>
+<script type="text/javascript" src="/app/js/main.js"></script>
+
