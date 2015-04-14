@@ -290,11 +290,11 @@ app.post('/sendMessage', function(req, res) {
   var name = req.body.name;
   var message = req.body.message;
   var replied = false;
-  var date = Date.now();
+  var date = req.body.date;
 
   var user = req.body;
   var searchUser = {
-    name: name;
+    name: name
   };
 
 
@@ -316,13 +316,15 @@ app.post('/sendMessage', function(req, res) {
   });
 
   newMessage.save(function(err) {
-    if (err) {
-      res.status(401).send({
-        message: 'problem with database encountered'
-      });
-      return;
-    }
-    res.status(200).send();
+
+    createSendToken(newMessage, res);
+    // if (err) {
+    //   res.status(401).send({
+    //     message: 'problem with database encountered'
+    //   });
+    //   return;
+    // }
+    // res.status(200).send();
     return;
   });
 

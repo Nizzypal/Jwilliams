@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var MessageSchema = new mongoose.Schema({
   name: String,
-  date: Date,
+  date: String,
   message: String,
   replied: Boolean
 })
