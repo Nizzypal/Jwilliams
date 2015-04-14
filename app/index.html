@@ -61,7 +61,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>              
           </button>
-          <a class="navbar-brand" href="index.html"><img src="img/logo.png" alt="logo"></a> <!-- Your logo here-->
+          <a class="navbar-brand" ui-sref="main"><img src="img/logo.png" alt="logo"></a> <!-- Your logo here-->
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -70,11 +70,11 @@
 <!--            <li><a class="page-scroll" href="#banner">Home</a></li>-->
             <li><a class="page-scroll" href="#vision">SIGNUP/LOGIN</a></li>
             
-            <li><a class="page-scroll" href="#portfolio">Create</a></li>  
-              <li><a class="page-scroll" href="#portfolio">Rent</a></li>
-              <li><a class="page-scroll" href="#portfolio">Vacation Homes</a></li>
+            <li><a class="page-scroll" href="admin/views/admin.html">Admin</a></li>  
+              <li><a class="page-scroll" >Rent</a></li>
+              <li><a class="page-scroll" >Vacation Homes</a></li>
 
-              <li><a class="page-scroll" href="#subscription">Subscirbe</a></li>
+              <li><a class="page-scroll" ui-sref="subscribe">Subscirbe</a></li>
 <!--            <li><a class="page-scroll" href="#portfolio">Units</a></li>-->
 
             <li><a class="page-scroll" href="#footer">Contact</a></li>
@@ -101,43 +101,8 @@
 
 
 
-    <!-- About Section
-    ================================================== -->
-    <section id="about"> <!-- Start about -->
-      <div class="about-content wow fadeIn" data-wow-delay="2s">
-        <div class="container"> <!-- Container -->
-          <h2>J. WILLIAMS MANAGEMENT GROUP</h2> <!-- Your name or agency name here -->
-          <p class="large">3rd St., Net Cube Bldg, BGC</p> <!-- Your address -->
-          <p class="small">www.jwmgi.com</p> <!-- Your website -->
-          <br>
-          <p class="large">We started with our dream homes.</p> <!-- Tell more about you -->
-          <p class="atext">We are a small group of passionate homemakers. We started with our own rooms, designing them, crafting and then living in them. Afterwards, we stood back and felt proud; but with our passion unsatiated we since decided to move on and start designing for others. </p>
-            <p class="large">We pick and furnish these homes with a burning passion; always seeing ourselves and our own family living in what we create.</p>
-        </div>
-      </div> <!-- End container -->
-    </section> <!-- End about -->
 
-    <!-- Footer Section
-    ================================================== -->
-    <section id="footer"> <!-- Start footer -->
-      <div class="container"> <!-- Container -->
-        <a href="#"><img src="img/07_footer-logo.png" alt="footer-logo"></a>
-        <br>
-        <br>
-        <!-- Buttons --> 
-        <a id="show" class="btn wow bounceIn" data-wow-delay="0.6s"><h2>GO ON > ASK US</h2></a> <!-- Button to click toggle contact form -->
-        <br>
-        <p>info@jwmgi.com</p> <!-- Your email add here -->
-        <p>www.jwmgi.com</p> <!-- Any other information here -->
-      </div> <!-- End container -->
-    </section> <!-- End footer -->
-
-    <!-- Toggle Contact Section
-    ================================================== -->
-    <section id="contact">  <!-- Start contact -->
-      <div ng-include="'views/contact.html'"></div>
-    </section> <!-- Start contact -->
-    
+  
     <!-- About Section
     ================================================== -->
     <section id="socials">

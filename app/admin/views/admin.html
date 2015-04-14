@@ -1,0 +1,97 @@
+<html lang="en">
+
+<head>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/admin/css/adminstyle.css">
+  <link rel="stylesheet" type="text/css" href="/app/bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body ng-app="jwilliamsAdmin">
+
+  <div id="wrapper">
+    <div class="overlay"></div>
+
+    <!-- Sidebar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+      <ul class="nav sidebar-nav">
+        <li class="sidebar-brand">
+          <a href="#">
+                       Brand
+                    </a>
+        </li>
+           <li>
+          <a ui-sref="admin">Dashboard</a>
+        </li>
+        <li>
+          <a ui-sref="createUnit">Properties</a>
+        </li>
+        <!--
+        <li>
+          <a href="#">Events</a>
+        </li>
+        <li>
+          <a href="#">Team</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Works <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li class="dropdown-header">Dropdown heading</li>
+            <li><a href="#">Action</a>
+            </li>
+            <li><a href="#">Another action</a>
+            </li>
+            <li><a href="#">Something else here</a>
+            </li>
+            <li><a href="#">Separated link</a>
+            </li>
+            <li><a href="#">One more separated link</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Services</a>
+        </li>
+        <li>
+          <a href="#">Contact</a>
+        </li>
+        <li>
+          <a href="https://twitter.com/maridlcrmn">Follow me</a>
+        </li>
+-->
+      </ul>
+    </nav>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container">
+        <button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+          <span class="hamb-top"></span>
+          <span class="hamb-middle"></span>
+          <span class="hamb-bottom"></span>
+        </button>
+        <div ui-view></div>
+
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <script src="/app/bower_components/jquery/dist/jquery.js"></script>
+  <script src="/app/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="/app/bower_components/angular/angular.js"></script>
+  <script src="/app/bower_components/angular-animate/angular-animate.js"></script>
+  <script src="/app/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="/app/admin/scripts/sidebar.js"></script>
+  <!-- Docs at http://simpleweatherjs.com -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.simpleWeather/3.0.2/jquery.simpleWeather.min.js"></script>
+  <!-- Docs at http://www.chartjs.org -->
+  <script src="//www.chartjs.org/assets/Chart.min.js"></script>
+  <script src="/app/admin/scripts/adminapp.js"></script>
+
+</body>
+
+</html>
+
