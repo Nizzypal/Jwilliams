@@ -48,17 +48,7 @@
       </div>
     </section> 
 
-<!-- Subscribe
-    ================================================== -->
-<section id="subscription">
-  <figure class="effect-portfolio wow fadeIn" data-wow-duration="2s"> <!-- Portfolio 2 -->
-    <figcaption> <!-- Caption -->
-      <h2>Newsletter</h2>
-      <p>Subscribe to our monthly newsletter!</p>
-      <h4><a ui-sref="subscribe" class="portfolio-link" style="color:white" data-toggle="modal">Know more</a><!-- Larger image popup --></h4>
-    </figcaption> <!-- End caption -->   
-  </figure> <!-- End portfolio 2 -->
-</section>
+
 
 <!-- Call-To-Action Section
     ================================================== -->
@@ -69,7 +59,7 @@
             <p><span>Create an account to book a unit..</span></p>
           </div>
           <div class="col-md-4 wow fadeIn" data-wow-delay="0.4s">
-            <a class="page-scroll" href="#footer"><span class="btn right">SIGN UP</span></a> <!-- Subscribe button -->
+            <a class="page-scroll" href=""><span class="btn right">SIGN UP</span></a> <!-- Subscribe button -->
           </div>
         </div>
       </div>
@@ -158,16 +148,16 @@
       </figure> <!-- End portfolio 9 -->
     </section> 
 
-      <!-- Call-To-Action Section
+<!-- Subscribe
     ================================================== -->
-    <section id="subscribe"> 
+  <section id="subscribe"> 
       <div class="container">
         <div class="row">
           <div class="col-md-8 wow fadeIn" data-wow-delay="0.2s">
-            <p><span>POST UR PROERTIES..</span></p>
+            <p><span>Create an account to book a unit..</span></p>
           </div>
           <div class="col-md-4 wow fadeIn" data-wow-delay="0.4s">
-            <a ui-sref="createUnit" class="page-scroll" href="#footer"><span class="btn right">CREATE A UNIT</span></a> <!-- Subscribe button -->
+            <a class="page-scroll" ui-sref="subscribe" href=""><span class="btn right">Subscribe</span></a> <!-- Subscribe button -->
           </div>
         </div>
       </div>
@@ -216,3 +206,42 @@
         </div>
       </div>
     </section>
+
+
+    <!-- About Section
+    ================================================== -->
+    <section id="about"> <!-- Start about -->
+      <div class="about-content wow fadeIn" data-wow-delay="2s">
+        <div class="container"> <!-- Container -->
+          <h2>J. WILLIAMS MANAGEMENT GROUP</h2> <!-- Your name or agency name here -->
+          <p class="large">3rd St., Net Cube Bldg, BGC</p> <!-- Your address -->
+          <p class="small">www.jwmgi.com</p> <!-- Your website -->
+          <br>
+          <p class="large">We started with our dream homes.</p> <!-- Tell more about you -->
+          <p class="atext">We are a small group of passionate homemakers. We started with our own rooms, designing them, crafting and then living in them. Afterwards, we stood back and felt proud; but with our passion unsatiated we since decided to move on and start designing for others. </p>
+            <p class="large">We pick and furnish these homes with a burning passion; always seeing ourselves and our own family living in what we create.</p>
+        </div>
+      </div> <!-- End container -->
+    </section> <!-- End about -->
+
+  <!-- Footer Section
+    ================================================== -->
+    <section id="footer"> <!-- Start footer -->
+      <div class="container"> <!-- Container -->
+        <a href="#"><img src="img/07_footer-logo.png" alt="footer-logo"></a>
+        <br>
+        <br>
+        <!-- Buttons --> 
+        <a id="show" class="btn wow bounceIn" data-wow-delay="0.6s"><h2>GO ON > ASK US</h2></a> <!-- Button to click toggle contact form -->
+        <br>
+        <p>info@jwmgi.com</p> <!-- Your email add here -->
+        <p>www.jwmgi.com</p> <!-- Any other information here -->
+      </div> <!-- End container -->
+    </section> <!-- End footer -->
+
+    <!-- Toggle Contact Section
+    ================================================== -->
+    <section id="contact">  <!-- Start contact -->
+      <div ng-include="'views/contact.html'"></div>
+    </section> <!-- Start contact -->
+    
