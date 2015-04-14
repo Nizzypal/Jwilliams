@@ -291,7 +291,7 @@ app.post('/subscriber', function(req, res) {
 
   var subscribed = true;
 
-  var user = req.body.usr;
+  var user = req.body.name;
   var email = req.body.email;
 
   // var searchUser = {

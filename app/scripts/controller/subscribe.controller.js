@@ -9,15 +9,23 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, 
 	// }).error(function(err) {
 	//     alert('warning', "Unable to get meals");
 	// });
+	
+
+	var userInfo = {
+		name: "",
+		email: ""
+	};
+
+	$scope.userInfo = userInfo;
 
 	$scope.clicked = function() {
-    	$( "#subscribe" ).submit(function() {
+    	// $( "#subscribe" ).submit(function() {
 			alert( "Handler for .submit() called." );
-			$http.post(API_URL + 'subscriber').success(function() {
+			$http.post(API_URL + 'subscriber', userInfo).success(function() {
 			}).error(function(err) {
 			    alert('warning', "Unable to get meals");
 			});
-		});
+		// });
     };
 });
 
