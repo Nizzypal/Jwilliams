@@ -284,6 +284,47 @@ app.post('/editUser', function(req, res) {
     return;
   });
 
+});
+
+app.post('/sendMessage', function(req, res) {
+  var name = req.body.name;
+  var message = req.body.message;
+  var replied = false;
+  var date = Date.now();
+
+  var user = req.body;
+  var searchUser = {
+    name: name;
+  };
+
+
+  User.findOne(searchUser, function(err, user) {
+
+    if (!user) {
+      res.status(401).send({
+        message: 'User not found!'
+      });
+      return;
+    } 
+  });
+
+  var newMessage= new Message({
+  name: name,
+  date: date,
+  message: message,
+  replied: replied
+  });
+
+  newMessage.save(function(err) {
+    if (err) {
+      res.status(401).send({
+        message: 'problem with database encountered'
+      });
+      return;
+    }
+    res.status(200).send();
+    return;
+  });
 
 });
 
@@ -311,8 +352,8 @@ app.post('/subscriber', function(req, res) {
   var newUser = new User({
     name: user,
     email: email,
-    contact1: 'asdas',
-    password: 'asdas',
+    contact1: '',
+    password: '',
     address1: '',
     subscribed: true,
     role: 'user'
@@ -323,8 +364,6 @@ app.post('/subscriber', function(req, res) {
   });
 
 });
-
-
 
 app.get('/items', function(req, res) {
   if (!req.headers.authorization) {
@@ -396,6 +435,7 @@ var mealTypes = [{
   typeCode: 'snack',
   thumb: 'https://skitchen-s3bucket.s3.amazonaws.com/pancit.jpg'
 }];
+
 app.get('/typeOfMeals', function(req, res) {
   if (!req.headers.authorization) {
     return res.status(401).send({
@@ -476,13 +516,6 @@ app.post('/userInfo', function(req, res) {
 
     });
   }
-
-  //User.findOne({_id: ObjectId(payload.sub)}, function(err,foundUser){
-  //    console.log("foundUser:"+foundUser);
-  //            if(foundUser){
-  //                console.log(foundUser);
-  //                res.status(200).send({user: foundUser});}
-  //        })
 
   var userId = mongoose.Types.ObjectId(payload.sub);
   User.findById(userId, function(err, foundUser) {
