@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var User = require('./models/user.js');
 var Item = require('./models/item.js');
 var Message = require('./models/message.js');
+var ItemRentInfo = require('./models/rentInfo.js');
 
 var path = require('path');
 var request = require('request');
@@ -191,6 +192,110 @@ app.post('/submitItem', function(req, res) {
   });
 
   newItem.save(function(err) {
+    if (err) {
+      res.status(401).send({
+        message: 'problem with database encountered'
+      });
+      return;
+    }
+    res.status(200).send();
+    return;
+  });
+
+});
+
+//Server endpoint for creating units
+app.post('/createUnit', function(req, res) {
+    // var name: String,
+    // var type: String,
+    // var floor: String,
+    // var floorCount: String,
+    // var price: String,
+    // var size: String,
+    // var bedroomCount: String,
+    // var bathroomCount: String,
+    // var quartersCount: String,
+    // var powderCount: String,
+    // var forShortTerm: Boolean,
+    // var forLongTerm: Boolean,
+    // var forSale: Boolean,
+    // var condominiumName: String,
+    // var city: String,
+    // var address: String,
+    // var photos: []
+
+    // var monthlyRate: Number,
+    // var dailyRate: Number,
+    // var blockDateStart: Date,
+    // var blockDateEnd: Date,
+    // var blockDates: [Date],
+    // var currentRenter: String,
+    // var numberMonthsAdvance: Number,
+    // var numberMonthsDeposit: Number,
+    // var cancellationFee: Number,
+    // var terminationFee: Number,
+    // var includeUtilities: Boolean,
+    // var includeInternet: Boolean,
+    // var requirePassport: Boolean,
+    // var requireAlienCard: Boolean,
+    // var requireID: Boolean,
+    // var unitAmenities: [String],
+    // var buildingAmenities: [String]    
+
+  //console.log(req.body);
+
+  var newItem = new Item({
+    // name: String,
+    // type: String,
+    // floor: String,
+    // floorCount: String,
+    // price: String,
+    // size: String,
+    // bedroomCount: String,
+    // bathroomCount: String,
+    // quartersCount: String,
+    // powderCount: String,
+    // forShortTerm: Boolean,
+    // forLongTerm: Boolean,
+    // forSale: Boolean,
+    // condominiumName: String,
+    // city: String,
+    // address: String,
+    // photos: []
+  });
+
+   var newRentInfo = new ItemRentInfo({
+    // monthlyRate: Number,
+    // dailyRate: Number,
+    // blockDateStart: Date,
+    // blockDateEnd: Date,
+    // blockDates: [Date],
+    // currentRenter: String,
+    // numberMonthsAdvance: Number,
+    // numberMonthsDeposit: Number,
+    // cancellationFee: Number,
+    // terminationFee: Number,
+    // includeUtilities: Boolean,
+    // includeInternet: Boolean,
+    // requirePassport: Boolean,
+    // requireAlienCard: Boolean,
+    // requireID: Boolean,
+    // unitAmenities: [String],
+    // buildingAmenities: [String]
+  }); 
+
+  newItem.save(function(err) {
+    if (err) {
+      res.status(401).send({
+        message: 'problem with database encountered'
+      });
+      return;
+    }
+    res.status(200).send();
+    return;
+  });
+
+  newRentInfo.save(function(err) {
     if (err) {
       res.status(401).send({
         message: 'problem with database encountered'
