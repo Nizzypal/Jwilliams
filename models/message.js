@@ -6,7 +6,7 @@ var MessageSchema = new mongoose.Schema({
   date: String,
   message: String,
   replied: Boolean
-})
+});
 
 MessageSchema.methods.generateDate = function(){
     // var user = this.toObject();

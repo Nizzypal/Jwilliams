@@ -1,8 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
+//Model Requires
 var User = require('./models/user.js');
 var Item = require('./models/item.js');
+var Message = require('./models/message.js');
+
 var path = require('path');
 var request = require('request');
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -297,7 +301,7 @@ app.post('/sendMessage', function(req, res) {
     name: name
   };
 
-
+  //BUSINESS RULE - they can't send to us without being registered users first?
   User.findOne(searchUser, function(err, user) {
 
     if (!user) {
@@ -318,13 +322,6 @@ app.post('/sendMessage', function(req, res) {
   newMessage.save(function(err) {
 
     createSendToken(newMessage, res);
-    // if (err) {
-    //   res.status(401).send({
-    //     message: 'problem with database encountered'
-    //   });
-    //   return;
-    // }
-    // res.status(200).send();
     return;
   });
 
