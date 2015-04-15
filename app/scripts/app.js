@@ -50,6 +50,12 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     // controller:  'CreateUnitCtrl'
   });
 
+  // $stateProvider.state('sendMessage', {
+  //   //url: '/sendMessage',
+  //   templateUrl: '/views/contact.html',
+  //   controller:  'MessageCtrl'
+  // });  
+
   //    $stateProvider.state('logout',{
   //        url:'/logout',
   //        controller: 'LogoutCtrl'
