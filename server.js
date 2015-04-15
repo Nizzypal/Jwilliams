@@ -245,7 +245,7 @@ app.post('/createUnit', function(req, res) {
   //console.log(req.body);
 
   var newItem = new Item({
-    // name: String,
+    name: req.body.createUnitData.unit.name,
     // type: String,
     // floor: String,
     // floorCount: String,
@@ -260,12 +260,12 @@ app.post('/createUnit', function(req, res) {
     // forSale: Boolean,
     // condominiumName: String,
     // city: String,
-    // address: String,
+    address: req.body.createUnitData.unit.address
     // photos: []
   });
 
    var newRentInfo = new ItemRentInfo({
-    // monthlyRate: Number,
+    monthlyRate: req.body.createUnitData.rentInfo.monthlyRate
     // dailyRate: Number,
     // blockDateStart: Date,
     // blockDateEnd: Date,

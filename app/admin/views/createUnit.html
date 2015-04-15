@@ -7,7 +7,7 @@
 					<div class="form-group">
 						<label for="name" class="control-label col-xs-4">Unit Name:</label>
 						<div class="col-xs-8">
-							<input type="text" id="name" class="form-control input-sm">
+							<input type="text" id="name" class="form-control input-sm" ng-model="unit.name">
 						</div>
 					</div>
 				</div>
@@ -15,7 +15,7 @@
 					<div class="form-group">
 						<label for="address" class="control-label col-xs-4">Address:</label>
 						<div class="col-xs-8">
-							<input type="text" id="address" class="form-control input-sm">
+							<input type="text" id="address" class="form-control input-sm" ng-model="unit.address">
 						</div>
 					</div>	
 				</div>	
@@ -65,7 +65,7 @@
 					<div class="form-group">
 						<label for="monthlyRate" class="control-label col-xs-6">Monthly Rate:</label>
 						<div class="col-xs-6">
-							<input type="text" id="monthlyRate" class="form-control input-sm">
+							<input type="text" id="monthlyRate" class="form-control input-sm" ng-model="rentInfo.monthlyRate">
 						</div>
 					</div>
 				</div>
@@ -277,5 +277,7 @@
 			</div>		
 		</div>
 	</div>	
+	<button type="button" class="btn btn-primary btn-lg" ng-click="unitCreate()">CREATE</button>
+	<div class="bottom40"></div>
 </div>
 
