@@ -247,7 +247,7 @@ app.post('/createUnit', function(req, res) {
   var newItem = new Item({
     name: req.body.unit.name,
     // type: String,
-    floor: req.body.unit.floor
+    floor: req.body.unit.floor,
     // floorCount: String,
     // price: String,
     // size: String,
@@ -276,11 +276,11 @@ app.post('/createUnit', function(req, res) {
     cancellationFeeLT: req.body.rentInfo.cancellationFeeLT,
     cancellationFeeST: req.body.rentInfo.cancellationFeeST,
     terminationFee: req.body.rentInfo.terminationFee,
-    // includeUtilities: Boolean,
-    // includeInternet: Boolean,
-    // requirePassport: Boolean,
-    // requireAlienCard: Boolean,
-    // requireID: Boolean,
+    includeUtilities: req.body.rentInfo.includeUtilities,
+    includeInternet: req.body.rentInfo.includeInternet,
+    requirePassport: req.body.rentInfo.requirePassport,
+    requireAlienCard: req.body.rentInfo.requireAlienCard,
+    requireID: req.body.rentInfo.requireID
     // unitAmenities: [String],
     // buildingAmenities: [String]
   }); 
