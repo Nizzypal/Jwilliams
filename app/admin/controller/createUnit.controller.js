@@ -1,4 +1,4 @@
-angular.module().controller('CreateUnitCtrl', function($scope, $http, API_URL){
+angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $http, API_URL){
 
   var unit = {
 		name: "",
@@ -31,7 +31,8 @@ angular.module().controller('CreateUnitCtrl', function($scope, $http, API_URL){
 		currentRenter: "",
 		numberMonthsAdvance: 0,
 		numberMonthsDeposit: 0,
-		cancellationFee: 0,
+		cancellationFeeLT: 0,
+		cancellationFeeST: 0,
 		terminationFee: 0,
 		includeUtilities: false,
 		includeInternet: false,
@@ -46,7 +47,7 @@ angular.module().controller('CreateUnitCtrl', function($scope, $http, API_URL){
 
   var createUnitData = {
   	unit: unit,
-  	renInfo: rentInfo
+  	rentInfo: rentInfo
   }
   $scope.unitCreate = function(){
   	alert( "Handler for .unitCreate() called." );
