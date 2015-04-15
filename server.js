@@ -426,7 +426,7 @@ app.post('/sendMessage', function(req, res) {
 
   newMessage.save(function(err) {
 
-    createSendToken(newMessage, res);
+    //createSendToken(newMessage, res);
     return;
   });
 
