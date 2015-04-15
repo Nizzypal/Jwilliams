@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-controller="CreateUnitCtrl">
 	<div class="row rentInfo">
 		<h1><span class="label">General Rental Info</span></h1>
 		<div class="form-horizontal">
@@ -31,7 +31,7 @@
 					<div class="form-group">
 						<label for="floor" class="control-label col-xs-4">Floor:</label>
 						<div class="col-xs-3 pull-right">
-							<input type="number" id="floor" class="form-control input-sm">
+							<input type="number" id="floor" class="form-control input-sm" ng-model="unit.floor">
 						</div>
 					</div>	
 				</div>	
@@ -39,7 +39,7 @@
 					<div class="form-group">
 						<label for="numberBedroom" class="control-label col-xs-5"># of Bedroom:</label>
 						<div class="col-xs-3 pull-right">
-							<input type="number" id="numberBedroom" class="form-control input-sm">
+							<input type="number" id="numberBedroom" class="form-control input-sm" ng-model="unit.bedroomCount">
 						</div>
 					</div>	
 				</div>	
@@ -47,7 +47,7 @@
 					<div class="form-group">
 						<label for="numberBathroom" class="control-label col-xs-5"># of Bathroom:</label>
 						<div class="col-xs-3 pull-right">
-							<input type="number" id="numberBathroom" class="form-control input-sm">
+							<input type="number" id="numberBathroom" class="form-control input-sm" ng-model="unit.bathroomCount">
 						</div>
 					</div>	
 				</div>	
@@ -55,7 +55,7 @@
 					<div class="form-group">
 						<label id="numberPowderoom" for="numberPowderoom" class="control-label col-xs-5"># of Powderoom:</label>
 						<div class="col-xs-3 pull-right">
-							<input type="number" id="numberPowderoom" class="form-control input-sm">
+							<input type="number" id="numberPowderoom" class="form-control input-sm" ng-model="unit.powderCount">
 						</div>
 					</div>	
 				</div>													
@@ -73,7 +73,7 @@
 					<div class="form-group">
 						<label for="dailyRate" class="control-label col-xs-6">Daily Rate:</label>
 						<div class="col-xs-6">
-							<input type="text" id="dailyRate" class="form-control input-sm">
+							<input type="text" id="dailyRate" class="form-control input-sm" ng-model="rentInfo.dailyRate">
 						</div>
 					</div>	
 				</div>	
@@ -88,7 +88,7 @@
 				<div class="row">
 					<div class="form-group">
 						<div class="col-xs-12">
-							<textarea class="form-control" rows="5" id="comment"></textarea>
+							<textarea class="form-control" rows="5" id="photos"></textarea>
 						</div>
 					</div>	
 				</div>													
@@ -98,7 +98,7 @@
 					<div class="form-group">
 						<label for="blockStart" class="control-label col-xs-6">Block Date Start:</label>
 						<div id="blockStart" class="input-group input-group-sm col-xs-5 pull-right">
-							<input type="text" id="blockStart" class="form-control" placeholder="">
+							<input type="text" id="blockStart" class="form-control" placeholder="" ng-model="rentInfo.blockDateStart">
 							<span class="btn btn-default dropdown-toggle input-group-addon glyphicon glyphicon-triangle-bottom" id="blockStart" data-toggle="dropdown">
 							</span>    
 							<ul class="dropdown-menu" role="menu">
@@ -115,7 +115,7 @@
 					<div class="form-group">
 						<label for="blockEnd" class="control-label col-xs-6">Block Date End:</label>
 						<div id="blockEnd" class="input-group input-group-sm col-xs-5 pull-right">
-							<input type="text" id="blockEnd" class="form-control" placeholder="">
+							<input type="text" id="blockEnd" class="form-control" placeholder="" ng-model="rentInfo.blockDateEnd">
 							<span class="input-group-addon glyphicon glyphicon-triangle-bottom" id="blockEnd"></span>
 						</div>
 					</div>	
@@ -146,7 +146,7 @@
 					<div class="form-group">
 						<label for="numberMonthsAdvance" class="control-label col-xs-6"># of Months to Advance:</label>
 						<div class="col-xs-3 pull-right">
-							<input type="number" id="numberMonthsAdvance" class="form-control input-sm">
+							<input type="number" id="numberMonthsAdvance" class="form-control input-sm" ng-model="rentInfo.numberMonthsAdvance">
 						</div>
 					</div>	
 				</div>	
@@ -154,7 +154,7 @@
 					<div class="form-group">
 						<label for="numberMonthsDeposit" class="control-label col-xs-6"># of Months Deposit:</label>
 						<div class="col-xs-3 pull-right">
-							<input type="number" id="numberMonthsDeposit" class="form-control input-sm">
+							<input type="number" id="numberMonthsDeposit" class="form-control input-sm" ng-model="rentInfo.numberMonthsDeposit">
 						</div>
 					</div>	
 				</div>	
@@ -162,7 +162,7 @@
 					<div class="form-group">
 						<label for="cancellationFeeLT" class="control-label col-xs-5">Cancellation Fee:</label>
 						<div class="col-xs-7">
-							<input type="text" id="cancellationFeeLT" class="form-control input-sm">
+							<input type="text" id="cancellationFeeLT" class="form-control input-sm" ng-model="rentInfo.cancellationFeeLT">
 						</div>
 					</div>
 				</div>
@@ -170,7 +170,7 @@
 					<div class="form-group">
 						<label for="terminationFee" class="control-label col-xs-5">Termination Fee:</label>
 						<div class="col-xs-7">
-							<input type="text" id="terminationFee" class="form-control input-sm">
+							<input type="text" id="terminationFee" class="form-control input-sm" ng-model="rentInfo.terminationFee">
 						</div>
 					</div>
 				</div>																		
