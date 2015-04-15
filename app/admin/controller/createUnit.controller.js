@@ -59,4 +59,8 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
   		});
   };
 
+  $scope.reverseBoolean = function(value){
+  	return !value;
+  };
+
 })

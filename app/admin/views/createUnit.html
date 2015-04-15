@@ -179,23 +179,24 @@
 				<div class="row">
 					<div class="form-group">
 						<div class=" checkbox col-xs-12">
-							<label for="utilities"><input type="checkbox" id="utilities" value="">Include utilities in base rent</label>
+							<label for="utilities"><input type="checkbox" id="utilities" value="" ng-model="rentInfo.includeUtilities" ng-checked="rentInfo.includeUtilities" ng-click="reverseBoolean(rentInfo.includeUtilities)">Include utilities in base rent</label>
+							<!-- <input id="utilitiesSlave" type="checkbox" ng-checked="rentInfo.includeUtilities" aria-label="Slave input"> -->
 						</div>
 						<div class="bottom40"></div>
 						<div class=" checkbox col-xs-12">
-							<label for="internet"><input type="checkbox" id="internet" value="">Include internet in base rent</label>
+							<label for="internet"><input type="checkbox" id="internet" value="" ng-model="rentInfo.includeInternet" ng-checked="rentInfo.includeInternet" ng-click="reverseBoolean(rentInfo.includeInternet)">Include internet in base rent</label>
 						</div>					
 						<div class="bottom40"></div>
 						<div class=" checkbox col-xs-12">
-							<label for="passportLT"><input type="checkbox" id="passportLT" value="">Require Passport</label>		
+							<label for="passportLT"><input type="checkbox" id="passportLT" value="" ng-model="rentInfo.requirePassport" ng-checked="rentInfo.requirePassport" ng-click="reverseBoolean(rentInfo.requirePassport)">Require Passport</label>		
 						</div>					
 						<div class="bottom40"></div>
 						<div class=" checkbox col-xs-12">
-							<label for="alienLT"><input type="checkbox" id="alienLT" value="">Require Alien Card</label>		
+							<label for="alienLT"><input type="checkbox" id="alienLT" value="" ng-model="rentInfo.requireAlienCard" ng-checked="rentInfo.requireAlienCard" ng-click="reverseBoolean(rentInfo.requireAlienCard)">Require Alien Card</label>		
 						</div>					
 						<div class="bottom40"></div>
 						<div class=" checkbox col-xs-12">
-							<label for="IDLT"><input type="checkbox" id="IDLT" value="">Require ID</label>		
+							<label for="IDLT"><input type="checkbox" id="IDLT" value="" ng-model="rentInfo.requireID" ng-checked="rentInfo.requireID" ng-click="reverseBoolean(rentInfo.requireID)">Require ID</label>		
 						</div>					
 						<div class="bottom40"></div>
 					</div>	
@@ -206,7 +207,7 @@
 					<div class="form-group">
 						<label for="blockStart" class="control-label col-xs-6">Current Renter:</label>
 						<div id="currentRenter" class="input-group input-group-sm col-xs-5 pull-right">
-							<input type="text" id="currentRenter" class="form-control" placeholder="">
+							<input type="text" id="currentRenter" class="form-control" placeholder="" ng-model="rentInfo.currentRenter">
 							<span class="btn btn-default dropdown-toggle input-group-addon glyphicon glyphicon-triangle-bottom" id="currentRenter" data-toggle="dropdown">
 							</span>    
 							<ul class="dropdown-menu" role="menu">
@@ -252,7 +253,7 @@
 					<div class="form-group">
 						<label for="cancellationFeeST" class="control-label col-xs-5">Cancellation Fee:</label>
 						<div class="col-xs-7">
-							<input type="text" id="cancellationFeeST" class="form-control input-sm">
+							<input type="text" id="cancellationFeeST" class="form-control input-sm" ng-model="rentInfo.cancellationFeeST">
 						</div>
 					</div>
 				</div>																	
@@ -261,15 +262,16 @@
 				<div class="row">
 					<div class="form-group">				
 						<div class=" checkbox col-xs-12">
-							<label for="passportST"><input type="checkbox" id="passportST" value="">Require Passport</label>		
+							<label for="passportST"><input type="checkbox" id="passportST" value="" ng-model="rentInfo.requirePassport" ng-checked="rentInfo.requirePassport" ng-click="reverseBoolean(rentInfo.requirePassport)">Require Passport
+							</label>		
 						</div>					
 						<div class="bottom40"></div>
 						<div class=" checkbox col-xs-12">
-							<label for="alienST"><input type="checkbox" id="alienST" value="">Require Alien Card</label>		
+							<label for="alienST"><input type="checkbox" id="alienST" value="" ng-model="rentInfo.requireAlienCard" ng-checked="rentInfo.requireAlienCard" ng-click="reverseBoolean(rentInfo.requireAlienCard)">Require Alien Card</label>		
 						</div>					
 						<div class="bottom40"></div>
 						<div class=" checkbox col-xs-12">
-							<label for="IDST"><input type="checkbox" id="IDST" value="">Require ID</label>		
+							<label for="IDST"><input type="checkbox" id="IDST" value="" ng-model="rentInfo.requireID" ng-checked="rentInfo.requireID" ng-click="reverseBoolean(rentInfo.requireID)">Require ID</label>		
 						</div>					
 						<div class="bottom40"></div>
 					</div>	
