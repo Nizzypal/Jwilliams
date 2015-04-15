@@ -1,184 +1,281 @@
-<div class="row rentInfo">
-	<div class="form-horizontal">
-		<div class="col-md-4">
-			<div class="row">
-				<div class="form-group">
-					<label for="name" class="control-label col-xs-4">Unit Name:</label>
-					<div class="col-xs-8">
-						<input type="text" id="name" class="form-control input-sm">
+<div class="container">
+	<div class="row rentInfo">
+		<h1><span class="label">General Rental Info</span></h1>
+		<div class="form-horizontal">
+			<div class="col-md-4">
+				<div class="row">
+					<div class="form-group">
+						<label for="name" class="control-label col-xs-4">Unit Name:</label>
+						<div class="col-xs-8">
+							<input type="text" id="name" class="form-control input-sm">
+						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="form-group">
+						<label for="address" class="control-label col-xs-4">Address:</label>
+						<div class="col-xs-8">
+							<input type="text" id="address" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="area" class="control-label col-xs-4">Area(sqm):</label>
+						<div class="col-xs-3 pull-right">
+							<input type="number" id="area" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="floor" class="control-label col-xs-4">Floor:</label>
+						<div class="col-xs-3 pull-right">
+							<input type="number" id="floor" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="numberBedroom" class="control-label col-xs-5"># of Bedroom:</label>
+						<div class="col-xs-3 pull-right">
+							<input type="number" id="numberBedroom" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="numberBathroom" class="control-label col-xs-5"># of Bathroom:</label>
+						<div class="col-xs-3 pull-right">
+							<input type="number" id="numberBathroom" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label id="numberPowderoom" for="numberPowderoom" class="control-label col-xs-5"># of Powderoom:</label>
+						<div class="col-xs-3 pull-right">
+							<input type="number" id="numberPowderoom" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>													
 			</div>
-			<div class="row">
-				<div class="form-group">
-					<label for="address" class="control-label col-xs-4">Address:</label>
-					<div class="col-xs-8">
-						<input type="text" id="address" class="form-control input-sm">
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<label for="area" class="control-label col-xs-4">Area(sqm):</label>
-					<div class="col-xs-3 pull-right">
-						<input type="number" id="area" class="form-control input-sm">
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<label for="floor" class="control-label col-xs-4">Floor:</label>
-					<div class="col-xs-3 pull-right">
-						<input type="number" id="floor" class="form-control input-sm">
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<label for="numberBedroom" class="control-label col-xs-5"># of Bedroom:</label>
-					<div class="col-xs-3 pull-right">
-						<input type="number" id="numberBedroom" class="form-control input-sm">
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<label for="numberBathroom" class="control-label col-xs-5"># of Bathroom:</label>
-					<div class="col-xs-3 pull-right">
-						<input type="number" id="numberBathroom" class="form-control input-sm">
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<label id="numberPowderoom" for="numberPowderoom" class="control-label col-xs-5"># of Powderoom:</label>
-					<div class="col-xs-3 pull-right">
-						<input type="number" id="numberPowderoom" class="form-control input-sm">
-					</div>
-				</div>	
-			</div>													
-		</div>
-		<div class="col-md-4">
-			<div class="row">
-				<div class="form-group">
-					<label for="monthlyRate" class="control-label col-xs-6">Monthly Rate:</label>
-					<div class="col-xs-6">
-						<input type="text" id="monthlyRate" class="form-control input-sm">
+			<div class="col-md-4">
+				<div class="row">
+					<div class="form-group">
+						<label for="monthlyRate" class="control-label col-xs-6">Monthly Rate:</label>
+						<div class="col-xs-6">
+							<input type="text" id="monthlyRate" class="form-control input-sm">
+						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="form-group">
+						<label for="dailyRate" class="control-label col-xs-6">Daily Rate:</label>
+						<div class="col-xs-6">
+							<input type="text" id="dailyRate" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="" class="control-label col-xs-5">Add photo:</label>
+						<div class="col-xs-7">
+							<button type="button" class="btn btn-primary pull-right">Browse</button>
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<div class="col-xs-12">
+							<textarea class="form-control" rows="5" id="comment"></textarea>
+						</div>
+					</div>	
+				</div>													
 			</div>
-			<div class="row">
-				<div class="form-group">
-					<label for="dailyRate" class="control-label col-xs-6">Daily Rate:</label>
-					<div class="col-xs-6">
-						<input type="text" id="dailyRate" class="form-control input-sm">
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<label for="" class="control-label col-xs-5">Add photo:</label>
-					<div class="col-xs-7">
-						<button type="button" class="btn btn-primary pull-right">Browse</button>
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<div class="col-xs-12">
-						<textarea class="form-control" rows="5" id="comment"></textarea>
-					</div>
-				</div>	
-			</div>													
-		</div>
-		<div class="col-md-4">
-			<div class="row">
-				<div class="form-group">
-					<label for="blockStart" class="control-label col-xs-6">Block Date Start:</label>
-					<div id="blockStart" class="input-group input-group-sm col-xs-5 pull-right">
-						<input type="text" id="blockStart" class="form-control" placeholder="">
-						<span class="btn btn-default dropdown-toggle input-group-addon glyphicon glyphicon-triangle-bottom" id="blockStart" data-toggle="dropdown">
-						</span>    
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Action</a></li>
-						    <li><a href="#">Another action</a></li>
-						    <li><a href="#">Something else here</a></li>
-						    <li class="divider"></li>
-						    <li><a href="#">Separated link</a></li>
-						</ul>				
+			<div class="col-md-4">
+				<div class="row">
+					<div class="form-group">
+						<label for="blockStart" class="control-label col-xs-6">Block Date Start:</label>
+						<div id="blockStart" class="input-group input-group-sm col-xs-5 pull-right">
+							<input type="text" id="blockStart" class="form-control" placeholder="">
+							<span class="btn btn-default dropdown-toggle input-group-addon glyphicon glyphicon-triangle-bottom" id="blockStart" data-toggle="dropdown">
+							</span>    
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+							    <li><a href="#">Another action</a></li>
+							    <li><a href="#">Something else here</a></li>
+							    <li class="divider"></li>
+							    <li><a href="#">Separated link</a></li>
+							</ul>				
+						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="form-group">
+						<label for="blockEnd" class="control-label col-xs-6">Block Date End:</label>
+						<div id="blockEnd" class="input-group input-group-sm col-xs-5 pull-right">
+							<input type="text" id="blockEnd" class="form-control" placeholder="">
+							<span class="input-group-addon glyphicon glyphicon-triangle-bottom" id="blockEnd"></span>
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="" class="control-label col-xs-5">Blocked Dates:</label>
+						<div class="col-xs-7">
+							<button type="button" class="btn btn-primary pull-right">Add block date</button>
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<div class="col-xs-12 pull ">
+							<textarea class="form-control" rows="5" id="blockDates"></textarea>
+						</div>
+					</div>	
+				</div>													
 			</div>
-			<div class="row">
-				<div class="form-group">
-					<label for="blockEnd" class="control-label col-xs-6">Block Date End:</label>
-					<div id="blockEnd" class="input-group input-group-sm col-xs-5 pull-right">
-						<input type="text" id="blockEnd" class="form-control" placeholder="">
-						<span class="input-group-addon glyphicon glyphicon-triangle-bottom" id="blockEnd"></span>
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<label for="" class="control-label col-xs-5">Blocked Dates:</label>
-					<div class="col-xs-7">
-						<button type="button" class="btn btn-primary pull-right">Add block date</button>
-					</div>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<div class="col-xs-12 pull ">
-						<textarea class="form-control" rows="5" id="blockDates"></textarea>
-					</div>
-				</div>	
-			</div>													
 		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="form-horizontal">
-		<div class="col-md-4">
-			<div class="row">
-				<div class="form-group">
-					<label for="blockStart" class="control-label col-xs-6">Current Renter:</label>
-					<div id="currentRenter" class="input-group input-group-sm col-xs-5 pull-right">
-						<input type="text" id="currentRenter" class="form-control" placeholder="">
-						<span class="btn btn-default dropdown-toggle input-group-addon glyphicon glyphicon-triangle-bottom" id="currentRenter" data-toggle="dropdown">
-						</span>    
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Action</a></li>
-						    <li><a href="#">Another action</a></li>
-						    <li><a href="#">Something else here</a></li>
-						    <li class="divider"></li>
-						    <li><a href="#">Separated link</a></li>
-						</ul>				
+	<div class="row rentInfo">
+		<h1><span class="label">Long Term Rental Terms</span></h1>
+		<div class="form-horizontal">
+			<div class="col-md-4">
+				<div class="row">
+					<div class="form-group">
+						<label for="numberMonthsAdvance" class="control-label col-xs-6"># of Months to Advance:</label>
+						<div class="col-xs-3 pull-right">
+							<input type="number" id="numberMonthsAdvance" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="numberMonthsDeposit" class="control-label col-xs-6"># of Months Deposit:</label>
+						<div class="col-xs-3 pull-right">
+							<input type="number" id="numberMonthsDeposit" class="form-control input-sm">
+						</div>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="cancellationFeeLT" class="control-label col-xs-5">Cancellation Fee:</label>
+						<div class="col-xs-7">
+							<input type="text" id="cancellationFeeLT" class="form-control input-sm">
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<div class="col-xs-8">
-						<input type="text" id="tag" class="form-control" placeholder="Tag">
+				<div class="row">
+					<div class="form-group">
+						<label for="terminationFee" class="control-label col-xs-5">Termination Fee:</label>
+						<div class="col-xs-7">
+							<input type="text" id="terminationFee" class="form-control input-sm">
+						</div>
 					</div>
-					<div class="col-xs-4">
-						<button type="button" class="btn btn-primary pull-right">Add Tag</button>
-					</div>
-				</div>	
+				</div>																		
 			</div>	
-			<div class="row">
-				<div class="form-group">
-					<label for="" class="control-label col-xs-5">Search Tags:</label>
-				</div>	
-			</div>	
-			<div class="row">
-				<div class="form-group">
-					<div class="col-xs-12 pull ">
-						<textarea class="form-control" rows="5" id="tag"></textarea>
+			<div class="col-md-4">
+				<div class="row">
+					<div class="form-group">
+						<div class=" checkbox col-xs-12">
+							<label for="utilities"><input type="checkbox" id="utilities" value="">Include utilities in base rent</label>
+						</div>
+						<div class="bottom40"></div>
+						<div class=" checkbox col-xs-12">
+							<label for="internet"><input type="checkbox" id="internet" value="">Include internet in base rent</label>
+						</div>					
+						<div class="bottom40"></div>
+						<div class=" checkbox col-xs-12">
+							<label for="passportLT"><input type="checkbox" id="passportLT" value="">Require Passport</label>		
+						</div>					
+						<div class="bottom40"></div>
+						<div class=" checkbox col-xs-12">
+							<label for="alienLT"><input type="checkbox" id="alienLT" value="">Require Alien Card</label>		
+						</div>					
+						<div class="bottom40"></div>
+						<div class=" checkbox col-xs-12">
+							<label for="IDLT"><input type="checkbox" id="IDLT" value="">Require ID</label>		
+						</div>					
+						<div class="bottom40"></div>
+					</div>	
+				</div>				
+			</div>		
+			<div class="col-md-4">
+				<div class="row">
+					<div class="form-group">
+						<label for="blockStart" class="control-label col-xs-6">Current Renter:</label>
+						<div id="currentRenter" class="input-group input-group-sm col-xs-5 pull-right">
+							<input type="text" id="currentRenter" class="form-control" placeholder="">
+							<span class="btn btn-default dropdown-toggle input-group-addon glyphicon glyphicon-triangle-bottom" id="currentRenter" data-toggle="dropdown">
+							</span>    
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+							    <li><a href="#">Another action</a></li>
+							    <li><a href="#">Something else here</a></li>
+							    <li class="divider"></li>
+							    <li><a href="#">Separated link</a></li>
+							</ul>				
+						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<div class="col-xs-8">
+							<input type="text" id="tag" class="form-control" placeholder="Tag">
+						</div>
+						<div class="col-xs-4">
+							<button type="button" class="btn btn-primary pull-right">Add Tag</button>
+						</div>
+					</div>	
 				</div>	
-			</div>													
-		</div>	
+				<div class="row">
+					<div class="form-group">
+						<label for="" class="control-label col-xs-5">Search Tags:</label>
+					</div>	
+				</div>	
+				<div class="row">
+					<div class="form-group">
+						<div class="col-xs-12 pull ">
+							<textarea class="form-control" rows="5" id="tag"></textarea>
+						</div>
+					</div>	
+				</div>													
+			</div>	
+		</div>
 	</div>
+	<div class="row rentInfo">
+		<h1><span class="label">Short Term Rental Terms</span></h1>
+		<div class="form-horizontal">
+			<div class="col-md-4">
+				<div class="row">
+					<div class="form-group">
+						<label for="cancellationFeeST" class="control-label col-xs-5">Cancellation Fee:</label>
+						<div class="col-xs-7">
+							<input type="text" id="cancellationFeeST" class="form-control input-sm">
+						</div>
+					</div>
+				</div>																	
+			</div>	
+			<div class="col-md-4">
+				<div class="row">
+					<div class="form-group">				
+						<div class=" checkbox col-xs-12">
+							<label for="passportST"><input type="checkbox" id="passportST" value="">Require Passport</label>		
+						</div>					
+						<div class="bottom40"></div>
+						<div class=" checkbox col-xs-12">
+							<label for="alienST"><input type="checkbox" id="alienST" value="">Require Alien Card</label>		
+						</div>					
+						<div class="bottom40"></div>
+						<div class=" checkbox col-xs-12">
+							<label for="IDST"><input type="checkbox" id="IDST" value="">Require ID</label>		
+						</div>					
+						<div class="bottom40"></div>
+					</div>	
+				</div>				
+			</div>		
+		</div>
+	</div>	
 </div>
 
