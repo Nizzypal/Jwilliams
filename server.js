@@ -1,8 +1,13 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
+//Model Requires
 var User = require('./models/user.js');
 var Item = require('./models/item.js');
+var Message = require('./models/message.js');
+var ItemRentInfo = require('./models/rentInfo.js');
+
 var path = require('path');
 var request = require('request');
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -199,6 +204,110 @@ app.post('/submitItem', function(req, res) {
 
 });
 
+//Server endpoint for creating units
+app.post('/createUnit', function(req, res) {
+    // var name: String,
+    // var type: String,
+    // var floor: String,
+    // var floorCount: String,
+    // var price: String,
+    // var size: String,
+    // var bedroomCount: String,
+    // var bathroomCount: String,
+    // var quartersCount: String,
+    // var powderCount: String,
+    // var forShortTerm: Boolean,
+    // var forLongTerm: Boolean,
+    // var forSale: Boolean,
+    // var condominiumName: String,
+    // var city: String,
+    // var address: String,
+    // var photos: []
+
+    // var monthlyRate: Number,
+    // var dailyRate: Number,
+    // var blockDateStart: Date,
+    // var blockDateEnd: Date,
+    // var blockDates: [Date],
+    // var currentRenter: String,
+    // var numberMonthsAdvance: Number,
+    // var numberMonthsDeposit: Number,
+    // var cancellationFee: Number,
+    // var terminationFee: Number,
+    // var includeUtilities: Boolean,
+    // var includeInternet: Boolean,
+    // var requirePassport: Boolean,
+    // var requireAlienCard: Boolean,
+    // var requireID: Boolean,
+    // var unitAmenities: [String],
+    // var buildingAmenities: [String]    
+
+  //console.log(req.body);
+
+  var newItem = new Item({
+    // name: String,
+    // type: String,
+    // floor: String,
+    // floorCount: String,
+    // price: String,
+    // size: String,
+    // bedroomCount: String,
+    // bathroomCount: String,
+    // quartersCount: String,
+    // powderCount: String,
+    // forShortTerm: Boolean,
+    // forLongTerm: Boolean,
+    // forSale: Boolean,
+    // condominiumName: String,
+    // city: String,
+    // address: String,
+    // photos: []
+  });
+
+   var newRentInfo = new ItemRentInfo({
+    // monthlyRate: Number,
+    // dailyRate: Number,
+    // blockDateStart: Date,
+    // blockDateEnd: Date,
+    // blockDates: [Date],
+    // currentRenter: String,
+    // numberMonthsAdvance: Number,
+    // numberMonthsDeposit: Number,
+    // cancellationFee: Number,
+    // terminationFee: Number,
+    // includeUtilities: Boolean,
+    // includeInternet: Boolean,
+    // requirePassport: Boolean,
+    // requireAlienCard: Boolean,
+    // requireID: Boolean,
+    // unitAmenities: [String],
+    // buildingAmenities: [String]
+  }); 
+
+  newItem.save(function(err) {
+    if (err) {
+      res.status(401).send({
+        message: 'problem with database encountered'
+      });
+      return;
+    }
+    res.status(200).send();
+    return;
+  });
+
+  newRentInfo.save(function(err) {
+    if (err) {
+      res.status(401).send({
+        message: 'problem with database encountered'
+      });
+      return;
+    }
+    res.status(200).send();
+    return;
+  });
+
+});
+
 app.post('/editItem', function(req, res) {
   var photoUrl = req.body.photoUrl;
   var itemPrice = req.body.price;
@@ -284,6 +393,42 @@ app.post('/editUser', function(req, res) {
     return;
   });
 
+});
+
+app.post('/sendMessage', function(req, res) {
+  var name = req.body.name;
+  var message = req.body.message;
+  var replied = false;
+  var date = req.body.date;
+
+  var user = req.body;
+  var searchUser = {
+    name: name
+  };
+
+  //BUSINESS RULE - they can't send to us without being registered users first?
+  User.findOne(searchUser, function(err, user) {
+
+    if (!user) {
+      res.status(401).send({
+        message: 'User not found!'
+      });
+      return;
+    } 
+  });
+
+  var newMessage= new Message({
+  name: name,
+  date: date,
+  message: message,
+  replied: replied
+  });
+
+  newMessage.save(function(err) {
+
+    createSendToken(newMessage, res);
+    return;
+  });
 
 });
 
@@ -291,7 +436,7 @@ app.post('/subscriber', function(req, res) {
 
   var subscribed = true;
 
-  var user = req.body.usr;
+  var user = req.body.name;
   var email = req.body.email;
 
   // var searchUser = {
@@ -311,8 +456,8 @@ app.post('/subscriber', function(req, res) {
   var newUser = new User({
     name: user,
     email: email,
-    contact1: 'asdas',
-    password: 'asdas',
+    contact1: '',
+    password: '',
     address1: '',
     subscribed: true,
     role: 'user'
@@ -323,8 +468,6 @@ app.post('/subscriber', function(req, res) {
   });
 
 });
-
-
 
 app.get('/items', function(req, res) {
   if (!req.headers.authorization) {
@@ -396,6 +539,7 @@ var mealTypes = [{
   typeCode: 'snack',
   thumb: 'https://skitchen-s3bucket.s3.amazonaws.com/pancit.jpg'
 }];
+
 app.get('/typeOfMeals', function(req, res) {
   if (!req.headers.authorization) {
     return res.status(401).send({
@@ -476,13 +620,6 @@ app.post('/userInfo', function(req, res) {
 
     });
   }
-
-  //User.findOne({_id: ObjectId(payload.sub)}, function(err,foundUser){
-  //    console.log("foundUser:"+foundUser);
-  //            if(foundUser){
-  //                console.log(foundUser);
-  //                res.status(200).send({user: foundUser});}
-  //        })
 
   var userId = mongoose.Types.ObjectId(payload.sub);
   User.findById(userId, function(err, foundUser) {

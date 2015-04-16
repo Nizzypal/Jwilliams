@@ -996,3 +996,30 @@ html { height: 100%;}
     background-color: rgba(250,250,250,.8);
     z-index: 1;
 }
+
+div.row.rentInfo {
+  margin-bottom: 50px;
+}
+
+div.col-md-4, div.col-md-3, div.col-md-2 {
+  padding-left: 50px;
+}
+
+div.rentLabel {
+  padding: 0px;
+}
+
+div.form-horizontal .control-label  {
+  text-align: left;
+}
+div#blockStart, div#blockEnd, div#currentRenter {
+  margin-right: 15px;
+}
+
+#blockStart.glyphicon, #blockEnd.glyphicon, #currentRenter.glyphicon {
+  top: 0px;
+}
+
+/*input#tag {
+  width: auto;
+}*/
