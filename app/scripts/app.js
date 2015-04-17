@@ -73,6 +73,11 @@ angular.module('jwilliamsAdmin').config(function($stateProvider, $urlRouterProvi
   //   templateUrl: '/views/createUnit.html',
   //   controller:  'CreateUnitCtrl'
   // });
+//mailchimp
+var mcapi = require('./node_modules/mailchimp-api/mailchimp');
+var lists = require('./app/admin/routes/lists');
+// set MailChimp API key here
+mc = new mcapi.Mailchimp('7c9449737b73d44ba6fd130fba22a56b-us10');
 
 });
 

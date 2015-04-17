@@ -59,7 +59,7 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
   		.success(function(){})
   		.error(function(err){
   			alert('warning: ' + err.message);
-  		});
+  		});  
   };
 
 	$scope.addPhoto = function(){

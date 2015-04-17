@@ -1,5 +1,6 @@
 angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, API_URL) {
 
+//var mc = new mcapi.Mailchimp('7c9449737b73d44ba6fd130fba22a56b-us10');
 	// $scope.city = city.value;
 	// $scope.units = [];
 	// $scope.currentUnit = {};
@@ -26,6 +27,19 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, 
 			    alert('warning', "Unable to get meals");
 			});
 		// });
+
+	  "7c9449737b73d44ba6fd130fba22a56b-us10".lists.subscribe({id: 105081, email:{email:"nazarite_paladin@yahoo.com"}}, function(data) {
+	      req.session.success_flash = 'User subscribed successfully! Look for the confirmation email.';
+	      res.redirect('/lists/'+req.params.id);
+	    },
+	    function(error) {
+	      if (error.error) {
+	        req.session.error_flash = error.code + ": " + error.error;
+	      } else {
+	        req.session.error_flash = 'There was an error subscribing that user';
+	      }
+	      res.redirect('/lists/'+req.params.id);
+	    });
     };
 });
 

@@ -15,7 +15,14 @@ var jwt = require('./services/jwt.js');
 var aws = require('aws-sdk');
 var q = require('q');
 
+//mailchimp
+var mcapi = require('./node_modules/mailchimp-api/mailchimp');
+var lists = require('./app/admin/routes/lists');
+
 var app = express();
+
+// set MailChimp API key here
+mc = new mcapi.Mailchimp('7c9449737b73d44ba6fd130fba22a56b-us10');
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || 'AKIAJK42ZM2U5NOUDDFQ';
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY || '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';
@@ -308,6 +315,8 @@ app.post('/createUnit', function(req, res) {
   });
 
 });
+
+app.post('/lists/:id/subscribe', lists.subscribe);
 
 app.post('/editItem', function(req, res) {
   var photoUrl = req.body.photoUrl;
