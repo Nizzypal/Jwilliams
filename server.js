@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var User = require('./models/user.js');
 var Item = require('./models/item.js');
 var Message = require('./models/message.js');
-var ItemRentInfo = require('./models/rentInfo.js');
+var Rent = require('./models/rent.js');
 
 var path = require('path');
 var request = require('request');
@@ -245,41 +245,42 @@ app.post('/createUnit', function(req, res) {
   //console.log(req.body);
 
   var newItem = new Item({
-    // name: String,
+    name: req.body.unit.name,
     // type: String,
-    // floor: String,
+    floor: req.body.unit.floor,
     // floorCount: String,
     // price: String,
     // size: String,
-    // bedroomCount: String,
-    // bathroomCount: String,
+    bedroomCount: req.body.unit.bedroomCount,
+    bathroomCount: req.body.unit.bathroomCount,
     // quartersCount: String,
-    // powderCount: String,
-    // forShortTerm: Boolean,
-    // forLongTerm: Boolean,
+    powderCount: req.body.unit.powderCount,
+    //forShortTerm: Boolean,
+    //forLongTerm: Boolean,
     // forSale: Boolean,
     // condominiumName: String,
     // city: String,
-    // address: String,
+    address: req.body.unit.address
     // photos: []
   });
 
-   var newRentInfo = new ItemRentInfo({
-    // monthlyRate: Number,
-    // dailyRate: Number,
-    // blockDateStart: Date,
-    // blockDateEnd: Date,
+   var newRent = new Rent({
+    monthlyRate: req.body.rentInfo.monthlyRate,
+    dailyRate: req.body.rentInfo.dailyRate,
+    blockDateStart: req.body.rentInfo.blockDateStart,
+    blockDateEnd: req.body.rentInfo.blockDateEnd,
     // blockDates: [Date],
-    // currentRenter: String,
-    // numberMonthsAdvance: Number,
-    // numberMonthsDeposit: Number,
-    // cancellationFee: Number,
-    // terminationFee: Number,
-    // includeUtilities: Boolean,
-    // includeInternet: Boolean,
-    // requirePassport: Boolean,
-    // requireAlienCard: Boolean,
-    // requireID: Boolean,
+    currentRenter: req.body.rentInfo.currentRenter,
+    numberMonthsAdvance: req.body.rentInfo.numberMonthsAdvance,
+    numberMonthsDeposit: req.body.rentInfo.numberMonthsDeposit,
+    cancellationFeeLT: req.body.rentInfo.cancellationFeeLT,
+    cancellationFeeST: req.body.rentInfo.cancellationFeeST,
+    terminationFee: req.body.rentInfo.terminationFee,
+    includeUtilities: req.body.rentInfo.includeUtilities,
+    includeInternet: req.body.rentInfo.includeInternet,
+    requirePassport: req.body.rentInfo.requirePassport,
+    requireAlienCard: req.body.rentInfo.requireAlienCard,
+    requireID: req.body.rentInfo.requireID
     // unitAmenities: [String],
     // buildingAmenities: [String]
   }); 
@@ -295,7 +296,7 @@ app.post('/createUnit', function(req, res) {
     return;
   });
 
-  newRentInfo.save(function(err) {
+  newRent.save(function(err) {
     if (err) {
       res.status(401).send({
         message: 'problem with database encountered'
@@ -426,7 +427,7 @@ app.post('/sendMessage', function(req, res) {
 
   newMessage.save(function(err) {
 
-    createSendToken(newMessage, res);
+    //createSendToken(newMessage, res);
     return;
   });
 

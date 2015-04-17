@@ -1019,7 +1019,12 @@ div#blockStart, div#blockEnd, div#currentRenter {
 #blockStart.glyphicon, #blockEnd.glyphicon, #currentRenter.glyphicon {
   top: 0px;
 }
-
-/*input#tag {
-  width: auto;
-}*/
+/*
+div.form-horizontal .checkbox {
+  margin-bottom:35px;
+  margin: 0px;
+}
+*/
+div.bottom40 {
+  height: 40px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block;
+}
