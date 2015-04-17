@@ -15,7 +15,7 @@ angular.module('jwilliams').controller('MessageCtrl', function($scope, $http, AP
 
 		$http.post(API_URL + 'sendMessage', message).success(function() {
 		}).error(function(err) {
-		    alert('warning', "Unable to send message!");
+		    alert('warning: ' + err.message);
 		});				
 	};
 });

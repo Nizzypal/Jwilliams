@@ -47,7 +47,7 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   $stateProvider.state('createUnit', {
     url: '/createUnit',
     templateUrl: '/views/createUnit.html',
-    // controller:  'CreateUnitCtrl'
+    controller:  'CreateUnitCtrl'
   });
 
   // $stateProvider.state('sendMessage', {
@@ -62,6 +62,18 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   //                                    });
 
   $urlRouterProvider.otherwise('/');
+});
+
+angular
+  .module('jwilliamsAdmin', ['ui.router']);
+angular.module('jwilliamsAdmin').config(function($stateProvider, $urlRouterProvider) {
+
+  // $stateProvider.state('createUnit', {
+  //   url: '/createUnit',
+  //   templateUrl: '/views/createUnit.html',
+  //   controller:  'CreateUnitCtrl'
+  // });
+
 });
 
 
