@@ -28,7 +28,7 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, 
 			});
 		// });
 
-	  "7c9449737b73d44ba6fd130fba22a56b-us10".lists.subscribe({id: 105081, email:{email:"nazarite_paladin@yahoo.com"}}, function(data) {
+	  "7c9449737b				 .lists.subscribe({apikey: "7c9449737b73d44ba6fd130fba22a56b-us10", id:"105081", email:{email:"nazarite_paladin@yahoo.com"}}, function(data) {
 	      req.session.success_flash = 'User subscribed successfully! Look for the confirmation email.';
 	      res.redirect('/lists/'+req.params.id);
 	    },
