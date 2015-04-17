@@ -260,8 +260,8 @@ app.post('/createUnit', function(req, res) {
     // forSale: Boolean,
     // condominiumName: String,
     // city: String,
-    address: req.body.unit.address
-    // photos: []
+    address: req.body.unit.address,
+    photos: req.body.unit.photos
   });
 
    var newRent = new Rent({

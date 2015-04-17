@@ -122,4 +122,7 @@ angular.module('jwilliams').directive('endRepeat', ['$timeout', function ($timeo
 			}
 		}])
 
+//constants
 .constant('API_URL', 'http://localhost:3030/')
+// .constant('PIX_HEIGHT', 200);
+// .constant('PIX_WIDTH', 200);
