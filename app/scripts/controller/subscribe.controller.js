@@ -1,6 +1,5 @@
 angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, API_URL) {
 
-//var mc = new mcapi.Mailchimp('7c9449737b73d44ba6fd130fba22a56b-us10');
 	// $scope.city = city.value;
 	// $scope.units = [];
 	// $scope.currentUnit = {};
@@ -28,19 +27,14 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, 
 			});
 		// });
 
-	  "7c9449737b				 .lists.subscribe({apikey: "7c9449737b73d44ba6fd130fba22a56b-us10", id:"105081", email:{email:"nazarite_paladin@yahoo.com"}}, function(data) {
-	      req.session.success_flash = 'User subscribed successfully! Look for the confirmation email.';
-	      res.redirect('/lists/'+req.params.id);
-	    },
-	    function(error) {
-	      if (error.error) {
-	        req.session.error_flash = error.code + ": " + error.error;
-	      } else {
-	        req.session.error_flash = 'There was an error subscribing that user';
-	      }
-	      res.redirect('/lists/'+req.params.id);
-	    });
-    };
-});
+		// api.call('list', 'subscribe', { id: 776869c525, email: {email:'nazarite_paladin@yahoo.com'} }, function (error, data) {
+		//     if (error)
+		//         console.log(error.message);
+		//     else
+		//         console.log(JSON.stringify(data)); // Do something with your data!
+		// });
 
+	};
+
+});
 

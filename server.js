@@ -15,14 +15,16 @@ var jwt = require('./services/jwt.js');
 var aws = require('aws-sdk');
 var q = require('q');
 
-//mailchimp
-var mcapi = require('./node_modules/mailchimp-api/mailchimp');
-var lists = require('./app/admin/routes/lists');
+//Mailschimp API related code
+var MailChimpAPI = require('mailchimp').MailChimpAPI;
+var apiKey = '7c9449737b73d44ba6fd130fba22a56b-us10';
+try { 
+    var api = new MailChimpAPI(apiKey, { version : '2.0' });
+} catch (error) {
+    console.log(error.message);
+}
 
 var app = express();
-
-// set MailChimp API key here
-mc = new mcapi.Mailchimp('7c9449737b73d44ba6fd130fba22a56b-us10');
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || 'AKIAJK42ZM2U5NOUDDFQ';
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY || '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';
@@ -316,7 +318,7 @@ app.post('/createUnit', function(req, res) {
 
 });
 
-app.post('/lists/:id/subscribe', lists.subscribe);
+// app.post('/lists/:id/subscribe', lists.subscribe);
 
 app.post('/editItem', function(req, res) {
   var photoUrl = req.body.photoUrl;
@@ -476,6 +478,13 @@ app.post('/subscriber', function(req, res) {
   newUser.save(function(err) {
     createSendToken(newUser, res);
   });
+
+    api.call('lists', 'subscribe', { id: '776869c525', email: {email:newUser.email} }, function (error, data) {
+        if (error)
+            console.log(error.message);
+        else
+            console.log(JSON.stringify(data)); // Do something with your data!
+    });  
 
 });
 
