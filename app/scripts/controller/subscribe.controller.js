@@ -8,8 +8,7 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, 
 	//     $scope.units = units;
 	// }).error(function(err) {
 	//     alert('warning', "Unable to get meals");
-	// });
-	
+	// });	
 
 	var userInfo = {
 		name: "",
@@ -26,14 +25,6 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, 
 			    alert('warning', "Unable to get meals");
 			});
 		// });
-
-		// api.call('list', 'subscribe', { id: 776869c525, email: {email:'nazarite_paladin@yahoo.com'} }, function (error, data) {
-		//     if (error)
-		//         console.log(error.message);
-		//     else
-		//         console.log(JSON.stringify(data)); // Do something with your data!
-		// });
-
 	};
 
 });
