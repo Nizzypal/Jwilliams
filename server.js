@@ -28,7 +28,7 @@ var app = express();
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || 'AKIAJK42ZM2U5NOUDDFQ';
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY || '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';
-var S3_BUCKET = process.env.S3_BUCKET || 'skitchen-s3bucket';
+var S3_BUCKET = process.env.S3_BUCKET || 'jwilliams-s3bucket';
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -268,7 +268,7 @@ app.post('/createUnit', function(req, res) {
     //forLongTerm: Boolean,
     // forSale: Boolean,
     // condominiumName: String,
-    // city: String,
+    city: req.body.unit.city,
     address: req.body.unit.address,
     photos: req.body.unit.photos
   });
