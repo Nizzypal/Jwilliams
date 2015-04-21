@@ -442,6 +442,13 @@ app.post('/sendMessage', function(req, res) {
     return;
   });
 
+    api.call('campaigns', 'send', { id: '206253', function (error, data) {
+        if (error)
+            console.log(error.message);
+        else
+            console.log(JSON.stringify(data)); // Do something with your data!
+    });    
+
 });
 
 app.post('/subscriber', function(req, res) {
