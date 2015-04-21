@@ -18,10 +18,12 @@ var q = require('q');
 //Mailschimp API related code
 var MailChimpAPI = require('mailchimp').MailChimpAPI;
 var apiKey = '7c9449737b73d44ba6fd130fba22a56b-us10';
-try { 
-    var api = new MailChimpAPI(apiKey, { version : '2.0' });
+try {
+  var api = new MailChimpAPI(apiKey, {
+    version: '2.0'
+  });
 } catch (error) {
-    console.log(error.message);
+  console.log(error.message);
 }
 
 var app = express();
@@ -215,41 +217,41 @@ app.post('/submitItem', function(req, res) {
 
 //Server endpoint for creating units
 app.post('/createUnit', function(req, res) {
-    // var name: String,
-    // var type: String,
-    // var floor: String,
-    // var floorCount: String,
-    // var price: String,
-    // var size: String,
-    // var bedroomCount: String,
-    // var bathroomCount: String,
-    // var quartersCount: String,
-    // var powderCount: String,
-    // var forShortTerm: Boolean,
-    // var forLongTerm: Boolean,
-    // var forSale: Boolean,
-    // var condominiumName: String,
-    // var city: String,
-    // var address: String,
-    // var photos: []
+  // var name: String,
+  // var type: String,
+  // var floor: String,
+  // var floorCount: String,
+  // var price: String,
+  // var size: String,
+  // var bedroomCount: String,
+  // var bathroomCount: String,
+  // var quartersCount: String,
+  // var powderCount: String,
+  // var forShortTerm: Boolean,
+  // var forLongTerm: Boolean,
+  // var forSale: Boolean,
+  // var condominiumName: String,
+  // var city: String,
+  // var address: String,
+  // var photos: []
 
-    // var monthlyRate: Number,
-    // var dailyRate: Number,
-    // var blockDateStart: Date,
-    // var blockDateEnd: Date,
-    // var blockDates: [Date],
-    // var currentRenter: String,
-    // var numberMonthsAdvance: Number,
-    // var numberMonthsDeposit: Number,
-    // var cancellationFee: Number,
-    // var terminationFee: Number,
-    // var includeUtilities: Boolean,
-    // var includeInternet: Boolean,
-    // var requirePassport: Boolean,
-    // var requireAlienCard: Boolean,
-    // var requireID: Boolean,
-    // var unitAmenities: [String],
-    // var buildingAmenities: [String]    
+  // var monthlyRate: Number,
+  // var dailyRate: Number,
+  // var blockDateStart: Date,
+  // var blockDateEnd: Date,
+  // var blockDates: [Date],
+  // var currentRenter: String,
+  // var numberMonthsAdvance: Number,
+  // var numberMonthsDeposit: Number,
+  // var cancellationFee: Number,
+  // var terminationFee: Number,
+  // var includeUtilities: Boolean,
+  // var includeInternet: Boolean,
+  // var requirePassport: Boolean,
+  // var requireAlienCard: Boolean,
+  // var requireID: Boolean,
+  // var unitAmenities: [String],
+  // var buildingAmenities: [String]
 
   //console.log(req.body);
 
@@ -274,7 +276,7 @@ app.post('/createUnit', function(req, res) {
     photos: req.body.unit.photos
   });
 
-   var newRent = new Rent({
+  var newRent = new Rent({
     monthlyRate: req.body.rentInfo.monthlyRate,
     dailyRate: req.body.rentInfo.dailyRate,
     blockDateStart: req.body.rentInfo.blockDateStart,
@@ -290,10 +292,11 @@ app.post('/createUnit', function(req, res) {
     includeInternet: req.body.rentInfo.includeInternet,
     requirePassport: req.body.rentInfo.requirePassport,
     requireAlienCard: req.body.rentInfo.requireAlienCard,
-    requireID: req.body.rentInfo.requireID
+    requireID: req.body.rentInfo.requireID,
+    unitId: newItem._id.toString(),
     // unitAmenities: [String],
     // buildingAmenities: [String]
-  }); 
+  });
 
   newItem.save(function(err) {
     if (err) {
@@ -427,14 +430,14 @@ app.post('/sendMessage', function(req, res) {
         message: 'User not found!'
       });
       return;
-    } 
+    }
   });
 
-  var newMessage= new Message({
-  name: name,
-  date: date,
-  message: message,
-  replied: replied
+  var newMessage = new Message({
+    name: name,
+    date: date,
+    message: message,
+    replied: replied
   });
 
   newMessage.save(function(err) {
@@ -500,12 +503,17 @@ app.post('/subscriber', function(req, res) {
     createSendToken(newUser, res);
   });
 
-    api.call('lists', 'subscribe', { id: '776869c525', email: {email:newUser.email} }, function (error, data) {
-        if (error)
-            console.log(error.message);
-        else
-            console.log(JSON.stringify(data)); // Do something with your data!
-    });  
+  api.call('lists', 'subscribe', {
+    id: '776869c525',
+    email: {
+      email: newUser.email
+    }
+  }, function(error, data) {
+    if (error)
+      console.log(error.message);
+    else
+      console.log(JSON.stringify(data)); // Do something with your data!
+  });
 
 });
 
@@ -1032,11 +1040,23 @@ app.get('/getUnit', function(req, res) {
       foundMealView.powderCount = foundMeal.powderCount;
       foundMealView.bedroomCount = foundMeal.bedroomCount;
       foundMealView.photos = foundMeal.photos;
-
       console.log(foundMealView);
       res.status(200).send(foundMealView);
     }
-  })
+
+    console.log(foundMealView);
+    res.status(200).send(foundMealView);
+  });
+});
+
+
+app.get('/getRent', function(req, res) {
+  var stringId = req.query.q;
+  Rent.findOne({
+    unitId: stringId
+  }, function(err, foundRent) {
+    res.status(200).send(foundRent)
+  });
 })
 
 app.post('/auth/google/auth/google', function(req, res) {

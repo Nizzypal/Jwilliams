@@ -18,7 +18,8 @@ var RentInfoSchema = new mongoose.Schema({
 	requireAlienCard: Boolean,
 	requireID: Boolean,
 	unitAmenities: [String],
-	buildingAmenities: [String]
+	buildingAmenities: [String],
+    unitId: String
 });
 
 module.exports = mongoose.model("Rent", RentInfoSchema);
