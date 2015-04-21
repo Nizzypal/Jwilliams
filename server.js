@@ -15,6 +15,15 @@ var jwt = require('./services/jwt.js');
 var aws = require('aws-sdk');
 var q = require('q');
 
+//Mailschimp API related code
+var MailChimpAPI = require('mailchimp').MailChimpAPI;
+var apiKey = '7c9449737b73d44ba6fd130fba22a56b-us10';
+try { 
+    var api = new MailChimpAPI(apiKey, { version : '2.0' });
+} catch (error) {
+    console.log(error.message);
+}
+
 var app = express();
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || 'AKIAJK42ZM2U5NOUDDFQ';
@@ -260,8 +269,8 @@ app.post('/createUnit', function(req, res) {
     // forSale: Boolean,
     // condominiumName: String,
     // city: String,
-    address: req.body.unit.address
-    // photos: []
+    address: req.body.unit.address,
+    photos: req.body.unit.photos
   });
 
    var newRent = new Rent({
@@ -308,6 +317,8 @@ app.post('/createUnit', function(req, res) {
   });
 
 });
+
+// app.post('/lists/:id/subscribe', lists.subscribe);
 
 app.post('/editItem', function(req, res) {
   var photoUrl = req.body.photoUrl;
@@ -467,6 +478,13 @@ app.post('/subscriber', function(req, res) {
   newUser.save(function(err) {
     createSendToken(newUser, res);
   });
+
+    api.call('lists', 'subscribe', { id: '776869c525', email: {email:newUser.email} }, function (error, data) {
+        if (error)
+            console.log(error.message);
+        else
+            console.log(JSON.stringify(data)); // Do something with your data!
+    });  
 
 });
 

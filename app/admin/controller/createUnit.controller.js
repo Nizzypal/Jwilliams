@@ -1,5 +1,8 @@
 angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $http, API_URL){
 
+  var pixHeight = 200;
+  var pixWidth = 200;
+
   var unit = {
 		name: "",
 		type: "",
@@ -56,8 +59,51 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
   		.success(function(){})
   		.error(function(err){
   			alert('warning: ' + err.message);
-  		});
+  		});  
   };
+
+	$scope.addPhoto = function(){
+  		$('input#photos').click();	
+	};
+
+	$('input#photos').on('change', function(){
+		var currentText = $('#photoNames').val();
+
+		//Get names of files
+		var fileObject = $('input#photos').prop("files")
+		//var names = $.map(files, function(val) { return val.name; });
+		var preview_elem = $("#tableEntryRow");
+		
+		$('#photoNames').val(currentText + "\n" + fileObject[0].name);
+		var fileName = fileObject[0].name;
+		var fileSize = fileObject.size;
+
+    	if (fileSize > 200000) {
+        	//angular.injector(['ng', 'skitchenApp']).invoke(function(alert) {
+          	alert('warning', 'Sorry,', ' File is too big.');
+        	//});
+        	return;
+      	}
+
+    	var s3upload = new S3Upload({
+	        s3_object_name: fileName,
+	        file_dom_selector: 'photos',
+	        s3_sign_put_url: '/sign_s3',
+	        onProgress: function(percent, message) {
+	          //status_elem.innerHTML = 'Upload progress: ' + percent + '% ' + message;
+	        },
+	        onFinishS3Put: function(public_url) {
+	          //status_elem.innerHTML = 'Upload completed. Uploaded to: ' + public_url;
+	          //url_elem.value = public_url;
+	          preview_elem.append('<td><img src="' + public_url + '" style="display:table-cell;width:'+pixHeight+'px;height:'+pixWidth+'px;float:left;"/></td>');
+	          unit.photos.push(public_url);
+	        },
+	        onError: function(status) {
+	          //status_elem.innerHTML = 'Upload error: ' + status;
+	        }
+     	});		
+	});  
+
 
   $scope.reverseBoolean = function(value){
   	return !value;
