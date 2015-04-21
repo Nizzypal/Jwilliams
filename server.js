@@ -260,6 +260,7 @@ app.post('/createUnit', function(req, res) {
     // floorCount: String,
     // price: String,
     // size: String,
+    size: req.body.unit.size,
     bedroomCount: req.body.unit.bedroomCount,
     bathroomCount: req.body.unit.bathroomCount,
     // quartersCount: String,
@@ -996,7 +997,7 @@ app.post('/isAdmin2', function(req, res) {
   });
 })
 
-app.get('/meal', function(req, res) {
+app.get('/getUnit', function(req, res) {
   var stringId = req.query.q;
   var mealId = mongoose.Types.ObjectId(stringId);
   Item.findById(mealId, function(err, foundMeal) {
@@ -1005,24 +1006,13 @@ app.get('/meal', function(req, res) {
       var foundMealView = {};
       foundMealView._id = foundMeal._id.toString();
       foundMealView.name = foundMeal.name;
-      foundMealView.price = foundMeal.price;
-      foundMealView.photoUrl = foundMeal.photoUrl;
-      foundMealView.description = foundMeal.description;
-      foundMealView.serving = foundMeal.serving;
-      foundMealView.dateStart = foundMeal.dateStart;
-      foundMealView.dateEnd = foundMeal.dateEnd;
+      foundMealView.address = foundMeal.address;
+      foundMealView.size = foundMeal.size;
+      foundMealView.bathroomCount = foundMeal.bathroomCount;
+      foundMealView.powderCount = foundMeal.powderCount;
+      foundMealView.bedroomCount = foundMeal.bedroomCount;
+      foundMealView.photos = foundMeal.photos;
 
-      for (var i = 0; i < availabilityTypes.length; i++) {
-        if (availabilityTypes[i].typeCode === foundMeal.availability) {
-          foundMealView.availability = availabilityTypes[i];
-        }
-      }
-
-      for (var i = 0; i < mealTypes.length; i++) {
-        if (mealTypes[i].typeCode === foundMeal.type) {
-          foundMealView.type = mealTypes[i];
-        }
-      }
       console.log(foundMealView);
       res.status(200).send(foundMealView);
     }

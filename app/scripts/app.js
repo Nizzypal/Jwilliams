@@ -23,38 +23,46 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     url: '/bgc',
     templateUrl: '/views/bgc.html'
   });
-    
+
   $stateProvider.state('makati', {
     url: '/makati',
     templateUrl: '/views/city.html',
     controller: 'AreaCtrl',
-    resolve:{
+    resolve: {
 
-         // Example using function with simple return value.
-         // Since it's not a promise, it resolves immediately.
-         city:  function(){
-            return {value: 'makati'};
-         }
+      // Example using function with simple return value.
+      // Since it's not a promise, it resolves immediately.
+      city: function() {
+        return {
+          value: 'makati'
+        };
+      }
     }
   });
 
   $stateProvider.state('subscribe', {
     url: '/subscribe',
     templateUrl: '/views/subscribe.html',
-    controller:  'SubscribeCtrl'
+    controller: 'SubscribeCtrl'
   });
 
   $stateProvider.state('createUnit', {
     url: '/createUnit',
     templateUrl: '/views/createUnit.html',
-    controller:  'CreateUnitCtrl'
+    controller: 'CreateUnitCtrl'
+  });
+    
+    $stateProvider.state('viewUnit', {
+    url: '/viewUnit/:unitId',
+    templateUrl: '/views/unit.html',
+    controller: 'ViewUnitCtrl'
   });
 
   // $stateProvider.state('sendMessage', {
   //   //url: '/sendMessage',
   //   templateUrl: '/views/contact.html',
   //   controller:  'MessageCtrl'
-  // });  
+  // });
 
   //    $stateProvider.state('logout',{
   //        url:'/logout',
@@ -99,28 +107,35 @@ angular.module('jwilliams').directive('modalDialog', function() {
   };
 });
 
-angular.module('jwilliams').directive('wrapOwlcarousel', function () {  
-    return {  
-        restrict: 'E',  
-        link: function (scope, element, attrs) {  
-            var options = scope.$eval($(element).attr('data-options'));  
-            $(element).owlCarousel(options);  
-        }  
-    };  
+angular.module('jwilliams').directive('wrapOwlcarousel', function() {
+  return {
+    restrict: 'E',
+    link: function(scope, element, attrs) {
+      var options = scope.$eval($(element).attr('data-options'));
+      $(element).owlCarousel(options);
+    }
+  };
 });
 
-angular.module('jwilliams').directive('endRepeat', ['$timeout', function ($timeout) {
-			return {
-				restrict: 'A',
-				link: function (scope, element, attr) {
-					if (scope.$last === true) {
-						$timeout(function () {
-							scope.$emit('ngRepeatFinished');
-						});
-					}
-				}
-			}
-		}])
+angular.module('jwilliams').directive('endRepeat', ['$timeout',
+  function($timeout) {
+    return {
+      restrict: 'A',
+
+      link: function(scope, element, attrs) {
+        scope.slides = 1;
+        if (scope.$last === true) {
+          $timeout(function() {
+            scope.$emit('ngRepeatFinished',scope.slides);
+          });
+          attrs.$observe('slides', function(value) {
+            scope.slides = value;
+          });
+        }
+      }
+    }
+  }
+])
 
 //constants
 .constant('API_URL', 'http://localhost:3030/')

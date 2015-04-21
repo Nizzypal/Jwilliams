@@ -1,0 +1,78 @@
+<section id="units">
+  <div class="dark-overlay vision">
+    <div class="centered  wow bounceIn">
+      <h4>Welcome to</h4>
+      <h2>{{city}} City </h2>
+      <h6></h6>
+    </div>
+  </div>
+</section>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2">
+      <div class="modal-body">
+
+        <!--
+                  <wrap-owlcarousel class="owl-carousel owl-theme" data-options="{autoPlay: 3000,
+        slideSpeed : 300, paginationSpeed : 400, singleItem : true}">
+                    <div ng-repeat="photo in currentUnit.photos">
+                      <img width="100%" ng-src="{{photo}}"></img>
+                    </div>
+
+                    <img width="100%" src="/app/img/bgc/parklane/3.JPG"></img>
+                    <img width="100%" src="/app/img/bgc/parklane/4.JPG"></img>
+                    <img width="100%" src="/app/img/bgc/parklane/5.JPG"></img>
+
+                  </wrap-owlcarousel>
+-->
+
+        <div class="swiper-container" max-height="500px">
+          <div class="swiper-wrapper">
+            <div ng-repeat="photo in currentUnit.photos" end-repeat class="swiper-slide">
+              <img height="600px" ng-src="{{photo}}"></img>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-scrollbar"></div>
+        </div>
+
+        <h2> {{currentUnit.name}}</h2>
+        <h3 class="product-code"> {{currentUnit.size}},
+                 {{currentUnit.bedroomCount}} Bedrooms,
+                 {{currentUnit.quartersCount}} Maid's Quarters,
+                   {{currentUnit.bathroomCount}} Bathrooms,
+                  {{currentUnit.powderCount}} Powder rooms </h3>
+        <div class="product-price"> <span class="price-sales"> 199998php/month</span>  <span class="price-standard">2200000php</span>
+        </div>
+        <div class="details-description">
+          <p>Beautiful home. Furnished by interior designer William Sanchez.</p>
+        </div>
+
+        <!--/.cart-actions-->
+
+        <div class="product-share clearfix">
+          <p>SHARE</p>
+          <div class="socialIcon">
+            <a href="#"> <i class="fa fa-facebook"></i>
+            </a>
+            <a href="#"> <i class="fa fa-twitter"></i>
+            </a>
+            <a href="#"> <i class="fa fa-google-plus"></i>
+            </a>
+            <a href="#"> <i class="fa fa-pinterest"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/ product Image-->
+
+
+  <!--/.modal-details-inner-->
+
+</div>
