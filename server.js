@@ -442,12 +442,25 @@ app.post('/sendMessage', function(req, res) {
     return;
   });
 
-    api.call('campaigns', 'send', { id: '206253', function (error, data) {
+  var campaignID;
+
+  var campaign = api.call('campaigns', 'list', { filters: {subject:'testCamp'} }, function (error, data) {
         if (error)
             console.log(error.message);
         else
             console.log(JSON.stringify(data)); // Do something with your data!
-    });    
+          campaignID = data.data[0].id;  
+
+      api.call('campaigns', 'send', { cid: campaignID}, function (error, data) {
+          if (error)
+              console.log(error.message);
+          else
+              console.log(JSON.stringify(data)); // Do something with your data!
+      });
+  });  
+
+
+  
 
 });
 
