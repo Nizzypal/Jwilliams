@@ -8,8 +8,7 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, 
 	//     $scope.units = units;
 	// }).error(function(err) {
 	//     alert('warning', "Unable to get meals");
-	// });
-	
+	// });	
 
 	var userInfo = {
 		name: "",
@@ -26,7 +25,7 @@ angular.module('jwilliams').controller('SubscribeCtrl', function($scope, $http, 
 			    alert('warning', "Unable to get meals");
 			});
 		// });
-    };
-});
+	};
 
+});
 

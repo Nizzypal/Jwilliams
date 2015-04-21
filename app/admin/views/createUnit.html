@@ -1,5 +1,17 @@
 <div class="container" ng-controller="CreateUnitCtrl">
 	<div class="row rentInfo">
+		<h1><span class="label">Pictures</span></h1>
+		<div class="table-responsive">          
+	      	<table class="table">
+	        	<tbody>
+	          		<tr id="tableEntryRow"></tr>
+	        	</tbody>
+	    	</table>
+	    </div>
+	    <div class="bottom40"></div>
+	</div>
+
+	<div class="row rentInfo">
 		<h1><span class="label">General Rental Info</span></h1>
 		<div class="form-horizontal">
 			<div class="col-md-4">
@@ -8,6 +20,14 @@
 						<label for="name" class="control-label col-xs-4">Unit Name:</label>
 						<div class="col-xs-8">
 							<input type="text" id="name" class="form-control input-sm" ng-model="unit.name">
+						</div>
+					</div>
+				</div>
+                <div class="row">
+					<div class="form-group">
+						<label for="name" class="control-label col-xs-4">City:</label>
+						<div class="col-xs-8">
+							<input type="text" id="name" class="form-control input-sm" ng-model="unit.city">
 						</div>
 					</div>
 				</div>
@@ -81,14 +101,15 @@
 					<div class="form-group">
 						<label for="" class="control-label col-xs-5">Add photo:</label>
 						<div class="col-xs-7">
-							<button type="button" class="btn btn-primary pull-right">Browse</button>
+							<button type="button" class="btn btn-primary pull-right" ng-click="addPhoto()">Browse</button>
 						</div>
 					</div>	
 				</div>	
 				<div class="row">
 					<div class="form-group">
 						<div class="col-xs-12">
-							<textarea class="form-control" rows="5" id="photos"></textarea>
+							<textarea class="form-control" rows="5" id="photoNames"></textarea>
+							<input id="photos" class="form-control" type="file" placeholder="" required style="display:none;"> 					
 						</div>
 					</div>	
 				</div>													
@@ -136,7 +157,7 @@
 					</div>	
 				</div>													
 			</div>
-		</div>
+		</div>			
 	</div>
 	<div class="row rentInfo">
 		<h1><span class="label">Long Term Rental Terms</span></h1>
@@ -283,3 +304,4 @@
 	<div class="bottom40"></div>
 </div>
 
+ <script type="text/javascript" src="/app/scripts/common/s3upload.js"></script>
