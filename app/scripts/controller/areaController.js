@@ -1,4 +1,4 @@
-angular.module('jwilliams').controller('AreaCtrl', function($scope, city, API_URL, $http) {
+angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, city, API_URL, $http) {
 
   $scope.city = city.value;
   $scope.units = [];
@@ -20,24 +20,30 @@ angular.module('jwilliams').controller('AreaCtrl', function($scope, city, API_UR
   $scope.clicked = function(index) {
     alert(index)
   }
-  $scope.$on('ngRepeatFinished', function() {
+  $scope.$on('ngRepeatFinished', function(event, data) {
     var mySwiper = new Swiper('.swiper-container', {
       //Your options here:
       mode: 'horizontal',
       loop: false,
       keyboardControl: true,
       mousewheelControl: true,
-      slidesPerView: 1,
+      slidesPerView: data,
       scrollbar: '.swiper-scrollbar',
-        scrollbarHide: false,
-        centeredSlides: true,
-        spaceBetween: 30,
-        grabCursor: true,
-        nextButton: '.swiper-button-next',
-        prevButton: '.swiper-button-prev'
-        
-     
-   
+      scrollbarHide: false,
+      centeredSlides: true,
+      spaceBetween: 30,
+      grabCursor: true,
+      nextButton: '.swiper-button-next',
+      prevButton: '.swiper-button-prev'
+
+
+
     });
   });
+
+  $scope.goView = function(unit) {
+    $state.go("viewUnit", {
+      "unitId": unit._id
+    });
+  }
 });
