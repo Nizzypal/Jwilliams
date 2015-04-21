@@ -51,7 +51,8 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
   var createUnitData = {
   	unit: unit,
   	rentInfo: rentInfo
-  }
+  };
+
   $scope.unitCreate = function(){
   	alert( "Handler for .unitCreate() called." );
 
@@ -101,12 +102,24 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
 	        onError: function(status) {
 	          //status_elem.innerHTML = 'Upload error: ' + status;
 	        }
-     	});		
+     	});	
 	});  
+
+	$scope.addBlockDate = function(){
+     	//Blockdates
+     	var currentBlockDates = $('#blockDates').val();
+     	$('#blockDates').val(currentBlockDates + "\n" + $('input#blockStart').val() + ' - ' + $('input#blockEnd').val());
+	};
+
+	//Add tags
+	$scope.addTags = function(){
+		var currentTags = $('#tags').val();
+     	$('#tags').val(currentTags + "\n" + $('input#tag').val());
+     };
 
 
   $scope.reverseBoolean = function(value){
   	return !value;
   };
 
-})
+});
