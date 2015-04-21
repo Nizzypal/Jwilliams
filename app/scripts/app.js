@@ -123,7 +123,7 @@ angular.module('jwilliams').directive('endRepeat', ['$timeout',
       restrict: 'A',
 
       link: function(scope, element, attrs) {
-        scope.slides = 1;
+        
         if (scope.$last === true) {
           $timeout(function() {
             scope.$emit('ngRepeatFinished',scope.slides);

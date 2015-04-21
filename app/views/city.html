@@ -25,36 +25,36 @@
       <div class="swiper-container" max-height="500px">
         <div class="swiper-wrapper">
           <div ng-repeat='unit in units' end-repeat slides='3' class="swiper-slide">
-          <div class="item">
-            <div class="product">
-              <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
-                <i class="glyphicon glyphicon-heart"></i>
-              </a>
+            <div class="item">
+              <div class="product">
+                <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+                  <i class="glyphicon glyphicon-heart"></i>
+                </a>
 
-              <div class="image">
-                <div class="quickview">
-                  <a title="Quick View" class="btn btn-xs  btn-quickview" ng-click='toggleModal(unit)' data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+                <div class="image">
+                  <div class="quickview">
+                    <a title="Quick View" class="btn btn-xs  btn-quickview" ng-click='toggleModal(unit)' data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
+                  </div>
+                  <a data-target="#product-details-modal" data-toggle="modal">
+                    <img ng-src="{{unit.photos[0]}}" ng-click='toggleModal(unit)' alt="img" class="img-responsive">
+                  </a>
+                  <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
                 </div>
-                <a data-target="#product-details-modal" data-toggle="modal">
-                  <img ng-src="{{unit.photos[0]}}" ng-click='toggleModal(unit)' alt="img" class="img-responsive">
-                </a>
-                <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
-              </div>
-              <div class="description">
-                <h4><a href="product-details.html"> {{unit.name}}</a></h4>
-                <!--                  <p>{{unit.type}} type, {{unit.floorCount}} floors, {{unit.condominiumName}} building </p>-->
-                <p>{{unit.address}}</p>
-                <p>{{unit.size}}, {{unit.bedroomCount}} Bedrooms, {{unit.quartersCount}} Maid's Quarters, {{unit.bathroomCount}} Bathrooms, {{unit.powderCount}} Powder rooms</p>
-              </div>
-              <div class="price"> <span>{{unit.price}}</span>
-              </div>
-              <div class="action-control">
-                <a class="btn btn-primary" ng-click="goView(unit)"> <span class="add2cart"><i class="glyphicon glyphicon-envelope"> </i> View Unit </span>
-                </a>
+                <div class="description">
+                  <h4><a href="product-details.html"> {{unit.name}}</a></h4>
+                  <!--                  <p>{{unit.type}} type, {{unit.floorCount}} floors, {{unit.condominiumName}} building </p>-->
+                  <p>{{unit.address}}</p>
+                  <p>{{unit.size}}, {{unit.bedroomCount}} Bedrooms, {{unit.quartersCount}} Maid's Quarters, {{unit.bathroomCount}} Bathrooms, {{unit.powderCount}} Powder rooms</p>
+                </div>
+                <div class="price"> <span>{{unit.price}}</span>
+                </div>
+                <div class="action-control">
+                  <a class="btn btn-primary" ng-click="goView(unit)"> <span class="add2cart"><i class="glyphicon glyphicon-envelope"> </i> View Unit </span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
         <div class="swiper-pagination"></div>
 
@@ -85,12 +85,12 @@
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
 
     </modal-dialog>
-      <!-- End Modal -->
+    <!-- End Modal -->
   </div>
 </div>
 
