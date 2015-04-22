@@ -1,35 +1,42 @@
 // (function(basic) {
     'use strict';
 
-    function EventNameInput() {
+    function Inquiry($scope) {
         return {
             restrict: 'AE',
-            template: '<div><input="textarea"></div>',
+            template:   '<input id="inquiry" type="textarea" style="float:right"></input>' + 
+                        '<button id="inquire" class="btn-primary" ng-click="addInquiry()">Submit</button>' +
+                        '<input id="" type="textarea comment" style="float:right"></input>' + 
+                        '<button id="comment" class="btn-primary" ng-click="addComment()">Comment</button>',
             scope: {
             },
-            controller:,
-            controllerAs:,
-            link: function(scope, element, attrs, controllers){
-                controllers[0].init(controllers[1]);
+            controller: function(){
+                var vm = this;
+                vm.addInquiry = addInquiry;
+                vm.addComment = addComment;
 
-                scope.$watch('ngModel', function(){
-                    if (scope.model != scope.ngModel){
-                        scope.model = scope.ngModel;
-                    }
-                });
-
-                scope.$watch('model', function(){
-                    scope.ngModel = scope.model;
-                    
-                    controllers[0].validate(scope.ngModel);
-                    controllers[0].update(scope.ngModel, scope.options,
-                            angular.element('.widget-text:first-child')[0].id);
-                });
+                function addInquiry(){
+                    //TODO save inquiry
+                };
+                function addComment(){
+                    //TODO save comment
+                };
+            },
+            link: function(scope, element, attrs, controller){
+                $scope.addInquiry = function(){
+                    controller.addInquiry();
+                    $('input#inquiry:last').append('<input id="" type="textarea" style="float:right"></input>' + 
+                        '<button id="comment" class="btn-default" ng-click="addComment()">Comment</button>');
+                };
+                $scope.addComment = function(){
+                    $('input.comment:last').append('<input id="" type="textarea" style="float:right"></input>' + 
+                        '<button id="comment" class="btn-primary" ng-click="addComment()">Comment</button>');
+                };
             }
         };
     };
 
-    basic.directive('eventNameInput', EventNameInput);
+    angular.module('jwilliams').directive('jwInquiry', Inquiry);
 
 // })(angular.module('questions.event.name.directive', [
 //     'basicinfo.event.name.service'
