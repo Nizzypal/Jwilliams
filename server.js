@@ -1042,6 +1042,7 @@ app.get('/getUnit', function(req, res) {
       foundMealView.photos = foundMeal.photos;
       console.log(foundMealView);
       res.status(200).send(foundMealView);
+      return;
     }
 
     console.log(foundMealView);
