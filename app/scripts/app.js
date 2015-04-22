@@ -58,6 +58,12 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     controller: 'ViewUnitCtrl'
   });
 
+    $stateProvider.state('inquiry', {
+    url: '/viewUnit/inquiry',
+    templateUrl: '/views/inquiry.html',
+    controller: 'InquiryCtrl'
+  });
+
   // $stateProvider.state('sendMessage', {
   //   //url: '/sendMessage',
   //   templateUrl: '/views/contact.html',
