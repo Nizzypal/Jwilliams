@@ -1,164 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- Basic Page Needs
-    ================================================== -->
-    <meta charset="utf-8">
-    <title>J. Williams Property Managment</title>
-    <meta name="description" content="rent a home">
-    <meta name="keywords" content="rent, condo, house, manila, alabang">
-    <meta name="author" content="JWMGI">
 
-    <!-- Mobile Specific Metas
+<head>
+  <!-- Basic Page Needs
     ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="utf-8">
+  <title>J. Williams Property Managment</title>
+  <meta name="description" content="rent a home">
+  <meta name="keywords" content="rent, condo, house, manila, alabang">
+  <meta name="author" content="JWMGI">
 
-    <!-- Stylesheet
+  <!-- Mobile Specific Metas
     ================================================== -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/animate.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/responsiveness.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        <link href="bower_components/OwlCarousel/owl-carousel/owl.carousel.css" rel="stylesheet">
+  <!-- Stylesheet
+    ================================================== -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/animate.css">
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/responsiveness.css">
+
+  <link href="bower_components/OwlCarousel/owl-carousel/owl.carousel.css" rel="stylesheet">
   <link href="bower_components/OwlCarousel/owl-carousel/owl.theme.css" rel="stylesheet">
-    <!-- Favicons
+  <!-- Favicons
     ================================================== -->
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
 
-    <script type="text/javascript" src="js/modernizr.custom.js"></script>
-<link rel="stylesheet" href="bower_components/idangerous-swiper/dist/css/swiper.min.css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+  <script type="text/javascript" src="js/modernizr.custom.js"></script>
+  <link rel="stylesheet" href="bower_components/idangerous-swiper/dist/css/swiper.min.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body ng-app="jwilliams">
-    <!-- Preloader
+<body ng-app="jwilliams">
+  <!-- Preloader
     ================================================== -->
-<!--
+  <!--
     <div id="preloader">
       <div id="status">&nbsp;</div>
     </div>
 -->
 
-    <!-- Navigation
+  <!-- Navigation
     ================================================== -->
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>              
-          </button>
-          <a class="navbar-brand" ui-sref="main"><img src="img/logo.png" alt="logo"></a> <!-- Your logo here-->
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-<!--            <li><a class="page-scroll" href="#banner">Home</a></li>-->
-            <li><a class="page-scroll" href="">SIGNUP/LOGIN</a></li>
-            
-            <li><a class="page-scroll" href="admin/views/admin.html">Admin</a></li>  
-            <li><a class="page-scroll" >Rent</a></li>
-            <li><a class="page-scroll" >Vacation Homes</a></li>
-
-<!--            <li><a class="page-scroll" ui-sref="subscribe">Subscirbe</a></li>-->
-<!--            <li><a class="page-scroll" href="#portfolio">Units</a></li>-->
-
-            <li><a class="page-scroll" href="">Contact</a></li>
-            <li><a class="page-scroll" href="">Billing</a></li>
-<!--            <li><a href="blog.html">Blog</a></li>-->
-          </ul>
-        </div><!-- End navbar-collapse -->
-      </div><!-- End container -->
-    </nav>
-
-    
-
-
-   
-
-    <!-- Portfolio Section
-    ================================================== -->
-    
-        <div  ui-view></div>
-      
-<!--      <div ng-include="'views/main.html'"></div>-->
-
-     <!-- End Portfolio Section -->
-
-
-
-
-  
-    <!-- About Section
-    ================================================== -->
-    <section id="socials">
-      <div class="container wow bounceIn" data-wow-delay="0.4s">
-        <p>Get the latest update of our new units</p>
-        <p> >> <span class="follow"> Follow us </span>  &lt;&lt; </p>
-        <ol class="social">
-          <li><a href="#"><i class="fa fa-facebook fa-2x"></i></a></li> <!-- Change # with your facebook link -->
-          <li><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li> <!-- Change # with your twitter link -->
-          <li><a href="#"><i class="fa fa-behance fa-2x"></i></a></li> <!-- Change # with your behance link -->
-          <li><a href="#"><i class="fa fa-dribbble fa-2x"></i></a></li> <!-- Change # with your dribbble link -->
-          <li><a href="#"><i class="fa fa-flickr fa-2x"></i></a></li> <!-- Change # with your flickr link -->
-          <li><a href="#"><i class="fa fa-google-plus fa-2x"></i></a></li> <!-- Change # with your googleplus link -->
-          <li><a href="#"><i class="fa fa-instagram fa-2x"></i></a></li> <!-- Change # with your instagram link -->
-        </ol>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" ui-sref="main">
+          <img src="img/logo.png" alt="logo">
+        </a>
+        <!-- Your logo here-->
       </div>
-    </section>
 
-    <div id="footer-nav">  <!-- Copyright notice on the bottom -->
-      <span>© 2015 J. Williams Management Group Inc. All Rights Reserved.</span>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <!--            <li><a class="page-scroll" href="#banner">Home</a></li>-->
+          <li><a class="page-scroll" href="">SIGNUP/LOGIN</a>
+          </li>
+
+          <li><a class="page-scroll" href="admin/views/admin.html">Admin</a>
+          </li>
+          <li><a class="page-scroll">Rent</a>
+          </li>
+          <li><a class="page-scroll">Vacation Homes</a>
+          </li>
+
+          <!--            <li><a class="page-scroll" ui-sref="subscribe">Subscirbe</a></li>-->
+          <!--            <li><a class="page-scroll" href="#portfolio">Units</a></li>-->
+
+          <li><a class="page-scroll" href="">Contact</a>
+          </li>
+          <li><a class="page-scroll" href="">Billing</a>
+          </li>
+          <!--            <li><a href="blog.html">Blog</a></li>-->
+        </ul>
+      </div>
+      <!-- End navbar-collapse -->
     </div>
+    <!-- End container -->
+  </nav>
 
 
-    <!-- jQuery / JavaScript plugins
+
+
+
+
+  <!-- Portfolio Section
     ================================================== -->
-      
-        <script src="bower_components/jquery/dist/jquery.js"></script>
+
+  <div ui-view></div>
+
+  <!--      <div ng-include="'views/main.html'"></div>-->
+
+  <!-- End Portfolio Section -->
+
+
+
+
+
+  <!-- About Section
+    ================================================== -->
+  <section id="socials">
+    <div class="container wow bounceIn" data-wow-delay="0.4s">
+      <p>Get the latest update of our new units</p>
+      <p>>> <span class="follow"> Follow us </span> &lt;&lt;</p>
+      <ol class="social">
+        <li><a href="#"><i class="fa fa-facebook fa-2x"></i></a>
+        </li>
+        <!-- Change # with your facebook link -->
+        <li><a href="#"><i class="fa fa-twitter fa-2x"></i></a>
+        </li>
+        <!-- Change # with your twitter link -->
+        <li><a href="#"><i class="fa fa-behance fa-2x"></i></a>
+        </li>
+        <!-- Change # with your behance link -->
+        <li><a href="#"><i class="fa fa-dribbble fa-2x"></i></a>
+        </li>
+        <!-- Change # with your dribbble link -->
+        <li><a href="#"><i class="fa fa-flickr fa-2x"></i></a>
+        </li>
+        <!-- Change # with your flickr link -->
+        <li><a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+        </li>
+        <!-- Change # with your googleplus link -->
+        <li><a href="#"><i class="fa fa-instagram fa-2x"></i></a>
+        </li>
+        <!-- Change # with your instagram link -->
+      </ol>
+    </div>
+  </section>
+
+  <div id="footer-nav">
+    <!-- Copyright notice on the bottom -->
+    <span>© 2015 J. Williams Management Group Inc. All Rights Reserved.</span>
+  </div>
+
+
+  <!-- jQuery / JavaScript plugins
+    ================================================== -->
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 
-    <script src="bower_components/idangerous-swiper/dist/js/swiper.min.js"></script>
-    <script src="js/wow.min.js"></script><!-- Content Animation -->
-    <script type="text/javascript" src="js/SmoothScroll.js"></script> <!-- Smooth scrolling page-->
-    <script type="text/javascript" src="js/jquery.easing.min.js"></script>
-    <script type="text/javascript" src="js/cbpAnimatedHeader.js"></script>
-    <script type="text/javascript" src="js/classie.js"></script>
-    <!-- Contact page-->
-    <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
-    <script type="text/javascript" src="js/contact.js"></script>
-    
-    <!-- My Custom Plugin JavaScript -->
-    <script type="text/javascript" src="js/main.js"></script>
+  <script src="bower_components/idangerous-swiper/dist/js/swiper.min.js"></script>
+  <script src="js/wow.min.js"></script>
+  <!-- Content Animation -->
+  <script type="text/javascript" src="js/SmoothScroll.js"></script>
+  <!-- Smooth scrolling page-->
+  <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+  <script type="text/javascript" src="js/cbpAnimatedHeader.js"></script>
+  <script type="text/javascript" src="js/classie.js"></script>
+  <!-- Contact page-->
+  <script type="text/javascript" src="js/jqBootstrapValidation.js"></script>
+  <script type="text/javascript" src="js/contact.js"></script>
 
-      
+  <!-- My Custom Plugin JavaScript -->
+  <script type="text/javascript" src="js/main.js"></script>
+
+
   <script src="bower_components/OwlCarousel/owl-carousel/owl.carousel.js"></script>
-      
+
   <script src="scripts/app.js"></script>
-      
-    <script type="text/javascript" src="/app/scripts/controller/modalController.js"></script>
-    <script type="text/javascript" src="/app/scripts/controller/areaController.js"></script>
-    <script type="text/javascript" src="/app/scripts/controller/messageController.js"></script>
-    <script type="text/javascript" src="/app/scripts/controller/subscribe.controller.js"></script>
-    <script type="text/javascript" src="/app/scripts/controller/viewUnit.controller.js"></script>
-      
-    
-  </body>
+
+  <script type="text/javascript" src="/app/scripts/controller/modalController.js"></script>
+  <script type="text/javascript" src="/app/scripts/controller/areaController.js"></script>
+  <script type="text/javascript" src="/app/scripts/controller/messageController.js"></script>
+  <script type="text/javascript" src="/app/scripts/controller/subscribe.controller.js"></script>
+  <script type="text/javascript" src="/app/scripts/controller/viewUnit.controller.js"></script>
+
+
+</body>
+
 </html>
+

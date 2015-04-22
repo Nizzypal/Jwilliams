@@ -2,18 +2,50 @@
   <div class="dark-overlay vision">
     <div class="centered  wow bounceIn">
       <h1>{{details.name}}</h1>
+               <h4 class="product-code text-center" >  {{details.address}} </h4>
     </div>
   </div>
 </section>
 <div class="container">
   <div class="row">
-    <div class="col-lg-8 col-lg-offset-2">
-      <div class="modal-body">
+    <div class="col-lg-12 ">
 
-        <!--
+      <style>
+        .swiper-container {
+          width: 100%;
+          height: 100%;
+          margin: 20px auto;
+        }
+        .swiper-slide {
+          text-align: center;
+          font-size: 18px;
+          background: #fff;
+          width: 60%;
+          /* Center slide text vertically */
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+        }
+        .swiper-slide:nth-child(2n) {
+          width: 80%;
+        }
+        .swiper-slide:nth-child(3n) {
+          width: 60%;
+        }
+      </style>
+      <!--
                   <wrap-owlcarousel class="owl-carousel owl-theme" data-options="{autoPlay: 3000,
         slideSpeed : 300, paginationSpeed : 400, singleItem : true}">
-                    <div ng-repeat="photo in currentUnit.photos">
+                    <div  ng-repeat="photo in details.photos">
                       <img width="100%" ng-src="{{photo}}"></img>
                     </div>
 
@@ -23,47 +55,67 @@
 
                   </wrap-owlcarousel>
 -->
+      <!--
+        <div id="owl-demo"  owlcarousel class="owl-carousel">
 
-        <div class="swiper-container" max-height="500px">
-          <div class="swiper-wrapper">
-            <div ng-repeat="photo in details.photos" end-repeat slides="1" class="swiper-slide">
-              <img height="600px" ng-src="{{photo}}"></img>
-            </div>
+          <div  ng-repeat="photo in details.photos" end-repeat>
+            <img width="100%" ng-src="{{photo}}"></img>
           </div>
-          <div class="swiper-pagination"></div>
 
-          <!-- If we need navigation buttons -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-          <div class="swiper-scrollbar"></div>
         </div>
-
-        <h2> {{currentUnit.name}}</h2>
-        <h3 class="product-code"> {{currentUnit.size}},
-                 {{currentUnit.bedroomCount}} Bedrooms,
-                 {{currentUnit.quartersCount}} Maid's Quarters,
-                   {{currentUnit.bathroomCount}} Bathrooms,
-                  {{currentUnit.powderCount}} Powder rooms </h3>
-        <div class="product-price"> <span class="price-sales"> 199998php/month</span>  <span class="price-standard">2200000php</span>
+-->
+      <!--
+        <div class="customNavigation">
+          <a class="btn owlcarousel_prev">Previous</a>
+          <a owlcarouselaction="next" class="btn owlcarousel_next">Next</a>
+          <a class="btn owlcarousel_play">Autoplay</a>
+          <a class="btn owlcarousel_stop">Stop</a>
         </div>
-        <div class="details-description">
-          <p>Beautiful home. Furnished by interior designer William Sanchez.</p>
-        </div>
+-->
 
-        <!--/.cart-actions-->
-
-        <div class="product-share clearfix">
-          <p>SHARE</p>
-          <div class="socialIcon">
-            <a href="#"> <i class="fa fa-facebook"></i>
-            </a>
-            <a href="#"> <i class="fa fa-twitter"></i>
-            </a>
-            <a href="#"> <i class="fa fa-google-plus"></i>
-            </a>
-            <a href="#"> <i class="fa fa-pinterest"></i>
-            </a>
+      <div class="swiper-container" max-height="500px">
+        <div class="swiper-wrapper">
+          <div ng-repeat="photo in details.photos" end-repeat slides="1" class="swiper-slide">
+            <img height="600px" ng-src="{{photo}}"></img>
           </div>
+        </div>
+        <div class="swiper-pagination"></div>
+
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
+      </div>
+
+      <h2 class="text-center"> {{details.name}}</h2>
+      <h3 class="product-code text-center"> {{details.size}} sqm.,
+                 {{details.bedroomCount}} Bedrooms,</h3>
+      <h3 class="product-code text-center"> {{details.bathroomCount}} Bathrooms, </h3>
+      <h3 class="product-code text-center" ng-show="details.powderCount"> {{details.powderCount}} Powder rooms </h3>
+
+      <div class="details-description text-center">
+        <p>Beautiful home. Furnished by interior designer William Sanchez.</p>
+      </div>
+      <br/>
+      <div class="product-price text-center"> <span class="price-sales"> Monthly Rate Php {{details.monthlyRate}}</span> 
+          <div class="product-price text-center"> <span class="price-sales"> Daily Rate Php {{details.dailyRate}}</span>
+<!--          <span class="price-standard">2200000php</span>-->
+      </div>
+      
+
+      <!--/.cart-actions-->
+
+      <div class="product-share clearfix">
+        <p>SHARE</p>
+        <div class="socialIcon">
+          <a href="#"> <i class="fa fa-facebook"></i>
+          </a>
+          <a href="#"> <i class="fa fa-twitter"></i>
+          </a>
+          <a href="#"> <i class="fa fa-google-plus"></i>
+          </a>
+          <a href="#"> <i class="fa fa-pinterest"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -74,3 +126,4 @@
   <!--/.modal-details-inner-->
 
 </div>
+
