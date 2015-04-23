@@ -2130,3 +2130,10 @@ section#contact .text-danger { color: #0076ff }
     border-color: #FFFFFF;
     border-radius: 0px;
 }
+
+/* COMMON STYLES */
+.spacer10{height:10px;}
+.spacer20{height:20px;}
+.spacer30{height:30px;}
+.spacer40{height:40px;}
+.spacer50{height:50px;}

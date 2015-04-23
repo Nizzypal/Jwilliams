@@ -58,11 +58,11 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     controller: 'ViewUnitCtrl'
   });
 
-  // $stateProvider.state('sendMessage', {
-  //   //url: '/sendMessage',
-  //   templateUrl: '/views/contact.html',
-  //   controller:  'MessageCtrl'
-  // });
+    $stateProvider.state('inquiry', {
+    url: '/viewUnit/inquiry',
+    templateUrl: '/views/inquiry.html'
+    //controller: 'InquiryCtrl'
+  });
 
   //    $stateProvider.state('logout',{
   //        url:'/logout',
@@ -123,7 +123,7 @@ angular.module('jwilliams').directive('endRepeat', ['$timeout',
       restrict: 'A',
 
       link: function(scope, element, attrs) {
-        
+        scope.slides = 1;
         if (scope.$last === true) {
           $timeout(function() {
             scope.$emit('ngRepeatFinished',scope.slides);

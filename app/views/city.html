@@ -32,11 +32,13 @@
                 </a>
 
                 <div class="image">
+<!--
                   <div class="quickview">
                     <a title="Quick View" class="btn btn-xs  btn-quickview" ng-click='toggleModal(unit)' data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
                   </div>
+-->
                   <a data-target="#product-details-modal" data-toggle="modal">
-                    <img ng-src="{{unit.photos[0]}}" ng-click='toggleModal(unit)' alt="img" class="img-responsive">
+                    <img ng-src="{{unit.photos[0]}}" alt="img" class="img-responsive">
                   </a>
                   <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
                 </div>
@@ -100,4 +102,3 @@
 
 <script type="text/javascript" src="/app/js/script.js"></script>
 <script type="text/javascript" src="/app/js/main.js"></script>
-
