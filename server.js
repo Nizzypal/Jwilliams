@@ -497,7 +497,8 @@ app.post('/subscriber', function(req, res) {
     id: '776869c525',
     email: {
       email: newUser.email
-    }
+    },
+    double_optin: false
   }, function(error, data) {
     if (error)
       console.log(error.message);
