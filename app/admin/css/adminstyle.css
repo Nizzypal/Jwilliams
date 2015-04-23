@@ -1028,3 +1028,7 @@ div.form-horizontal .checkbox {
 div.bottom40 {
   height: 40px; width: 100%; font-size: 0; margin: 0; padding: 0; border: 0; display: block;
 }
+
+label {
+  color: grey;
+}

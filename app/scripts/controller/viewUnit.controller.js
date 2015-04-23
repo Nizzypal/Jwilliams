@@ -23,15 +23,19 @@ angular.module('jwilliams')
       $scope.details.bathroomCount = unit.bathroomCount;
       $scope.details.photos = unit.photos;
     }).error(function(err) {
-      alert('warning', "Unable to get meals");
+      alert('warning', "Unable to get unit");
     })
 
     $http.get(API_URL + 'getRent' + '?q=' + $stateParams.unitId).success(function(rent) {
       $scope.details.monthlyRate = rent.monthlyRate;
       $scope.details.dailyRate = rent.dailyRate;
     }).error(function(err) {
-      alert('warning', "Unable to get meals");
+      alert('warning', "Unable to get rent");
     })
+
+    $scope.goInquire = function(unit) {
+      $state.go("inquiry");
+    }
 
     $scope.$on('ngRepeatFinished', function(event, data) {
       //

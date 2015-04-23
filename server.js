@@ -7,6 +7,7 @@ var User = require('./models/user.js');
 var Item = require('./models/item.js');
 var Message = require('./models/message.js');
 var Rent = require('./models/rent.js');
+var Inquiry = require('./models/inquiry.js');
 
 var path = require('path');
 var request = require('request');
@@ -217,41 +218,6 @@ app.post('/submitItem', function(req, res) {
 
 //Server endpoint for creating units
 app.post('/createUnit', function(req, res) {
-  // var name: String,
-  // var type: String,
-  // var floor: String,
-  // var floorCount: String,
-  // var price: String,
-  // var size: String,
-  // var bedroomCount: String,
-  // var bathroomCount: String,
-  // var quartersCount: String,
-  // var powderCount: String,
-  // var forShortTerm: Boolean,
-  // var forLongTerm: Boolean,
-  // var forSale: Boolean,
-  // var condominiumName: String,
-  // var city: String,
-  // var address: String,
-  // var photos: []
-
-  // var monthlyRate: Number,
-  // var dailyRate: Number,
-  // var blockDateStart: Date,
-  // var blockDateEnd: Date,
-  // var blockDates: [Date],
-  // var currentRenter: String,
-  // var numberMonthsAdvance: Number,
-  // var numberMonthsDeposit: Number,
-  // var cancellationFee: Number,
-  // var terminationFee: Number,
-  // var includeUtilities: Boolean,
-  // var includeInternet: Boolean,
-  // var requirePassport: Boolean,
-  // var requireAlienCard: Boolean,
-  // var requireID: Boolean,
-  // var unitAmenities: [String],
-  // var buildingAmenities: [String]
 
   //console.log(req.body);
 
@@ -301,7 +267,7 @@ app.post('/createUnit', function(req, res) {
   newItem.save(function(err) {
     if (err) {
       res.status(401).send({
-        message: 'problem with database encountered'
+        message: 'problem with item database encountered'
       });
       return;
     }
@@ -312,7 +278,31 @@ app.post('/createUnit', function(req, res) {
   newRent.save(function(err) {
     if (err) {
       res.status(401).send({
-        message: 'problem with database encountered'
+        message: 'problem with rent database encountered'
+      });
+      return;
+    }
+    res.status(200).send();
+    return;
+  });
+
+});
+
+//Server endpoint for creating inquiries
+app.post('/createInquiry', function(req, res){
+
+  var newInquiry = new Inquiry({
+    user: Number,
+    inquiryID: Number,
+    message: String,
+    isInquiry: Boolean,
+    haveBeenRepledTo: Boolean
+  });
+
+  newInquiry.save(function(err) {
+    if (err) {
+      res.status(401).send({
+        message: 'problem with inquiry database encountered'
       });
       return;
     }
@@ -445,6 +435,26 @@ app.post('/sendMessage', function(req, res) {
     //createSendToken(newMessage, res);
     return;
   });
+
+  var campaignID;
+
+  var campaign = api.call('campaigns', 'list', { filters: {subject:'testCamp'} }, function (error, data) {
+        if (error)
+            console.log(error.message);
+        else
+            console.log(JSON.stringify(data)); // Do something with your data!
+          campaignID = data.data[0].id;  
+
+      api.call('campaigns', 'send', { cid: campaignID}, function (error, data) {
+          if (error)
+              console.log(error.message);
+          else
+              console.log(JSON.stringify(data)); // Do something with your data!
+      });
+  });  
+
+
+  
 
 });
 
@@ -1020,7 +1030,9 @@ app.get('/getUnit', function(req, res) {
       foundMealView.powderCount = foundMeal.powderCount;
       foundMealView.bedroomCount = foundMeal.bedroomCount;
       foundMealView.photos = foundMeal.photos;
-
+      console.log(foundMealView);
+      res.status(200).send(foundMealView);
+      return;
     }
 
     console.log(foundMealView);
