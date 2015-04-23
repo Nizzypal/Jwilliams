@@ -1,43 +1,55 @@
-// (function(basic) {
-    'use strict';
+'use strict';
 
-    function Inquiry($scope) {
+angular.module('jwilliams').directive('jwInquiry', function(){
         return {
             restrict: 'AE',
-            template:   '<input id="inquiry" type="textarea" style="float:right"></input>' + 
-                        '<button id="inquire" class="btn-primary" ng-click="addInquiry()">Submit</button>' +
-                        '<input id="" type="textarea comment" style="float:right"></input>' + 
-                        '<button id="comment" class="btn-primary" ng-click="addComment()">Comment</button>',
-            scope: {
-            },
+            template:   '<div id="inquireRoot" class="col-md-12">' +
+                            '<div class="row">' +
+                                '<div class="spacer10"></div>' + 
+                                '<div class="form-group">' +
+                                    '<div class="col-md-6" style="padding-left:0px;">' +
+                                        '<textarea id="inquire" rows="5" placeholder="Put inquiry here..." class="form-control input-sm" style="float:left"></textarea >' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="row">' +
+                                '<div class="spacer20"></div>' + 
+                                '<div class="form-group">' +
+                                    '<button id="inquire" class="btn-primary" class="col-md-6" style="float:left" ng-click="addInquiry()">Submit</button>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>',
+            replace: true,
             controller: function(){
                 var vm = this;
-                vm.addInquiry = addInquiry;
-                vm.addComment = addComment;
-
-                function addInquiry(){
+                vm.addInquiry = function addInquiry(){
                     //TODO save inquiry
                 };
-                function addComment(){
+                vm.addComment = function addComment(){
                     //TODO save comment
                 };
             },
             link: function(scope, element, attrs, controller){
-                $scope.addInquiry = function(){
+                scope.addInquiry = function(){
+                    alert('Inquire');
                     controller.addInquiry();
-                    $('input#inquiry:last').append('<input id="" type="textarea" style="float:right"></input>' + 
-                        '<button id="comment" class="btn-default" ng-click="addComment()">Comment</button>');
+                    $(    '<div class="row">' +
+                            '<div class="spacer10"></div>' + 
+                            '<div class="form-group">' +
+                                '<div class="col-md-6" style="padding-left:0px;">' +
+                                    '<textarea id="" rows="5" placeholder="Put comment here..." class="form-control input-sm" style="float:left"></textarea >' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>'
+                    ).insertBefore('div#inquireRoot div.row:last-child');
                 };
-                $scope.addComment = function(){
-                    $('input.comment:last').append('<input id="" type="textarea" style="float:right"></input>' + 
-                        '<button id="comment" class="btn-primary" ng-click="addComment()">Comment</button>');
+
+                scope.addComment = function(){
+                    alert('Comment');
+                    controller.addComment();
+                    // $('input.comment:last-child').append('<input id="" type="textarea" style="float:right"></input>' + 
+                    //     '<button id="comment" class="btn-primary" ng-click="addComment()">Comment</button>');
                 };
             }
         };
-    };
-
-    angular.module('jwilliams').directive('jwInquiry', Inquiry);
-
-// })(angular.module('questions.event.name.directive', [
-//     'basicinfo.event.name.service'
-// ]));
+});
