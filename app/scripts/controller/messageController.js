@@ -3,6 +3,8 @@ angular.module('jwilliams').controller('MessageCtrl', function($scope, $http, AP
 		name: "",
 		date: "",
 		message: "",
+		email: "",
+  		phone: "",
 		replied: false
 	};
 
