@@ -1,7 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
 //Model Requires
 var User = require('./models/user.js');
 var Item = require('./models/item.js');
@@ -26,6 +25,30 @@ try {
 } catch (error) {
   console.log(error.message);
 }
+
+var token = {
+  accessToken: 'ya29.XwFVRnB5z8EBFXgKu9nTHaevf1Tk5Ouxzz_TuA1K4TnO8mShR_2dSFDKrvfjVV-EGAjnFxSJXr89qg'
+};
+
+var nodemailer = require('nodemailer');
+var generator = require('xoauth2').createXOAuth2Generator({
+  user: 'contactus@jwmgi.com',
+  clientId: '398696732728-0dp9s9frba72i6hc105h0h2bq32sl2cb.apps.googleusercontent.com',
+  clientSecret: '0ZG6I6rZ0ScH05nI4HMmF7KG',
+  refreshToken: '1/HM3fnRznAlGJv_HxRoYMQB8S16g6tl79ZjUS7uLV7XA',
+  accessToken: token.accessToken // optional
+});
+
+
+// listen for token updates
+// you probably want to store these to a db
+generator.on('token', function(token) {
+  console.log('New token for %s: %s', token.user, token.accessToken);
+  token.accessToken = token.accessToken;;
+});
+
+
+
 
 var app = express();
 
@@ -289,7 +312,7 @@ app.post('/createUnit', function(req, res) {
 });
 
 //Server endpoint for creating inquiries
-app.post('/createInquiry', function(req, res){
+app.post('/createInquiry', function(req, res) {
 
   var newInquiry = new Inquiry({
     user: Number,
@@ -440,23 +463,42 @@ app.post('/sendMessage', function(req, res) {
     return;
   });
 
-//mailing functionality
-var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
+    // login
+var transporter = nodemailer.createTransport(({
     service: 'gmail',
     auth: {
-        user: 'hil123rami@gmail.com',
-        pass: '123P@ssw0rd'
+        xoauth2: generator
     }
-});
-transporter.sendMail({
+}));
+
+// send mail
+  transporter.sendMail({
     from: 'hil123rami@gmail.com',
-    to: email,
+    to: 'richfabros@jwmgi.com',
     subject: 'Sent Message',
     text: message
-},  function(err, response) {
+  }, function(err, response) {
     console.log(err || response.response);
-});
+  });
+    
+    
+  //mailing functionality
+//  var nodemailer = require('nodemailer');
+//  var transporter = nodemailer.createTransport({
+//    service: 'gmail',
+//    auth: {
+//      user: 'hil123rami@gmail.com',
+//      pass: '123P@ssw0rd'
+//    }
+//  });
+//  transporter.sendMail({
+//    from: 'hil123rami@gmail.com',
+//    to: 'richfabros@jwmgi.com',
+//    subject: 'Sent Message',
+//    text: message
+//  }, function(err, response) {
+//    console.log(err || response.response);
+//  });
 
 
   // var campaignID;
@@ -466,7 +508,7 @@ transporter.sendMail({
   //           console.log(error.message);
   //       else
   //           console.log(JSON.stringify(data)); // Do something with your data!
-  //         campaignID = data.data[0].id;  
+  //         campaignID = data.data[0].id;
 
   //     api.call('campaigns', 'send', { cid: campaignID}, function (error, data) {
   //         if (error)
@@ -474,10 +516,10 @@ transporter.sendMail({
   //         else
   //             console.log(JSON.stringify(data)); // Do something with your data!
   //     });
-  // });  
+  // });
 
 
-  
+
 
 });
 
