@@ -5,6 +5,8 @@ var MessageSchema = new mongoose.Schema({
   name: String,
   date: String,
   message: String,
+  email: String,
+  phone: String,
   replied: Boolean
 });
 

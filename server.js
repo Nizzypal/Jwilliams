@@ -404,6 +404,8 @@ app.post('/editUser', function(req, res) {
 app.post('/sendMessage', function(req, res) {
   var name = req.body.name;
   var message = req.body.message;
+  var email = req.body.email;
+  var phone = req.body.phone;
   var replied = false;
   var date = req.body.date;
 
@@ -413,20 +415,22 @@ app.post('/sendMessage', function(req, res) {
   };
 
   //BUSINESS RULE - they can't send to us without being registered users first?
-  User.findOne(searchUser, function(err, user) {
+  // User.findOne(searchUser, function(err, user) {
 
-    if (!user) {
-      res.status(401).send({
-        message: 'User not found!'
-      });
-      return;
-    }
-  });
+  //   if (!user) {
+  //     res.status(401).send({
+  //       message: 'User not found!'
+  //     });
+  //     return;
+  //   }
+  // });
 
   var newMessage = new Message({
     name: name,
     date: date,
     message: message,
+    email: email,
+    phone: phone,
     replied: replied
   });
 
@@ -436,22 +440,41 @@ app.post('/sendMessage', function(req, res) {
     return;
   });
 
-  var campaignID;
+//mailing functionality
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'hil123rami@gmail.com',
+        pass: '123P@ssw0rd'
+    }
+});
+transporter.sendMail({
+    from: 'hil123rami@gmail.com',
+    to: email,
+    subject: 'Sent Message',
+    text: message
+},  function(err, response) {
+    console.log(err || response.response);
+});
 
-  var campaign = api.call('campaigns', 'list', { filters: {subject:'testCamp'} }, function (error, data) {
-        if (error)
-            console.log(error.message);
-        else
-            console.log(JSON.stringify(data)); // Do something with your data!
-          campaignID = data.data[0].id;  
 
-      api.call('campaigns', 'send', { cid: campaignID}, function (error, data) {
-          if (error)
-              console.log(error.message);
-          else
-              console.log(JSON.stringify(data)); // Do something with your data!
-      });
-  });  
+  // var campaignID;
+
+  // var campaign = api.call('campaigns', 'list', { filters: {subject:'testCamp'} }, function (error, data) {
+  //       if (error)
+  //           console.log(error.message);
+  //       else
+  //           console.log(JSON.stringify(data)); // Do something with your data!
+  //         campaignID = data.data[0].id;  
+
+  //     api.call('campaigns', 'send', { cid: campaignID}, function (error, data) {
+  //         if (error)
+  //             console.log(error.message);
+  //         else
+  //             console.log(JSON.stringify(data)); // Do something with your data!
+  //     });
+  // });  
 
 
   
