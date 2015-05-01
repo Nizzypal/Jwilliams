@@ -69,6 +69,12 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   //        controller: 'LogoutCtrl'
   //                                    });
 
+    $stateProvider.state('reqeust-inquiry', {
+      url:'/messages',
+      templateUrl: '/views/reqeust-inquiries.html'
+      //controller:
+    });
+
   $urlRouterProvider.otherwise('/');
 });
 
