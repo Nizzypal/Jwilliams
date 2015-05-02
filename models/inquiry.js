@@ -12,8 +12,9 @@ var InquirySchema = new mongoose.Schema({
 
 module.exports = mongoose.model('Inquiry', InquirySchema, 'inquiries');
 
-	'use strict';
-	// function CommentModel(){
+	// 'use strict';
+
+	// angular.module('jwilliams').service('CommentModel', function(){
 	// 	function commentModel(inquiryID, userID, message){
  //            this.inquiryID = inquiryID;
 	// 		this.userID = userID;
@@ -21,16 +22,5 @@ module.exports = mongoose.model('Inquiry', InquirySchema, 'inquiries');
  //            this.isInquiry = false;
  //            this.haveBeenRepledTo = false;			
 	// 	}
-	// 	return	commentModel;
-	// };
-
-	angular.module('jwilliams').service('CommentModel', function(){
-		function commentModel(inquiryID, userID, message){
-            this.inquiryID = inquiryID;
-			this.userID = userID;
-            this.message = message;
-            this.isInquiry = false;
-            this.haveBeenRepledTo = false;			
-		}
-		return	commentModel;		
-	});
+	// 	return	commentModel;		
+	// });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jwilliams', []).directive('jwInquiry', function($compile){
+angular.module('jwilliams').directive('jwInquiry', function($compile){
         return {
             restrict: 'AE',
             template:   '<div id="inquireRoot" class="col-md-12">' +
@@ -51,7 +51,6 @@ angular.module('jwilliams', []).directive('jwInquiry', function($compile){
                 $scope.textAreaRows = textAreaRows;
                 $scope.inquiry = inquiryData;
                 //$scope.comment = commentData;
-                $scope.comment = new CommentModel("", "", "");
                 $scope.inquiryCollecton = inquiryCollecton;
 
                 vm.inquiryCreate = function (inquiryData, inquiryCollecton){
@@ -71,29 +70,29 @@ angular.module('jwilliams', []).directive('jwInquiry', function($compile){
                 vm.commentCreate = function (commentData, commentCollecton){
                     alert( "Handler for .commentCreate() called. commentData - " + commentData.message );
 
-                    $http.post(API_URL + 'createInquiry', commentData)
+                    var tempModel = new commentModel("","",$scope.comment.message);
+                    $scope.comment = tempModel;
+
+                    $http.post(API_URL + 'createInquiry', tempModel)
                         .success(function(){})
                         .error(function(err){
                             alert('warning: ' + err.message);
                             return false;
                         });
                     
-                    commentCollecton.push(commentData);
+                    commentCollecton.push(tempModel);
 
                     //Since comment is a singleton, clear message field
-                    commentData.message = "";
+                    $scope.comment.message = "";
                     return true;
                 };      
 
-                function CreateComment(inquiryID, userID, message){
-                    function commentModel(){
-                        this.inquiryID = inquiryID;
+                function commentModel(inquiryID, userID, message){
+                        this.inquiryID =  inquiryID;
                         this.userID = userID;
                         this.message = message;
                         this.isInquiry = false;
-                        this.haveBeenRepledTo = false;          
-                    };
-                    return  commentModel;                    
+                        this.haveBeenRepledTo = false;       
                 };       
             },
             link: function(scope, element, attrs, controller){
