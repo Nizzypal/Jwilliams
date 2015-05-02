@@ -282,7 +282,8 @@ app.post('/createUnit', function(req, res) {
     requirePassport: req.body.rentInfo.requirePassport,
     requireAlienCard: req.body.rentInfo.requireAlienCard,
     requireID: req.body.rentInfo.requireID,
-    unitId: newItem._id.toString(),
+    unitId: newItem._id.toString()
+    //unitId: newItem._id.toString(),
     // unitAmenities: [String],
     // buildingAmenities: [String]
   });
@@ -311,19 +312,48 @@ app.post('/createUnit', function(req, res) {
 
 });
 
+app.get('/getInquiries', function(req, res) {
+  if (!req.headers.authorization) {
+    return res.status(401).send({
+      message: 'You are not authorized, please login'
+    });
+  }
+
+  var token = req.headers.authorization.split(' ')[1];
+  var payload = jwt.decode(token, "shh..");
+
+  if (!payload.sub) {
+    res.status(401).send({
+      message: 'Authentication failed'
+    });
+  }
+
+  Item.find().lean().exec(function(err, items) {
+    if (err) return console.error(err);
+    //  console.log(items);
+
+    res.json(items);
+    return;
+  });
+
+})
+
 //Server endpoint for creating inquiries
 app.post('/createInquiry', function(req, res) {
 
   var newInquiry = new Inquiry({
-    user: Number,
-    inquiryID: Number,
-    message: String,
-    isInquiry: Boolean,
-    haveBeenRepledTo: Boolean
+    userID: req.body.userID,
+    inquiryID:  req.body.inquiryID,
+    message: req.body.message,
+    isInquiry: req.body.isInquiry,
+    haveBeenRepledTo: req.body.haveBeenRepledTo
   });
 
+  //TODO - Data Integirty/Validation
+  //Business Rule - If isInquiry = true, then inquiryID should be null
+
   newInquiry.save(function(err) {
-    if (err) {
+    if (err) { 
       res.status(401).send({
         message: 'problem with inquiry database encountered'
       });
@@ -596,7 +626,6 @@ app.get('/items', function(req, res) {
     res.json(items);
     return;
   });
-
 
 })
 

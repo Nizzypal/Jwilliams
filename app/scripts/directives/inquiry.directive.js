@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jwilliams').directive('jwInquiry', function($compile){
+angular.module('jwilliams', []).directive('jwInquiry', function($compile){
         return {
             restrict: 'AE',
             template:   '<div id="inquireRoot" class="col-md-12">' +
@@ -25,7 +25,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
             //    textAreaRows: '@',
             //    message: '=' 
             // },
-            controller: function($scope, $http){
+            controller: function($scope, $http, API_URL){
                 var vm = this;
 
                 var inquiryData = {
@@ -41,7 +41,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     message: "",
                     isInquiry: false,
                     haveBeenRepledTo: false
-                };                
+                };  
+
                 var inquiryCollecton = [];
 
                 var textAreaRows = 4;
@@ -49,18 +50,19 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 //we put needed variables in the $scope
                 $scope.textAreaRows = textAreaRows;
                 $scope.inquiry = inquiryData;
-                $scope.comment = commentData;
+                //$scope.comment = commentData;
+                $scope.comment = new CommentModel("", "", "");
                 $scope.inquiryCollecton = inquiryCollecton;
 
                 vm.inquiryCreate = function (inquiryData, inquiryCollecton){
                     alert( "Handler for .inquiryCreate() called. inquiryData - " + inquiryData.message );
 
-                    // $http.post(API_URL + 'createInquiry', inquiryData)
-                    //     .success(function(){})
-                    //     .error(function(err){
-                    //         alert('warning: ' + err.message);
-                    //         return false;
-                    //     });
+                    $http.post(API_URL + 'createInquiry', inquiryData)
+                        .success(function(){})
+                        .error(function(err){
+                            alert('warning: ' + err.message);
+                            return false;
+                        });
                     
                     inquiryCollecton.push(inquiryData);
                     return true;
@@ -69,16 +71,30 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 vm.commentCreate = function (commentData, commentCollecton){
                     alert( "Handler for .commentCreate() called. commentData - " + commentData.message );
 
-                    // $http.post(API_URL + 'createInquiry', inquiryData)
-                    //     .success(function(){})
-                    //     .error(function(err){
-                    //         alert('warning: ' + err.message);
-                    //         return false;
-                    //     });
+                    $http.post(API_URL + 'createInquiry', commentData)
+                        .success(function(){})
+                        .error(function(err){
+                            alert('warning: ' + err.message);
+                            return false;
+                        });
                     
                     commentCollecton.push(commentData);
+
+                    //Since comment is a singleton, clear message field
+                    commentData.message = "";
                     return true;
-                };             
+                };      
+
+                function CreateComment(inquiryID, userID, message){
+                    function commentModel(){
+                        this.inquiryID = inquiryID;
+                        this.userID = userID;
+                        this.message = message;
+                        this.isInquiry = false;
+                        this.haveBeenRepledTo = false;          
+                    };
+                    return  commentModel;                    
+                };       
             },
             link: function(scope, element, attrs, controller){
                 if (scope.inquiryCollecton.length > 0){

@@ -10,4 +10,27 @@ var InquirySchema = new mongoose.Schema({
 	haveBeenRepledTo: Boolean
 });
 
-module.exports = mongoose.model('Inquiry', InquirySchema);
+module.exports = mongoose.model('Inquiry', InquirySchema, 'inquiries');
+
+	'use strict';
+	// function CommentModel(){
+	// 	function commentModel(inquiryID, userID, message){
+ //            this.inquiryID = inquiryID;
+	// 		this.userID = userID;
+ //            this.message = message;
+ //            this.isInquiry = false;
+ //            this.haveBeenRepledTo = false;			
+	// 	}
+	// 	return	commentModel;
+	// };
+
+	angular.module('jwilliams').service('CommentModel', function(){
+		function commentModel(inquiryID, userID, message){
+            this.inquiryID = inquiryID;
+			this.userID = userID;
+            this.message = message;
+            this.isInquiry = false;
+            this.haveBeenRepledTo = false;			
+		}
+		return	commentModel;		
+	});
