@@ -15,8 +15,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                             '<div class="row">' +
                                 '<div class="spacer20"></div>' + 
                                 '<div class="form-group">' +
-                                    '<button id="inquire" class="btn-primary" class="col-md-6" style="float:left" ng-click="addInquiry()">Submit</button>' +
-                                    '<button id="comment" class="btn-primary" class="col-md-6" style="float:left" ng-click="addComment()">Comment</button>' +
+                                    '<button id="inquire" class="btn-primary" class="col-md-6" style="float:left" ng-click="addInquiry(inquiry, messagesCollection)">Submit</button>' +
+                                    '<button id="comment" class="btn-primary" class="col-md-6" style="float:left" ng-click="addComment(currentMessage, messagesCollection)">Comment</button>' +
                                 '</div>' +
                             '</div>' +
                         '</div>',
@@ -43,7 +43,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     haveBeenRepledTo: false
                 };  
 
-                var inquiryCollecton = [];
+                var messagesCollection = [];
+                //var collectionIndex = 0;
 
                 var textAreaRows = 4;
 
@@ -51,9 +52,12 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 $scope.textAreaRows = textAreaRows;
                 $scope.inquiry = inquiryData;
                 //$scope.comment = commentData;
-                $scope.inquiryCollecton = inquiryCollecton;
+                $scope.messagesCollection = messagesCollection;
+                $scope.collectionIndex = 0;
+                $scope.currentMessage = messagesCollection[$scope.collectionIndex];
 
-                vm.inquiryCreate = function (inquiryData, inquiryCollecton){
+                vm.inquiryCreate = function (inquiryData, messagesCollection){
+                //function inquiryCreate (inquiryData, messagesCollection){
                     alert( "Handler for .inquiryCreate() called. inquiryData - " + inquiryData.message );
 
                     $http.post(API_URL + 'createInquiry', inquiryData)
@@ -63,29 +67,51 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                             return false;
                         });
                     
-                    inquiryCollecton.push(inquiryData);
+                    messagesCollection.push(inquiryData);
+                    $scope.collectionIndex++;
+
+                    //For the collection
+                    var firstComment = new commentModel();
+                    messagesCollection.push(firstComment);
+                    $scope.currentMessage = messagesCollection[$scope.collectionIndex];
+                    //$scope.collectionIndex++;
+
                     return true;
                 };
                 
-                vm.commentCreate = function (commentData, commentCollecton){
+                //$scope.inquiryCreate = inquiryCreate;
+
+                vm.commentCreate = function (commentData, messagesCollection){
+                //function commentCreate (commentData, messagesCollection){
                     alert( "Handler for .commentCreate() called. commentData - " + commentData.message );
 
-                    var tempModel = new commentModel("","",$scope.comment.message);
-                    $scope.comment = tempModel;
+                    //var tempModel = new commentModel("","",commentData);
+                    //$scope.comment = tempModel;
 
-                    $http.post(API_URL + 'createInquiry', tempModel)
+                    $http.post(API_URL + 'createInquiry', commentData)
                         .success(function(){})
                         .error(function(err){
                             alert('warning: ' + err.message);
                             return false;
                         });
                     
-                    commentCollecton.push(tempModel);
 
+                    //commentCollecton.push(commentData);
+                    $scope.collectionIndex++;
                     //Since comment is a singleton, clear message field
-                    $scope.comment.message = "";
+                    //$scope.comment.message = "";
+
+                    //For the next comment..
+                    var firstComment = new commentModel();
+                    messagesCollection.push(firstComment);
+                    $scope.currentMessage = messagesCollection[$scope.collectionIndex];
+
+                    //$scope.collectionIndex++;
+
                     return true;
                 };      
+
+                //$scope.commentCreate = commentCreate;
 
                 function commentModel(inquiryID, userID, message){
                         this.inquiryID =  inquiryID;
@@ -96,7 +122,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 };       
             },
             link: function(scope, element, attrs, controller){
-                if (scope.inquiryCollecton.length > 0){
+
+                if (scope.messagesCollection.length > 0){
                     $('button#inquire').hide();
                     $('button#comment').show();
                 } else {
@@ -104,14 +131,15 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     $('button#comment').hide();                    
                 }
 
-                scope.addInquiry = function(){
+                scope.addInquiry = function(inquiry, messagesCollection){
                     alert('Inquire');
-                    if (controller.inquiryCreate(scope.inquiry, scope.inquiryCollecton)){
+                    //if (controller.inquiryCreate(scope.inquiry, scope.messagesCollection)){
+                    if (controller.inquiryCreate(inquiry, messagesCollection)){
                         $(    '<div class="row">' +
                                 '<div class="spacer10"></div>' + 
                                 '<div class="form-group">' +
                                     '<div class="col-md-6" style="padding-left:0px;">' +
-                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="comment.message"></textarea >' +
+                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + scope.collectionIndex + '].message"></textarea >' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
@@ -123,6 +151,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
 
                         //scope.$apply(function() {
                             //var html = $('<div id="inquireRoot" class="col-md-12">').append($('div#inquireRoot').clone()).html();   
+                            
                             var html = $('div#inquireRoot').clone().html();   
                             var elm = $compile(html)(scope);
                             element.html('');
@@ -135,14 +164,15 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     }
                 };
 
-                scope.addComment = function(){
+                scope.addComment = function(comment, messagesCollection){
                     alert('Comment');
-                    if (controller.commentCreate(scope.comment, scope.inquiryCollecton)){
+                    //if (controller.commentCreate(scope.messagesCollection[scope.collectionIndex], scope.messagesCollection)){
+                    if (controller.commentCreate(comment, messagesCollection)){
                         $(    '<div class="row">' +
                                 '<div class="spacer10"></div>' + 
                                 '<div class="form-group">' +
                                     '<div class="col-md-6" style="padding-left:0px;">' +
-                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="comment.message"></textarea >' +
+                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + scope.collectionIndex + '].message"></textarea >' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
