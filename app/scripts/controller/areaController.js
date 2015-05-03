@@ -45,5 +45,5 @@ angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, city,
     $state.go("viewUnit", {
       "unitId": unit._id
     });
-  }
+  };
 });

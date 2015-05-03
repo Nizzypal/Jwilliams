@@ -1,3 +1,4 @@
+'use strict';
 angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, API_URL){
 
 	var inquiry = {
@@ -8,4 +9,13 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, API
 		isInquiry: true,
 		haveBeenRepledTo: false		
 	};
+
+    $http.get(API_URL + 'getInquiries' + '?q=""').success(function(inquiries) {
+      
+      console.log('Inquiries - ' + inquiries);
+
+      $scope.inquiries = inquiries;
+    }).error(function(err) {
+      alert('warning', "Unable to get inquiries");
+    });
 });

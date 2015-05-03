@@ -4,6 +4,7 @@
 
 angular.module('jwilliams')
   .controller('ViewUnitCtrl', function($scope, $http, $state, API_URL, $stateParams) {
+
     $scope.details = {
       name: '',
       address: '',
@@ -34,7 +35,10 @@ angular.module('jwilliams')
     })
 
     $scope.goInquire = function(unit) {
-      $state.go("inquiry");
+      //$state.go("inquiry");
+      $state.go("inquiry", {
+        "userID": ""
+      });      
     }
 
     $scope.$on('ngRepeatFinished', function(event, data) {

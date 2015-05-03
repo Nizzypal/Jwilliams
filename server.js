@@ -313,28 +313,67 @@ app.post('/createUnit', function(req, res) {
 });
 
 app.get('/getInquiries', function(req, res) {
-  if (!req.headers.authorization) {
-    return res.status(401).send({
-      message: 'You are not authorized, please login'
-    });
+
+  //Authentication stuff
+  // if (!req.headers.authorization) {
+  //   return res.status(401).send({
+  //     message: 'You are not authorized, please login'
+  //   });
+  // }
+
+  // var token = req.headers.authorization.split(' ')[1];
+  // var payload = jwt.decode(token, "shh..");
+
+  // if (!payload.sub) {
+  //   res.status(401).send({
+  //     message: 'Authentication failed'
+  //   });
+  // }
+
+  var stringId = req.query.q;
+  var userID = mongoose.Types.ObjectId(stringId);
+
+  //Get all inquiries
+  if (stringId === ""){
+    Inquiry.find().lean().exec(function(err, inquiries) {
+      if (err) return console.error(err);
+      //  console.log(items);
+
+      res.json(inquiries);
+      return;
+    });    
+  } else {
+    Inquiry.findById(userID, function(err, foundInquiries) {
+
+      var baseInquiry = {};
+
+      foundInquiries.forEach(function(element, index, array){
+        if (element.isInquiry == true)
+          baseInquiry = element
+      });
+
+      // for( var i = 0; i < foundInquiries.length; i++){
+
+      // } 
+
+      if (foundInquiry) {
+        var foundInquiryView = {};
+        foundInquiryView._id = foundInquiry._id.toString();
+        foundInquiryView.name = foundInquiry.name;
+        foundInquiryView.address = foundInquiry.address;
+        foundInquiryView.size = foundInquiry.size;
+        foundInquiryView.bathroomCount = foundInquiry.bathroomCount;
+        foundInquiryView.powderCount = foundInquiry.powderCount;
+
+        console.log(foundInquiryView);
+        res.status(200).send(foundInquiryView);
+        return;
+      }
+
+      console.log(foundMealView);
+      res.status(200).send(foundMealView);
+    });    
   }
-
-  var token = req.headers.authorization.split(' ')[1];
-  var payload = jwt.decode(token, "shh..");
-
-  if (!payload.sub) {
-    res.status(401).send({
-      message: 'Authentication failed'
-    });
-  }
-
-  Item.find().lean().exec(function(err, items) {
-    if (err) return console.error(err);
-    //  console.log(items);
-
-    res.json(items);
-    return;
-  });
 
 })
 
@@ -352,14 +391,16 @@ app.post('/createInquiry', function(req, res) {
   //TODO - Data Integirty/Validation
   //Business Rule - If isInquiry = true, then inquiryID should be null
 
-  newInquiry.save(function(err) {
+  newInquiry.save(function(err, inquiry) {
     if (err) { 
       res.status(401).send({
         message: 'problem with inquiry database encountered'
       });
       return;
     }
-    res.status(200).send();
+    res.status(200).send({
+      newInquiryID: inquiry.id
+    });
     return;
   });
 

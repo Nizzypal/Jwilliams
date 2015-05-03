@@ -14,23 +14,27 @@
     <!-- Portfolio Section
     ================================================== -->
 
-    <section id="" class="grid">
+    <section id="ReqInqCtrl" class="grid">
       <h3 class="pull-left">UNIT INQUIRY</h3>
-      <table class="table table-bordered table-striped table-hover">
+      <div ng-controller="ReqInqCtrl">
+      <table class="table table-bordered" >
         <thead>
           <tr>
-            <th>H1</th>
+            <th>UNIT</th>
+            <th>LAST UPDATED</th>
+            <th>DATE OF INQUIRY</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>TEST</td>
+          <tr ng-repeat="inquiry in inquiries">
+            <td>{{inquiry.userID}}</td><td>{{inquiry.userID}}</td><td>{{inquiry.userID}}</td>
           </tr>
-          <tr class="">
+<!--           <tr class="">
             <td>TEST</td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
+      </div>
     </section>
     <!-- End Portfolio Section -->
 

@@ -28,25 +28,37 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
             controller: function($scope, $http, API_URL){
                 var vm = this;
 
+                //variables for new inquiry
                 var inquiryData = {
-                    userID: "",
+                    userID: "111",
                     inquiryID: "",
                     message: "",
                     isInquiry: true,
                     haveBeenRepledTo: false
                 };
                 var commentData = {
-                    userID: "",
+                    userID: "111",
                     inquiryID: "",
                     message: "",
                     isInquiry: false,
                     haveBeenRepledTo: false
                 };  
 
+                var inquiryID = null;
                 var messagesCollection = [];
-                //var collectionIndex = 0;
-
                 var textAreaRows = 4;
+
+                //variable for existing inquiry
+                $http.get(API_URL + 'getInquiries' + '?q=' + $stateParams.inquiryID).success(function(unit) {
+                  $scope.details.name = unit.name;
+                  $scope.details.address = unit.address;
+                  $scope.details.size = unit.size;
+                  $scope.details.bedroomCount = unit.bedroomCount;
+                  $scope.details.bathroomCount = unit.bathroomCount;
+                  $scope.details.photos = unit.photos;
+                }).error(function(err) {
+                  alert('warning', "Unable to get unit");
+                })                
 
                 //we put needed variables in the $scope
                 $scope.textAreaRows = textAreaRows;
@@ -61,20 +73,27 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     alert( "Handler for .inquiryCreate() called. inquiryData - " + inquiryData.message );
 
                     $http.post(API_URL + 'createInquiry', inquiryData)
-                        .success(function(){})
+                        .success(function(newInquiry){
+                            inquiryID = newInquiry.newInquiryID;
+
+                            //put the inquiry in the collection
+                            messagesCollection.push(inquiryData);
+                            //$scope.collectionIndex++;
+
+                            //For the comment to follow which still has NO message
+                            // var firstComment = new commentModel(inquiryID, "111", "");
+                            // messagesCollection.push(firstComment);
+                            // $scope.currentMessage = messagesCollection[$scope.collectionIndex];
+
+                        })
                         .error(function(err){
                             alert('warning: ' + err.message);
                             return false;
                         });
                     
-                    messagesCollection.push(inquiryData);
-                    $scope.collectionIndex++;
-
-                    //For the collection
-                    var firstComment = new commentModel();
-                    messagesCollection.push(firstComment);
-                    $scope.currentMessage = messagesCollection[$scope.collectionIndex];
+                    //Setup the first comment
                     //$scope.collectionIndex++;
+                    //$scope.currentMessage = messagesCollection[$scope.collectionIndex];
 
                     return true;
                 };
@@ -83,35 +102,26 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
 
                 vm.commentCreate = function (commentData, messagesCollection){
                 //function commentCreate (commentData, messagesCollection){
-                    alert( "Handler for .commentCreate() called. commentData - " + commentData.message );
+                    //alert( "Handler for .commentCreate() called. commentData - " + commentData.message );
 
-                    //var tempModel = new commentModel("","",commentData);
-                    //$scope.comment = tempModel;
+                     //Adjust index So that the next area can be bound properly
+                    $scope.collectionIndex++;
 
-                    $http.post(API_URL + 'createInquiry', commentData)
+                    //For some reason the messagesCollection is updated automatically so NO need to push
+                    var nextComment = new commentModel(inquiryID,"111",messagesCollection[$scope.collectionIndex].message);
+                    //messagesCollection.push(nextComment);
+                    $scope.currentMessage = messagesCollection[$scope.collectionIndex];
+
+
+                    $http.post(API_URL + 'createInquiry', nextComment)
                         .success(function(){})
                         .error(function(err){
                             alert('warning: ' + err.message);
                             return false;
                         });
-                    
-
-                    //commentCollecton.push(commentData);
-                    $scope.collectionIndex++;
-                    //Since comment is a singleton, clear message field
-                    //$scope.comment.message = "";
-
-                    //For the next comment..
-                    var firstComment = new commentModel();
-                    messagesCollection.push(firstComment);
-                    $scope.currentMessage = messagesCollection[$scope.collectionIndex];
-
-                    //$scope.collectionIndex++;
 
                     return true;
                 };      
-
-                //$scope.commentCreate = commentCreate;
 
                 function commentModel(inquiryID, userID, message){
                         this.inquiryID =  inquiryID;
@@ -132,14 +142,14 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 }
 
                 scope.addInquiry = function(inquiry, messagesCollection){
-                    alert('Inquire');
                     //if (controller.inquiryCreate(scope.inquiry, scope.messagesCollection)){
                     if (controller.inquiryCreate(inquiry, messagesCollection)){
                         $(    '<div class="row">' +
                                 '<div class="spacer10"></div>' + 
                                 '<div class="form-group">' +
                                     '<div class="col-md-6" style="padding-left:0px;">' +
-                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + scope.collectionIndex + '].message"></textarea >' +
+                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + (scope.collectionIndex+1) + '].message"></textarea >' +
+                                        //'<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[1].message"></textarea >' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
@@ -157,22 +167,17 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                             element.html('');
                             element.append(elm);    
                         //})
-
-                        // var html = $('<div id="inquireRoot" class="col-md-12">').append($('div#inquireRoot').clone()).html();   
-                        // var elm = $compile(html)(scope);
-                        // element.replaceWith(elm);                    
                     }
                 };
 
                 scope.addComment = function(comment, messagesCollection){
-                    alert('Comment');
                     //if (controller.commentCreate(scope.messagesCollection[scope.collectionIndex], scope.messagesCollection)){
                     if (controller.commentCreate(comment, messagesCollection)){
                         $(    '<div class="row">' +
                                 '<div class="spacer10"></div>' + 
                                 '<div class="form-group">' +
                                     '<div class="col-md-6" style="padding-left:0px;">' +
-                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + scope.collectionIndex + '].message"></textarea >' +
+                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + (scope.collectionIndex+1) + '].message"></textarea >' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'

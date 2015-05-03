@@ -2132,13 +2132,18 @@ section#contact .text-danger { color: #0076ff }
 }
 
 
-/* INQUIRY PAGE */
+/* CREATE INQUIRY PAGE */
 textarea#inquire{
   color: #000;
 }
 
 div#inquireRoot textarea{
   color: #000;  
+}
+
+/* DISPLAY INQUIRY PAGE */
+table tbody tr:hover{
+   background-color: grey;
 }
 
 
