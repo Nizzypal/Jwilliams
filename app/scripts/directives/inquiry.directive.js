@@ -21,10 +21,10 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                             '</div>' +
                         '</div>',
             replace: true,
-            // scope: {
-            //    textAreaRows: '@',
-            //    message: '=' 
-            // },
+            scope: {
+               parentInquiry: '@'
+               //message: '=' 
+            },
             controller: function($scope, $http, API_URL){
                 var vm = this;
 
@@ -47,18 +47,19 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 var inquiryID = null;
                 var messagesCollection = [];
                 var textAreaRows = 4;
+                //var readMessages = {};
 
                 //variable for existing inquiry
-                $http.get(API_URL + 'getInquiries' + '?q=' + $stateParams.inquiryID).success(function(unit) {
-                  $scope.details.name = unit.name;
-                  $scope.details.address = unit.address;
-                  $scope.details.size = unit.size;
-                  $scope.details.bedroomCount = unit.bedroomCount;
-                  $scope.details.bathroomCount = unit.bathroomCount;
-                  $scope.details.photos = unit.photos;
-                }).error(function(err) {
-                  alert('warning', "Unable to get unit");
-                })                
+                if ($scope.parentInquiry){
+
+                    $http.get(API_URL + 'getInquiries' + '?q=' + $scope.parentInquiry).success(function(inquiries) {
+                        alert(inquiries.length);
+                        $scope.readMessages = inquiries;
+                    }).error(function(err) {
+                      alert('warning', "Unable to get unit");
+                    })                
+
+                }
 
                 //we put needed variables in the $scope
                 $scope.textAreaRows = textAreaRows;
@@ -67,6 +68,10 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 $scope.messagesCollection = messagesCollection;
                 $scope.collectionIndex = 0;
                 $scope.currentMessage = messagesCollection[$scope.collectionIndex];
+                $scope.readMessages = {
+                    baseInquiry: {},
+                    comments: []
+                };
 
                 vm.inquiryCreate = function (inquiryData, messagesCollection){
                 //function inquiryCreate (inquiryData, messagesCollection){
@@ -123,13 +128,14 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     return true;
                 };      
 
+                //Instatiates comment object
                 function commentModel(inquiryID, userID, message){
-                        this.inquiryID =  inquiryID;
-                        this.userID = userID;
-                        this.message = message;
-                        this.isInquiry = false;
-                        this.haveBeenRepledTo = false;       
-                };       
+                    this.inquiryID =  inquiryID;
+                    this.userID = userID;
+                    this.message = message;
+                    this.isInquiry = false;
+                    this.haveBeenRepledTo = false;       
+                };      
             },
             link: function(scope, element, attrs, controller){
 
@@ -189,6 +195,38 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                         element.append(elm);                   
                     }
                 };
+
+                //Places the inquiries/comments in the UI
+                scope.$watch('readMessages', initialize, true);                        
+
+                //if (scope.readMessages.baseInquiry.length > 0){
+                    function initialize(){
+                        
+                        //Place inquiry - involves chaning the its model
+                        //attrs.ngModel = scope.readMessages.baseInquiry.message;
+                        $('textarea#inquire').attr('ng-model', 'readMessages.baseInquiry.message');
+
+                        //Place comments of that inquiry
+                        scope.readMessages.comments.forEach(function(e, i, a){
+                            $(    '<div class="row">' +
+                                    '<div class="spacer10"></div>' + 
+                                    '<div class="form-group">' +
+                                        '<div class="col-md-6" style="padding-left:0px;">' +
+                                            '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
+                                            'value="' + e.message + '" ng-model="readMessages.comments[' + (i) + '].message"></textarea >' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>'
+                            ).insertBefore('div#inquireRoot div.row:last-child'); 
+
+                            var html = $('div#inquireRoot').clone().html();   
+                            var newElement = $compile(html)(scope);
+                            element.html('');
+                            element.append(newElement);                                
+                        });
+
+                    };                     
+                //}
             }
         };
 });

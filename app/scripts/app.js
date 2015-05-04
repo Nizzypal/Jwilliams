@@ -59,9 +59,9 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
 
     $stateProvider.state('inquiry', {
-    url: '/viewUnit/inquiry',
-    templateUrl: '/views/inquiry.html'
-    //controller: 'InquiryCtrl'
+    url: '/viewUnit/inquiry/:inquiryID',
+    templateUrl: '/views/inquiry.html',
+    controller: 'InquiryCtrl'
   });
 
   //    $stateProvider.state('logout',{

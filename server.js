@@ -331,10 +331,14 @@ app.get('/getInquiries', function(req, res) {
   // }
 
   var stringId = req.query.q;
-  var userID = mongoose.Types.ObjectId(stringId);
+  var baseInquiry = {};
+  var returnInquiries = {
+    baseInquiry: {},
+    comments: []
+  };
 
   //Get all inquiries
-  if (stringId === ""){
+  if (stringId == ""){
     Inquiry.find().lean().exec(function(err, inquiries) {
       if (err) return console.error(err);
       //  console.log(items);
@@ -343,38 +347,58 @@ app.get('/getInquiries', function(req, res) {
       return;
     });    
   } else {
-    Inquiry.findById(userID, function(err, foundInquiries) {
+    var inquiryID = mongoose.Types.ObjectId(stringId);
+    Inquiry.findById(inquiryID, function(err, foundInquiry) {
 
-      var baseInquiry = {};
+      baseInquiry.id = foundInquiry._id.toString();
+      baseInquiry.userID = foundInquiry.userID;
+      baseInquiry.message = foundInquiry.message;
+      baseInquiry.isInquiry = foundInquiry.isInquiry;
+      baseInquiry.haveBeenRepledTo = foundInquiry.haveBeenRepledTo;
 
-      foundInquiries.forEach(function(element, index, array){
-        if (element.isInquiry == true)
-          baseInquiry = element
+      returnInquiries.baseInquiry = baseInquiry;
+
+      Inquiry.find({'inquiryID': baseInquiry.id}, function(err, foundComments){
+        if (err) {
+          res.status(500).send({
+            message: 'problem with getting inquiries encountered'
+          });
+          return;
+        }      
+
+        if (foundComments.length > 0) {
+          returnInquiries.comments = foundComments;
+
+          console.log(foundComments);
+          res.status(200).send(returnInquiries); 
+          return;       
+        }
+        
+        console.log(foundComments);
+        res.status(200).send(returnInquiries);          
+
       });
-
-      // for( var i = 0; i < foundInquiries.length; i++){
 
       // } 
 
-      if (foundInquiry) {
-        var foundInquiryView = {};
-        foundInquiryView._id = foundInquiry._id.toString();
-        foundInquiryView.name = foundInquiry.name;
-        foundInquiryView.address = foundInquiry.address;
-        foundInquiryView.size = foundInquiry.size;
-        foundInquiryView.bathroomCount = foundInquiry.bathroomCount;
-        foundInquiryView.powderCount = foundInquiry.powderCount;
+      // if (foundInquiry) {
+      //   var foundInquiryView = {};
+      //   foundInquiryView._id = foundInquiry._id.toString();
+      //   foundInquiryView.name = foundInquiry.name;
+      //   foundInquiryView.address = foundInquiry.address;
+      //   foundInquiryView.size = foundInquiry.size;
+      //   foundInquiryView.bathroomCount = foundInquiry.bathroomCount;
+      //   foundInquiryView.powderCount = foundInquiry.powderCount;
 
-        console.log(foundInquiryView);
-        res.status(200).send(foundInquiryView);
-        return;
-      }
+      //   console.log(foundInquiryView);
+      //   res.status(200).send(foundInquiryView);
+      //   return;
+      // }
 
-      console.log(foundMealView);
-      res.status(200).send(foundMealView);
+      //console.log(messages);
+      //res.status(200).send(messages);
     });    
   }
-
 })
 
 //Server endpoint for creating inquiries

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, API_URL){
+angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $state, API_URL){
 
 	var inquiry = {
 		userID: "",
@@ -10,7 +10,7 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, API
 		haveBeenRepledTo: false		
 	};
 
-    $http.get(API_URL + 'getInquiries' + '?q=""').success(function(inquiries) {
+    $http.get(API_URL + 'getInquiries' + '?q=').success(function(inquiries) {
       
       console.log('Inquiries - ' + inquiries);
 
@@ -18,4 +18,15 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, API
     }).error(function(err) {
       alert('warning', "Unable to get inquiries");
     });
+
+
+    $scope.goInquire = function(inquiry) {
+    	alert("Go inquire w/ id - " + inquiry._id);
+
+      	//$state.go("inquiry");
+	    $state.go("inquiry", {
+			//"userID": inquiry.userID,
+	      	"inquiryID": inquiry._id
+	    });  
+	};
 });

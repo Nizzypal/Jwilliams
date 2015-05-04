@@ -37,7 +37,8 @@ angular.module('jwilliams')
     $scope.goInquire = function(unit) {
       //$state.go("inquiry");
       $state.go("inquiry", {
-        "userID": ""
+        //"userID": "",
+        "inquiryID":""
       });      
     }
 

@@ -26,7 +26,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="inquiry in inquiries">
+          <tr ng-repeat="inquiry in inquiries" data-href='url://viewUnit/inquiry:{{inquiry.userID}}' ng-click="goInquire(inquiry)">
             <td>{{inquiry.userID}}</td><td>{{inquiry.userID}}</td><td>{{inquiry.userID}}</td>
           </tr>
 <!--           <tr class="">
