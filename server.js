@@ -331,6 +331,8 @@ app.get('/getInquiries', function(req, res) {
   // }
 
   var stringId = req.query.q;
+  var userStringID = req.query.userID;
+
   var baseInquiry = {};
   var returnInquiries = {
     baseInquiry: {},
@@ -338,8 +340,9 @@ app.get('/getInquiries', function(req, res) {
   };
 
   //Get all inquiries
-  if (stringId == ""){
-    Inquiry.find().lean().exec(function(err, inquiries) {
+  //if (stringId == ""){
+  if (userStringID != null){
+    Inquiry.find({'userID': '111', isInquiry: true}).lean().exec(function(err, inquiries) {
       if (err) return console.error(err);
       //  console.log(items);
 

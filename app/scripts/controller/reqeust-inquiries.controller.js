@@ -10,7 +10,7 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
 		haveBeenRepledTo: false		
 	};
 
-    $http.get(API_URL + 'getInquiries' + '?q=').success(function(inquiries) {
+    $http.get(API_URL + 'getInquiries' + '?userID=111').success(function(inquiries) {
       
       console.log('Inquiries - ' + inquiries);
 
@@ -21,12 +21,16 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
 
 
     $scope.goInquire = function(inquiry) {
-    	alert("Go inquire w/ id - " + inquiry._id);
+    	//alert("Go inquire w/ id - " + inquiry._id);
 
-      	//$state.go("inquiry");
 	    $state.go("inquiry", {
 			//"userID": inquiry.userID,
 	      	"inquiryID": inquiry._id
 	    });  
+
+	  //   $state.go("inquiry", {
+			// //"userID": inquiry.userID,
+	  //     	"userID": inquiry.userID
+	  //   });  	    
 	};
 });
