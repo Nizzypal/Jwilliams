@@ -23,7 +23,6 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
             replace: true,
             scope: {
                parentInquiry: '@'
-               //message: '=' 
             },
             controller: function($scope, $http, API_URL){
                 var vm = this;
@@ -33,16 +32,17 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     userID: "111",
                     inquiryID: "",
                     message: "",
+                    dateOfInquiry: "",
                     isInquiry: true,
                     haveBeenRepledTo: false
                 };
-                var commentData = {
-                    userID: "111",
-                    inquiryID: "",
-                    message: "",
-                    isInquiry: false,
-                    haveBeenRepledTo: false
-                };  
+                // var commentData = {
+                //     userID: "111",
+                //     inquiryID: "",
+                //     message: "",
+                //     isInquiry: false,
+                //     haveBeenRepledTo: false
+                // };  
 
                 var inquiryID = null;
                 var messagesCollection = [];
@@ -53,8 +53,10 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 if ($scope.parentInquiry){
 
                     $http.get(API_URL + 'getInquiries' + '?q=' + $scope.parentInquiry).success(function(inquiries) {
-                        alert(inquiries.length);
+                        
+                        //places the inquiries in the scope so that it can be used in the link function
                         $scope.readMessages = inquiries;
+                    
                     }).error(function(err) {
                       alert('warning', "Unable to get unit");
                     })                
@@ -68,14 +70,15 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 $scope.messagesCollection = messagesCollection;
                 $scope.collectionIndex = 0;
                 $scope.currentMessage = messagesCollection[$scope.collectionIndex];
-                $scope.readMessages = {
-                    baseInquiry: {},
-                    comments: []
-                };
+                // $scope.readMessages = {
+                //     baseInquiry: {},
+                //     comments: []
+                // };
 
                 vm.inquiryCreate = function (inquiryData, messagesCollection){
-                //function inquiryCreate (inquiryData, messagesCollection){
-                    alert( "Handler for .inquiryCreate() called. inquiryData - " + inquiryData.message );
+
+                    //Timestamp when inquiry was created
+                    inquiryData.dateOfInquiry = new Date().toUTCString();
 
                     $http.post(API_URL + 'createInquiry', inquiryData)
                         .success(function(newInquiry){
@@ -106,8 +109,6 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 //$scope.inquiryCreate = inquiryCreate;
 
                 vm.commentCreate = function (commentData, messagesCollection){
-                //function commentCreate (commentData, messagesCollection){
-                    //alert( "Handler for .commentCreate() called. commentData - " + commentData.message );
 
                      //Adjust index So that the next area can be bound properly
                     $scope.collectionIndex++;
@@ -133,6 +134,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     this.inquiryID =  inquiryID;
                     this.userID = userID;
                     this.message = message;
+                    this.dateOfInquiry = new Date().toUTCString();
                     this.isInquiry = false;
                     this.haveBeenRepledTo = false;       
                 };      
@@ -165,14 +167,10 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                         $('button#inquire').hide();
                         $('button#comment').show();
 
-                        //scope.$apply(function() {
-                            //var html = $('<div id="inquireRoot" class="col-md-12">').append($('div#inquireRoot').clone()).html();   
-                            
-                            var html = $('div#inquireRoot').clone().html();   
-                            var elm = $compile(html)(scope);
-                            element.html('');
-                            element.append(elm);    
-                        //})
+                        var html = $('div#inquireRoot').clone().html();   
+                        var elm = $compile(html)(scope);
+                        element.html('');
+                        element.append(elm);    
                     }
                 };
 
@@ -197,36 +195,34 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 };
 
                 //Places the inquiries/comments in the UI
-                scope.$watch('readMessages', initialize, true);                        
+                scope.$watch('readMessages', initialize);                        
 
-                //if (scope.readMessages.baseInquiry.length > 0){
-                    function initialize(){
-                        
-                        //Place inquiry - involves chaning the its model
-                        //attrs.ngModel = scope.readMessages.baseInquiry.message;
-                        $('textarea#inquire').attr('ng-model', 'readMessages.baseInquiry.message');
+                //Function used for initialization of pre-loaded inquiry/comments
+                function initialize(){
+                    
+                    //Place inquiry - involves changing its model but since this is always called, checks first if there is a preloaded inquiry
+                    if (scope.readMessages == {}) $('textarea#inquire').attr('ng-model', 'readMessages.baseInquiry.message');
 
-                        //Place comments of that inquiry
-                        scope.readMessages.comments.forEach(function(e, i, a){
-                            $(    '<div class="row">' +
-                                    '<div class="spacer10"></div>' + 
-                                    '<div class="form-group">' +
-                                        '<div class="col-md-6" style="padding-left:0px;">' +
-                                            '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
-                                            'value="' + e.message + '" ng-model="readMessages.comments[' + (i) + '].message"></textarea >' +
-                                        '</div>' +
+                    //Place comments of that inquiry
+                    scope.readMessages.comments.forEach(function(e, i, a){
+                        $(    '<div class="row">' +
+                                '<div class="spacer10"></div>' + 
+                                '<div class="form-group">' +
+                                    '<div class="col-md-6" style="padding-left:0px;">' +
+                                        '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
+                                        'value="' + e.message + '" ng-model="readMessages.comments[' + (i) + '].message"></textarea >' +
                                     '</div>' +
-                                '</div>'
-                            ).insertBefore('div#inquireRoot div.row:last-child'); 
+                                '</div>' +
+                            '</div>'
+                        ).insertBefore('div#inquireRoot div.row:last-child'); 
 
-                            var html = $('div#inquireRoot').clone().html();   
-                            var newElement = $compile(html)(scope);
-                            element.html('');
-                            element.append(newElement);                                
-                        });
+                        var html = $('div#inquireRoot').clone().html();   
+                        var newElement = $compile(html)(scope);
+                        element.html('');
+                        element.append(newElement);                                
+                    });
 
-                    };                     
-                //}
+                };                     
             }
         };
 });

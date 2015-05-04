@@ -353,6 +353,7 @@ app.get('/getInquiries', function(req, res) {
       baseInquiry.id = foundInquiry._id.toString();
       baseInquiry.userID = foundInquiry.userID;
       baseInquiry.message = foundInquiry.message;
+      baseInquiry.dateOfInquiry = foundInquiry.dateOfInquiry;
       baseInquiry.isInquiry = foundInquiry.isInquiry;
       baseInquiry.haveBeenRepledTo = foundInquiry.haveBeenRepledTo;
 
@@ -408,6 +409,7 @@ app.post('/createInquiry', function(req, res) {
     userID: req.body.userID,
     inquiryID:  req.body.inquiryID,
     message: req.body.message,
+    dateOfInquiry: req.body.dateOfInquiry,
     isInquiry: req.body.isInquiry,
     haveBeenRepledTo: req.body.haveBeenRepledTo
   });

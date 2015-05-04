@@ -5,6 +5,7 @@ var InquirySchema = new mongoose.Schema({
 	userID: String,
 	inquiryID: String,
 	message: String,
+	dateOfInquiry: String,
 	//When isInquiry is false it means this message is a comment.
 	isInquiry: Boolean,
 	haveBeenRepledTo: Boolean
