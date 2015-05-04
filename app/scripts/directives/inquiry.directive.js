@@ -201,7 +201,9 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 function initialize(){
                     
                     //Place inquiry - involves changing its model but since this is always called, checks first if there is a preloaded inquiry
-                    if (scope.readMessages == {}) $('textarea#inquire').attr('ng-model', 'readMessages.baseInquiry.message');
+                    if (!(scope.readMessages == null)) {
+                      $('textarea#inquire').attr('ng-model', 'readMessages.baseInquiry.message');  
+                    }
 
                     //Place comments of that inquiry
                     scope.readMessages.comments.forEach(function(e, i, a){
