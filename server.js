@@ -717,8 +717,44 @@ app.get('/getItemsByCity/:cityCode', function(req, res) {
     return;
   });
 
+})
+
+app.get('/getItemsByRentalType/:rentalType', function(req, res) {
+  console.log(req.body);
+  var rentalType = req.params.rentalType;
+
+  if (rentalType == "shortTerm") {
+    getItemsBy('forShortTerm');  
+  } else if (rentalType == 'longTerm') {
+
+    var temp = true;
+  
+  Item.find({
+      forLongTerm: temp
+    }, function(err, items) {
+      if (err) return console.error(err);
+      return res.json(items);
+  });  
+
+    //getItemsBy({'forLongTerm': true});  
+  } else {
+    getItemsBy('forSale');
+  } 
 
 })
+
+
+//Gets Items according to specificparameter
+//TODO: make this generalized
+function getItemsBy( parameterObject ) {
+
+  //var stringParam = parameterObject.toString();
+  Item.find(parameterObject, function(err, items) {
+    if (err) return console.error(err);
+    return items;
+  });  
+
+};
 
 var mealTypes = [{
   title: "Main",

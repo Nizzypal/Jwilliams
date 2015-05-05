@@ -40,6 +40,12 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     }
   });
 
+  $stateProvider.state('longTerm', {
+  url: '/rental/:rentalType',
+  templateUrl: '/views/city.html',
+  controller: 'LongTermCtrl'
+  });
+
   $stateProvider.state('subscribe', {
     url: '/subscribe',
     templateUrl: '/views/subscribe.html',
