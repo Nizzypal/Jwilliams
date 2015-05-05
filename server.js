@@ -27,15 +27,15 @@ try {
 }
 
 var token = {
-  accessToken: 'ya29.XwFVRnB5z8EBFXgKu9nTHaevf1Tk5Ouxzz_TuA1K4TnO8mShR_2dSFDKrvfjVV-EGAjnFxSJXr89qg'
+  accessToken: 'ya29.ZAHYSpol4rskXjz9EvSWlyjZfL1VlEZ1eqJntWW47LWoeU0geBleD42wQKIm0SWpNNTuW_cDOPSR8w'
 };
 
 var nodemailer = require('nodemailer');
 var generator = require('xoauth2').createXOAuth2Generator({
-  user: 'contactus@jwmgi.com',
-  clientId: '398696732728-0dp9s9frba72i6hc105h0h2bq32sl2cb.apps.googleusercontent.com',
-  clientSecret: '0ZG6I6rZ0ScH05nI4HMmF7KG',
-  refreshToken: '1/HM3fnRznAlGJv_HxRoYMQB8S16g6tl79ZjUS7uLV7XA',
+  user: 'info@jwmgi.com',
+  clientId: '742485133843-k257r4pf5nt3fcj2gtqpuqid2s4p9ucl.apps.googleusercontent.com',
+  clientSecret: 'mc5CgjlA3VeKViQEsVSqDf1w',
+  refreshToken: '1/byh8wlguUxsZ6AVkgd2q-YCmiGwgYbMkINPZjtqdCgwMEudVrK5jSpoR30zcRFq6',
   accessToken: token.accessToken // optional
 });
 
@@ -282,7 +282,8 @@ app.post('/createUnit', function(req, res) {
     requirePassport: req.body.rentInfo.requirePassport,
     requireAlienCard: req.body.rentInfo.requireAlienCard,
     requireID: req.body.rentInfo.requireID,
-    unitId: newItem._id.toString(),
+    unitId: newItem._id.toString()
+    //unitId: newItem._id.toString(),
     // unitAmenities: [String],
     // buildingAmenities: [String]
   });
@@ -311,25 +312,124 @@ app.post('/createUnit', function(req, res) {
 
 });
 
+app.get('/getInquiries', function(req, res) {
+
+  //Authentication stuff
+  // if (!req.headers.authorization) {
+  //   return res.status(401).send({
+  //     message: 'You are not authorized, please login'
+  //   });
+  // }
+
+  // var token = req.headers.authorization.split(' ')[1];
+  // var payload = jwt.decode(token, "shh..");
+
+  // if (!payload.sub) {
+  //   res.status(401).send({
+  //     message: 'Authentication failed'
+  //   });
+  // }
+
+  var stringId = req.query.q;
+  var userStringID = req.query.userID;
+
+  var baseInquiry = {};
+  var returnInquiries = {
+    baseInquiry: {},
+    comments: []
+  };
+
+  //Get all inquiries
+  //if (stringId == ""){
+  if (userStringID != null){
+    Inquiry.find({'userID': '111', isInquiry: true}).lean().exec(function(err, inquiries) {
+      if (err) return console.error(err);
+      //  console.log(items);
+
+      res.json(inquiries);
+      return;
+    });    
+  } else {
+    var inquiryID = mongoose.Types.ObjectId(stringId);
+    Inquiry.findById(inquiryID, function(err, foundInquiry) {
+
+      baseInquiry.id = foundInquiry._id.toString();
+      baseInquiry.userID = foundInquiry.userID;
+      baseInquiry.message = foundInquiry.message;
+      baseInquiry.dateOfInquiry = foundInquiry.dateOfInquiry;
+      baseInquiry.isInquiry = foundInquiry.isInquiry;
+      baseInquiry.haveBeenRepledTo = foundInquiry.haveBeenRepledTo;
+
+      returnInquiries.baseInquiry = baseInquiry;
+
+      Inquiry.find({'inquiryID': baseInquiry.id}, function(err, foundComments){
+        if (err) {
+          res.status(500).send({
+            message: 'problem with getting inquiries encountered'
+          });
+          return;
+        }      
+
+        if (foundComments.length > 0) {
+          returnInquiries.comments = foundComments;
+
+          console.log(foundComments);
+          res.status(200).send(returnInquiries); 
+          return;       
+        }
+        
+        console.log(foundComments);
+        res.status(200).send(returnInquiries);          
+
+      });
+
+      // } 
+
+      // if (foundInquiry) {
+      //   var foundInquiryView = {};
+      //   foundInquiryView._id = foundInquiry._id.toString();
+      //   foundInquiryView.name = foundInquiry.name;
+      //   foundInquiryView.address = foundInquiry.address;
+      //   foundInquiryView.size = foundInquiry.size;
+      //   foundInquiryView.bathroomCount = foundInquiry.bathroomCount;
+      //   foundInquiryView.powderCount = foundInquiry.powderCount;
+
+      //   console.log(foundInquiryView);
+      //   res.status(200).send(foundInquiryView);
+      //   return;
+      // }
+
+      //console.log(messages);
+      //res.status(200).send(messages);
+    });    
+  }
+})
+
 //Server endpoint for creating inquiries
 app.post('/createInquiry', function(req, res) {
 
   var newInquiry = new Inquiry({
-    user: Number,
-    inquiryID: Number,
-    message: String,
-    isInquiry: Boolean,
-    haveBeenRepledTo: Boolean
+    userID: req.body.userID,
+    inquiryID:  req.body.inquiryID,
+    message: req.body.message,
+    dateOfInquiry: req.body.dateOfInquiry,
+    isInquiry: req.body.isInquiry,
+    haveBeenRepledTo: req.body.haveBeenRepledTo
   });
 
-  newInquiry.save(function(err) {
-    if (err) {
+  //TODO - Data Integirty/Validation
+  //Business Rule - If isInquiry = true, then inquiryID should be null
+
+  newInquiry.save(function(err, inquiry) {
+    if (err) { 
       res.status(401).send({
         message: 'problem with inquiry database encountered'
       });
       return;
     }
-    res.status(200).send();
+    res.status(200).send({
+      newInquiryID: inquiry.id
+    });
     return;
   });
 
@@ -596,7 +696,6 @@ app.get('/items', function(req, res) {
     res.json(items);
     return;
   });
-
 
 })
 
