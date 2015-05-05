@@ -3,23 +3,6 @@
 angular.module('jwilliams').directive('jwInquiry', function($compile){
         return {
             restrict: 'AE',
-            // template:   '<div id="inquireRoot" class="col-md-12">' +
-            //                 '<div class="row">' +
-            //                     '<div class="spacer10"></div>' + 
-            //                     '<div class="form-group">' +
-            //                         '<div class="col-md-6" style="padding-left:0px;">' +
-            //                             '<textarea id="inquire" rows="{{textAreaRows}}" placeholder="Put inquiry here..." class="form-control input-sm" style="float:left;" ng-model="inquiry.message"></textarea>' +
-            //                         '</div>' +
-            //                     '</div>' +
-            //                 '</div>' +
-            //                 '<div class="row">' +
-            //                     '<div class="spacer20"></div>' + 
-            //                     '<div class="form-group">' +
-            //                         '<button id="inquire" class="btn-primary" class="col-md-6" style="float:left" ng-click="addInquiry(inquiry, messagesCollection)">Submit</button>' +
-            //                         '<button id="comment" class="btn-primary" class="col-md-6" style="float:left" ng-click="addComment(currentMessage, messagesCollection)">Comment</button>' +
-            //                     '</div>' +
-            //                 '</div>' +
-            //             '</div>',
             templateUrl:'app/views/inquiry.tpl.html',
             replace: true,
             scope: {
@@ -39,13 +22,6 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     isInquiry: true,
                     haveBeenRepledTo: false
                 };
-                // var commentData = {
-                //     userID: "111",
-                //     inquiryID: "",
-                //     message: "",
-                //     isInquiry: false,
-                //     haveBeenRepledTo: false
-                // };  
 
                 var inquiryID = null;
                 var messagesCollection = [];
