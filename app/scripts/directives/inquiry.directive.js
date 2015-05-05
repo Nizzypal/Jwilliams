@@ -73,11 +73,6 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                         
                         //places the unit details in the scope so that it can be used in the link function
                         $scope.unitDetails = unitDetails;
-                        // $scope.details.name = unitDetails.name;
-                        // $scope.details.address = unitDetails.address;
-                        // $scope.details.size = unitDetails.size;
-                        // $scope.details.bedroomCount = unitDetails.bedroomCount;
-                        // $scope.details.bathroomCount = unitDetails.bathroomCount;
 
                     }).error(function(err) {
                       alert('warning', "Unable to get unit");

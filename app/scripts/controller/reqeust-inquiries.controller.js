@@ -23,14 +23,9 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
     $scope.goInquire = function(inquiry) {
     	//alert("Go inquire w/ id - " + inquiry._id);
 
-	    $state.go("inquiry", {
-			//"userID": inquiry.userID,
-	      	"inquiryID": inquiry._id
-	    });  
-
-	  //   $state.go("inquiry", {
-			// //"userID": inquiry.userID,
-	  //     	"userID": inquiry.userID
-	  //   });  	    
+	    $state.go("inquiry",  {
+        "inquiryID": inquiry._id,
+        "unitID": inquiry.unitID
+      });  	    
 	};
 });

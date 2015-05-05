@@ -342,6 +342,7 @@ app.get('/getInquiries', function(req, res) {
   //Get all inquiries
   //if (stringId == ""){
   if (userStringID != null){
+    //Find all inquiries made by this user
     Inquiry.find({'userID': '111', isInquiry: true}).lean().exec(function(err, inquiries) {
       if (err) return console.error(err);
       //  console.log(items);
@@ -355,6 +356,7 @@ app.get('/getInquiries', function(req, res) {
 
       baseInquiry.id = foundInquiry._id.toString();
       baseInquiry.userID = foundInquiry.userID;
+      baseInquiry.unitID = foundInquiry.unitID;
       baseInquiry.message = foundInquiry.message;
       baseInquiry.dateOfInquiry = foundInquiry.dateOfInquiry;
       baseInquiry.isInquiry = foundInquiry.isInquiry;
@@ -411,6 +413,7 @@ app.post('/createInquiry', function(req, res) {
   var newInquiry = new Inquiry({
     userID: req.body.userID,
     inquiryID:  req.body.inquiryID,
+    unitID: req.body.unitID,
     message: req.body.message,
     dateOfInquiry: req.body.dateOfInquiry,
     isInquiry: req.body.isInquiry,
