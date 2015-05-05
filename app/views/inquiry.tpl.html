@@ -1,0 +1,34 @@
+
+<div id="inquireRoot" class="col-md-12">
+
+  <h2 class="text-left"> {{unitDetails.name}}</h2>
+  <h3 class="product-code text-left"> {{unitDetails.size}} sqm.,
+             {{unitDetails.bedroomCount}} Bedrooms,</h3>
+  <h3 class="product-code text-left"> {{unitDetails.bathroomCount}} Bathrooms, </h3>
+  <h3 class="product-code text-left" ng-show="unitDetails.powderCount"> {{unitDetails.powderCount}} Powder rooms </h3>
+
+  <div class="unitDetails-description text-left">
+    <p>Beautiful home. Furnished by interior designer William Sanchez.</p>
+  </div>
+  <br/>
+  <div class="product-price text-left"> <span class="price-sales"> Monthly Rate Php {{unitDetails.monthlyRate}}</span> 
+      <div class="product-price text-left"> <span class="price-sales"> Daily Rate Php {{unitDetails.dailyRate}}</span>
+  </div>
+
+  <div class="row">
+    <div class="spacer10"></div>
+    <div class="form-group">
+      <div class="col-md-6" style="padding-left:0px;">
+        <textarea id="inquire" rows="{{textAreaRows}}" placeholder="Put inquiry here..." class="form-control input-sm" style="float:left;" ng-model="inquiry.message"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="spacer20"></div>'
+      <div class="form-group">
+        <button id="inquire" class="btn btn-lg" class="col-md-6" style="float:left" ng-click="addInquiry(inquiry, messagesCollection)">Submit</button>
+        <button id="comment" class="btn btn-lg" class="col-md-6" style="float:left" ng-click="addComment(currentMessage, messagesCollection)">Comment</button>
+      </div>
+    </div>
+
+  </div>     
