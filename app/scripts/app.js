@@ -59,15 +59,21 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
 
     $stateProvider.state('inquiry', {
-    url: '/viewUnit/inquiry',
-    templateUrl: '/views/inquiry.html'
-    //controller: 'InquiryCtrl'
+    url: '/viewUnit/inquiry/:inquiryID',
+    templateUrl: '/views/inquiry.html',
+    controller: 'InquiryCtrl'
   });
 
   //    $stateProvider.state('logout',{
   //        url:'/logout',
   //        controller: 'LogoutCtrl'
   //                                    });
+
+    $stateProvider.state('reqeust-inquiry', {
+      url:'/messages',
+      templateUrl: '/views/reqeust-inquiries.html'
+      //controller:
+    });
 
   $urlRouterProvider.otherwise('/');
 });
