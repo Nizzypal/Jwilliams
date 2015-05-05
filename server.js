@@ -27,15 +27,15 @@ try {
 }
 
 var token = {
-  accessToken: 'ya29.XwFVRnB5z8EBFXgKu9nTHaevf1Tk5Ouxzz_TuA1K4TnO8mShR_2dSFDKrvfjVV-EGAjnFxSJXr89qg'
+  accessToken: 'ya29.ZAHYSpol4rskXjz9EvSWlyjZfL1VlEZ1eqJntWW47LWoeU0geBleD42wQKIm0SWpNNTuW_cDOPSR8w'
 };
 
 var nodemailer = require('nodemailer');
 var generator = require('xoauth2').createXOAuth2Generator({
-  user: 'contactus@jwmgi.com',
-  clientId: '398696732728-0dp9s9frba72i6hc105h0h2bq32sl2cb.apps.googleusercontent.com',
-  clientSecret: '0ZG6I6rZ0ScH05nI4HMmF7KG',
-  refreshToken: '1/HM3fnRznAlGJv_HxRoYMQB8S16g6tl79ZjUS7uLV7XA',
+  user: 'info@jwmgi.com',
+  clientId: '742485133843-k257r4pf5nt3fcj2gtqpuqid2s4p9ucl.apps.googleusercontent.com',
+  clientSecret: 'mc5CgjlA3VeKViQEsVSqDf1w',
+  refreshToken: '1/byh8wlguUxsZ6AVkgd2q-YCmiGwgYbMkINPZjtqdCgwMEudVrK5jSpoR30zcRFq6',
   accessToken: token.accessToken // optional
 });
 
