@@ -2158,6 +2158,15 @@ table tbody tr:hover{
   color: black;
 }
 
+.ui-datepicker-calendar{
+  height: 200px;
+  width: 150px;
+}
+.ui-datepicker-inline{
+  height: 200px;
+  width: 150px;
+}
+
 /* COMMON STYLES */
 .spacer10{height:10px;}
 .spacer20{height:20px;}

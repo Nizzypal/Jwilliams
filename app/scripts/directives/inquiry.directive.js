@@ -3,7 +3,7 @@
 angular.module('jwilliams').directive('jwInquiry', function($compile){
         return {
             restrict: 'AE',
-            templateUrl:'app/views/inquiry.tpl.html',
+            templateUrl: 'app/views/inquiry.tpl.html',
             replace: true,
             scope: {
                parentInquiry: '@',

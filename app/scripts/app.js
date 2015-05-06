@@ -9,7 +9,8 @@
  * Main module of the application.
  */
 angular
-  .module('jwilliams', ['ui.router', 'ngAnimate']);
+  //.module('jwilliams', ['ui.router', 'ngAnimate']);
+  .module('jwilliams', ['ui.router', 'ngAnimate', 'ui.bootstrap']);
 
 angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) {
 
