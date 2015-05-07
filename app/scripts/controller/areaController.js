@@ -3,6 +3,7 @@ angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, city,
   $scope.city = city.value;
   $scope.units = [];
   $scope.currentUnit = {};
+
   $http.get(API_URL + 'getItemsByCity/' + $scope.city).success(function(units) {
     console.log(units);
     $scope.units = units;

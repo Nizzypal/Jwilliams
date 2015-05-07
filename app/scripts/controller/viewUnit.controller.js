@@ -36,9 +36,12 @@ angular.module('jwilliams')
 
     $scope.goInquire = function(unit) {
       //$state.go("inquiry");
+
+      var temp = angular.copy($stateParams.unitId);
       $state.go("inquiry", {
         //"userID": "",
-        "inquiryID":""
+        "inquiryID": "",
+        "unitID": temp
       });      
     }
 
