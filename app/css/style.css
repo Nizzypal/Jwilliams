@@ -2146,6 +2146,26 @@ table tbody tr:hover{
    background-color: grey;
 }
 
+/* DATEPICKER */
+.full button span {
+  background-color: limegreen;
+  border-radius: 32px;
+  color: black;
+}
+.partially button span {
+  background-color: orange;
+  border-radius: 32px;
+  color: black;
+}
+
+.ui-datepicker-calendar{
+  height: 200px;
+  width: 150px;
+}
+.ui-datepicker-inline{
+  height: 200px;
+  width: 150px;
+}
 
 /* COMMON STYLES */
 .spacer10{height:10px;}
