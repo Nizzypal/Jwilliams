@@ -3,26 +3,11 @@
 angular.module('jwilliams').directive('jwInquiry', function($compile){
         return {
             restrict: 'AE',
-            template:   '<div id="inquireRoot" class="col-md-12">' +
-                            '<div class="row">' +
-                                '<div class="spacer10"></div>' + 
-                                '<div class="form-group">' +
-                                    '<div class="col-md-6" style="padding-left:0px;">' +
-                                        '<textarea id="inquire" rows="{{textAreaRows}}" placeholder="Put inquiry here..." class="form-control input-sm" style="float:left;" ng-model="inquiry.message"></textarea>' +
-                                    '</div>' +
-                                '</div>' +
-                            '</div>' +
-                            '<div class="row">' +
-                                '<div class="spacer20"></div>' + 
-                                '<div class="form-group">' +
-                                    '<button id="inquire" class="btn-primary" class="col-md-6" style="float:left" ng-click="addInquiry(inquiry, messagesCollection)">Submit</button>' +
-                                    '<button id="comment" class="btn-primary" class="col-md-6" style="float:left" ng-click="addComment(currentMessage, messagesCollection)">Comment</button>' +
-                                '</div>' +
-                            '</div>' +
-                        '</div>',
+            templateUrl: 'app/views/inquiry.tpl.html',
             replace: true,
             scope: {
-               parentInquiry: '@'
+               parentInquiry: '@',
+               parentUnit: '@'
             },
             controller: function($scope, $http, API_URL){
                 var vm = this;
@@ -31,18 +16,12 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 var inquiryData = {
                     userID: "111",
                     inquiryID: "",
+                    unitID: "",
                     message: "",
                     dateOfInquiry: "",
                     isInquiry: true,
                     haveBeenRepledTo: false
                 };
-                // var commentData = {
-                //     userID: "111",
-                //     inquiryID: "",
-                //     message: "",
-                //     isInquiry: false,
-                //     haveBeenRepledTo: false
-                // };  
 
                 var inquiryID = null;
                 var messagesCollection = [];
@@ -58,10 +37,24 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                         $scope.readMessages = inquiries;
                     
                     }).error(function(err) {
-                      alert('warning', "Unable to get unit");
+                      alert('warning', "Unable to get inqiury");
                     })                
 
                 }
+
+                //variable for unit to be inquired about
+                if ($scope.parentUnit){
+
+                    $http.get(API_URL + 'getUnit' + '?q=' + $scope.parentUnit).success(function(unitDetails) {
+                        
+                        //places the unit details in the scope so that it can be used in the link function
+                        $scope.unitDetails = unitDetails;
+
+                    }).error(function(err) {
+                      alert('warning', "Unable to get unit");
+                    })                
+
+                }                
 
                 //we put needed variables in the $scope
                 $scope.textAreaRows = textAreaRows;
@@ -77,8 +70,9 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
 
                 vm.inquiryCreate = function (inquiryData, messagesCollection){
 
-                    //Timestamp when inquiry was created
+                    //Fill the inquiry object with relevant information
                     inquiryData.dateOfInquiry = new Date().toUTCString();
+                    inquiryData.unitID = $scope.unitDetails._id;
 
                     $http.post(API_URL + 'createInquiry', inquiryData)
                         .success(function(newInquiry){
@@ -114,7 +108,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     $scope.collectionIndex++;
 
                     //For some reason the messagesCollection is updated automatically so NO need to push
-                    var nextComment = new commentModel(inquiryID,"111",messagesCollection[$scope.collectionIndex].message);
+                    var nextComment = new commentModel(inquiryID,"111", $scope.unitDetails._id,messagesCollection[$scope.collectionIndex].message);
                     //messagesCollection.push(nextComment);
                     $scope.currentMessage = messagesCollection[$scope.collectionIndex];
 
@@ -130,9 +124,10 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 };      
 
                 //Instatiates comment object
-                function commentModel(inquiryID, userID, message){
+                function commentModel(inquiryID, userID, id, message){
                     this.inquiryID =  inquiryID;
                     this.userID = userID;
+                    this.unitID = id;
                     this.message = message;
                     this.dateOfInquiry = new Date().toUTCString();
                     this.isInquiry = false;

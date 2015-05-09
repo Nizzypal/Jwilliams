@@ -342,6 +342,7 @@ app.get('/getInquiries', function(req, res) {
   //Get all inquiries
   //if (stringId == ""){
   if (userStringID != null){
+    //Find all inquiries made by this user
     Inquiry.find({'userID': '111', isInquiry: true}).lean().exec(function(err, inquiries) {
       if (err) return console.error(err);
       //  console.log(items);
@@ -355,6 +356,7 @@ app.get('/getInquiries', function(req, res) {
 
       baseInquiry.id = foundInquiry._id.toString();
       baseInquiry.userID = foundInquiry.userID;
+      baseInquiry.unitID = foundInquiry.unitID;
       baseInquiry.message = foundInquiry.message;
       baseInquiry.dateOfInquiry = foundInquiry.dateOfInquiry;
       baseInquiry.isInquiry = foundInquiry.isInquiry;
@@ -411,6 +413,7 @@ app.post('/createInquiry', function(req, res) {
   var newInquiry = new Inquiry({
     userID: req.body.userID,
     inquiryID:  req.body.inquiryID,
+    unitID: req.body.unitID,
     message: req.body.message,
     dateOfInquiry: req.body.dateOfInquiry,
     isInquiry: req.body.isInquiry,
@@ -714,8 +717,44 @@ app.get('/getItemsByCity/:cityCode', function(req, res) {
     return;
   });
 
+})
+
+app.get('/getItemsByRentalType/:rentalType', function(req, res) {
+  console.log(req.body);
+  var rentalType = req.params.rentalType;
+
+  if (rentalType == "shortTerm") {
+    getItemsBy('forShortTerm');  
+  } else if (rentalType == 'longTerm') {
+
+    var temp = true;
+  
+  Item.find({
+      forLongTerm: temp
+    }, function(err, items) {
+      if (err) return console.error(err);
+      return res.json(items);
+  });  
+
+    //getItemsBy({'forLongTerm': true});  
+  } else {
+    getItemsBy('forSale');
+  } 
 
 })
+
+
+//Gets Items according to specificparameter
+//TODO: make this generalized
+function getItemsBy( parameterObject ) {
+
+  //var stringParam = parameterObject.toString();
+  Item.find(parameterObject, function(err, items) {
+    if (err) return console.error(err);
+    return items;
+  });  
+
+};
 
 var mealTypes = [{
   title: "Main",

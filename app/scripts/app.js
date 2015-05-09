@@ -9,7 +9,8 @@
  * Main module of the application.
  */
 angular
-  .module('jwilliams', ['ui.router', 'ngAnimate']);
+  //.module('jwilliams', ['ui.router', 'ngAnimate']);
+  .module('jwilliams', ['ui.router', 'ngAnimate', 'ui.bootstrap']);
 
 angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) {
 
@@ -40,6 +41,12 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     }
   });
 
+  $stateProvider.state('longTerm', {
+  url: '/rental/:rentalType',
+  templateUrl: '/views/city.html',
+  controller: 'LongTermCtrl'
+  });
+
   $stateProvider.state('subscribe', {
     url: '/subscribe',
     templateUrl: '/views/subscribe.html',
@@ -59,7 +66,8 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
 
     $stateProvider.state('inquiry', {
-    url: '/viewUnit/inquiry/:inquiryID',
+    //url: '/viewUnit/inquiry/:inquiryID',
+    url: '/viewUnit/inquiry?inquiryID&unitID',
     templateUrl: '/views/inquiry.html',
     controller: 'InquiryCtrl'
   });
