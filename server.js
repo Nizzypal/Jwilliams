@@ -256,8 +256,8 @@ app.post('/createUnit', function(req, res) {
     bathroomCount: req.body.unit.bathroomCount,
     // quartersCount: String,
     powderCount: req.body.unit.powderCount,
-    //forShortTerm: Boolean,
-    //forLongTerm: Boolean,
+    forShortTerm: req.body.unit.forShortTerm,
+    forLongTerm: req.body.unit.forLongTerm,
     // forSale: Boolean,
     // condominiumName: String,
     city: req.body.unit.city,
@@ -724,19 +724,19 @@ app.get('/getItemsByRentalType/:rentalType', function(req, res) {
   var rentalType = req.params.rentalType;
 
   if (rentalType == "shortTerm") {
-    getItemsBy('forShortTerm');  
+    getItemsBy({'forShortTerm': true}, res);  
   } else if (rentalType == 'longTerm') {
 
     var temp = true;
   
-  Item.find({
-      forLongTerm: temp
-    }, function(err, items) {
-      if (err) return console.error(err);
-      return res.json(items);
-  });  
+  // Item.find({
+  //     forLongTerm: temp
+  //   }, function(err, items) {
+  //     if (err) return console.error(err);
+  //     return res.json(items);
+  // });  
 
-    //getItemsBy({'forLongTerm': true});  
+    getItemsBy({'forLongTerm': true}, res);  
   } else {
     getItemsBy('forSale');
   } 
@@ -746,14 +746,14 @@ app.get('/getItemsByRentalType/:rentalType', function(req, res) {
 
 //Gets Items according to specificparameter
 //TODO: make this generalized
-function getItemsBy( parameterObject ) {
+function getItemsBy( parameterObject, response ) {
 
   //var stringParam = parameterObject.toString();
+
   Item.find(parameterObject, function(err, items) {
     if (err) return console.error(err);
-    return items;
+    return response.json(items);
   });  
-
 };
 
 var mealTypes = [{

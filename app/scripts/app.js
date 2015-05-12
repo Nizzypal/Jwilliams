@@ -47,6 +47,12 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   controller: 'LongTermCtrl'
   });
 
+  $stateProvider.state('shortTerm', {
+  url: '/rental/:rentalType',
+  templateUrl: '/views/city.html',
+  controller: 'ShortTermCtrl'
+  });  
+
   $stateProvider.state('subscribe', {
     url: '/subscribe',
     templateUrl: '/views/subscribe.html',

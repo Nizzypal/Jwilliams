@@ -56,6 +56,19 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
   $scope.unitCreate = function(){
   	alert( "Handler for .unitCreate() called." );
 
+  	//To determine what kind of rent this is.
+  	var shortTermValue = $('#cancellationFeeST').val();
+  	var longTermValue = $('#cancellationFeeLT').val();
+  	
+  	if (parseInt(shortTermValue) > 0){
+  		createUnitData.unit.forShortTerm = true;
+  		createUnitData.unit.forLongTerm = false;
+  	}
+  	else if (parseInt(longTermValue) > 0){
+  		createUnitData.unit.forLongTerm = true;
+  		createUnitData.unit.forShortTerm = false;
+  	}
+
   	$http.post(API_URL + 'createUnit', createUnitData)
   		.success(function(){})
   		.error(function(err){
