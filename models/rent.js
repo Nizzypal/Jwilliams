@@ -6,7 +6,7 @@ var RentInfoSchema = new mongoose.Schema({
 	dailyRate: Number,
 	blockDateStart: Date,
 	blockDateEnd: Date,
-	blockDates: [Date],
+	blockDates: [{blockDateStart: Date, blockDateEnd: Date}],
 	currentRenter: String,
 	numberMonthsAdvance: Number,
 	numberMonthsDeposit: Number,
@@ -21,5 +21,18 @@ var RentInfoSchema = new mongoose.Schema({
 	buildingAmenities: [String],
     unitId: String
 });
+
+RentInfoSchema.path('blockDates').validate(validateBlockDate, 'validation of `{PATH}` failed with value `{VALUE}`');
+
+//Block Date validator
+function validateBlockDate(blockDate){
+	RentInfoSchema.blockDates.forEach(function(element, index){
+		if (element.blockDateStart <= blockDate.blockDateStart <= element.blockDateEnd) {
+			if (element.blockDateStart <= blockDate.blockDateEnd <= element.blockDateEnd) continue;
+		} else return false;
+
+		return true;
+	}, 'Date invalid');
+}
 
 module.exports = mongoose.model("Rent", RentInfoSchema);
