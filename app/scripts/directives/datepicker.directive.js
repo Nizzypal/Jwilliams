@@ -11,6 +11,73 @@ angular.module('jwilliams').directive('jwDatepicker', function(){
 		},
 		link: function($scope, $http, API_URL){
 
+			// var dp = $("#datepicker")
+			//   .datepicker({
+			//      onSelect: function ( dateText, inst ) {
+			//            var d1, d2;
+			 
+			//            prv = +cur;
+			//            cur = inst.selectedDay;
+			//            if ( prv == -1 || prv == cur ) {
+			//               prv = cur;
+			//               $('#jrange input').val( dateText );
+			//            } else {
+			//               d1 = $.datepicker.formatDate( 
+			//                      'mm/dd/yy', 
+			//                      new Date( inst.selectedYear, inst.selectedMonth, Math.min(prv,cur) ), 
+			//                      {} 
+			//                   );
+			 
+			//               d2 = $.datepicker.formatDate( 
+			//                      'mm/dd/yy',
+			//                      new Date( inst.selectedYear, inst.selectedMonth, Math.max(prv,cur) ), 
+			//                      {} 
+			//                   );
+			//               $('#jrange input').val( d1+' - '+d2 );
+			//            }
+			//      },
+			//      beforeShowDay: function ( date ) {
+			//           return [true, 
+			//               ( (date.getDate() >= Math.min(prv, cur) && date.getDate() <= Math.max(prv, cur)) ? 
+			//                           'date-range-selected' : '')];
+			//      }			     
+			//   });		
+
+			// $('#datepicker')
+			//   .datepicker({
+			//     beforeShowDay: function ( date ) {
+			//           return [true, 
+			//               ( (date.getDate() >= Math.min(prv, cur) && date.getDate() <= Math.max(prv, cur)) ? 
+			//                           'ui-state-active' : '')];
+			//        }
+			//   });		
+
+			var date = new Date();
+			//$( "#datepicker" ).datepicker( "setDate", "+7d" );
+			var endDate = new Date(new Date().setDate(date.getDate() + 7));
+			setSelectedDays(date, endDate);
+
+			var i = 0;
+			function setSelectedDays (startDate, endDate){
+				var rangeDays = endDate.getDate() - startDate.getDate(); 
+				
+				var indexDate = new Date(startDate);
+				// var numberOfDaysToAdd = 6;
+				// indexDate.setDate(indexDate.getDate() + numberOfDaysToAdd); 
+
+				for(i = 0; i <= rangeDays; i++){
+
+					indexDate.setDate(startDate.getDate() + i);
+				}
+			}
+
+			$( "#datepicker" ).datepicker({
+				beforeShowDay: function ( indexDate ) {
+  					return [true, ( (indexDate.getDate() >= date.getDate() && indexDate.getDate() <= endDate.getDate()) ? 
+			                           'ui-state-active' : '')];
+					}
+				});			
+
 			var dp = $( "#datepicker" ).datepicker();
 			dp.hide();
 			var dpShow = false;
@@ -28,7 +95,9 @@ angular.module('jwilliams').directive('jwDatepicker', function(){
 					dp.hide();						
 					//dp.blur();						
 				}
-			});
+
+			}); 
+			  	
 
 			// $( "#datepicker" ).datepicker();
 

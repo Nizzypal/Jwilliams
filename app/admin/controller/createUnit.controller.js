@@ -141,13 +141,14 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
 				(element.blockDateStart <= blockDate.blockDateEnd <= element.blockDateEnd)) return false;
 		}, 'Date invalid');
 
+		//TODO: Improve invalid prompts
 		if (validDate){
 	     	//Put dates on the model
 	     	createUnitData.rentInfo.blockDates.push(blockDate);
 	     	
 	     	//Blockdates
 	     	var currentBlockDates = $('#blockDates').val();
-	     	$('#blockDates').val(currentBlockDates + "\n" + _startDate + ' - ' + _endDate);			
+	     	$('#blockDates').val(currentBlockDates + _startDate + ' - ' + _endDate + "\n");			
 		} else {alert('Date is Invalid');}
 	};
 
