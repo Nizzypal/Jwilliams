@@ -135,12 +135,20 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
      	var endDate = new Date(_endDate);
      	var blockDate = {blockDateStart: startDate, blockDateEnd: endDate}
 
-     	//Put dates on the model
-     	createUnitData.rentInfo.blockDates.push(blockDate);
-     	
-     	//Blockdates
-     	var currentBlockDates = $('#blockDates').val();
-     	$('#blockDates').val(currentBlockDates + "\n" + _startDate + ' - ' + _endDate);
+     	//Block Date validation
+		var validDate = createUnitData.rentInfo.blockDates.every(function(element, index){
+			if ((element.blockDateStart <= blockDate.blockDateStart <= element.blockDateEnd) ||
+				(element.blockDateStart <= blockDate.blockDateEnd <= element.blockDateEnd)) return false;
+		}, 'Date invalid');
+
+		if (validDate){
+	     	//Put dates on the model
+	     	createUnitData.rentInfo.blockDates.push(blockDate);
+	     	
+	     	//Blockdates
+	     	var currentBlockDates = $('#blockDates').val();
+	     	$('#blockDates').val(currentBlockDates + "\n" + _startDate + ' - ' + _endDate);			
+		} else {alert('Date is Invalid');}
 	};
 
 	//Add tags
