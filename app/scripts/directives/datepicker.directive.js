@@ -5,11 +5,11 @@ angular.module('jwilliams').directive('jwDatepicker', function(){
 		templateUrl: 'app/views/datepicker.tpl.html',
 		replace: true,
 		scope: {
-
+			blockedDates: "@"
 		},
 		controller: function($scope, $http, API_URL){
 		},
-		link: function($scope, $http, API_URL){
+		link: function(scope, http, API_URL){
 
 			// var dp = $("#datepicker")
 			//   .datepicker({
@@ -52,31 +52,70 @@ angular.module('jwilliams').directive('jwDatepicker', function(){
 			//        }
 			//   });		
 
+			var datesThisMonth = [];
+
+			scope.$watch(function(scope) { return scope.blockedDates }, function(){
+				
+				var temp = JSON.parse(scope.blockedDates);
+				alert();
+				if (temp.length > 0){
+					temp.forEach(function(element, index){
+						if (new Date(element.blockDateStart).getMonth() == (new Date().getMonth())){
+							datesThisMonth.push(element);
+						}
+					});
+				}
+			});
+
+			function blockDatesSelect (indexDate){
+				datesThisMonth.forEach(function(element,index){
+					if (indexDate >= (new Date(element.blockDateStart)) && indexDate <= (new Date(element.blockDateEnd)) ){
+						// return [true, 'ui-state-active'];
+					} //else return [true, ''];
+					return [true, 'ui-state-active'];
+				});
+			}
+
 			var date = new Date();
 			//$( "#datepicker" ).datepicker( "setDate", "+7d" );
 			var endDate = new Date(new Date().setDate(date.getDate() + 7));
-			setSelectedDays(date, endDate);
+			//setSelectedDays(date, endDate);
 
-			var i = 0;
-			function setSelectedDays (startDate, endDate){
-				var rangeDays = endDate.getDate() - startDate.getDate(); 
+			// var i = 0;
+			// function setSelectedDays (startDate, endDate){
+			// 	var rangeDays = endDate.getDate() - startDate.getDate(); 
 				
-				var indexDate = new Date(startDate);
-				// var numberOfDaysToAdd = 6;
-				// indexDate.setDate(indexDate.getDate() + numberOfDaysToAdd); 
+			// 	var indexDate = new Date(startDate);
+			// 	// var numberOfDaysToAdd = 6;
+			// 	// indexDate.setDate(indexDate.getDate() + numberOfDaysToAdd); 
 
-				for(i = 0; i <= rangeDays; i++){
+			// 	for(i = 0; i <= rangeDays; i++){
 
-					indexDate.setDate(startDate.getDate() + i);
-				}
-			}
+			// 		indexDate.setDate(startDate.getDate() + i);
+			// 	}
+			// }
 
 			$( "#datepicker" ).datepicker({
-				beforeShowDay: function ( indexDate ) {
-  					return [true, ( (indexDate.getDate() >= date.getDate() && indexDate.getDate() <= endDate.getDate()) ? 
-			                           'ui-state-active' : '')];
-					}
-				});			
+				beforeShowDay: function (indexDate){
+					var selected = false;
+					datesThisMonth.forEach(function(element,index){
+						//Check if indexDate is within range of blocked dates
+						if (indexDate >= (new Date(element.blockDateStart)) && indexDate <= (new Date(element.blockDateEnd)) ){
+							selected = true;
+						} 
+						//indexDate is same day as startDate or endDate
+						else if (indexDate.getDate() == (new Date(element.blockDateStart)).getDate() || indexDate.getDate() == (new Date(element.blockDateEnd)).getDate() )
+							selected = true;
+					});
+					if (!selected) return [true, ''];
+					else  return [true, 'ui-state-active'];
+				}
+
+				// beforeShowDay: function ( indexDate ) {
+		  		// 			// return [true, ( (indexDate.getDate() >= date.getDate() && indexDate.getDate() <= endDate.getDate()) ? 
+				//    //                        'ui-state-active' : '')];
+				// }
+			});			
 
 			var dp = $( "#datepicker" ).datepicker();
 			dp.hide();
@@ -98,8 +137,7 @@ angular.module('jwilliams').directive('jwDatepicker', function(){
 
 			}); 
 			  	
-
-			// $( "#datepicker" ).datepicker();
+			// $scope.DateNow = new Date();
 
 			// $scope.today = function() {
 			// 	$scope.dt = new Date();
@@ -128,6 +166,8 @@ angular.module('jwilliams').directive('jwDatepicker', function(){
 			// };
 
 			// $scope.dateOptions = {
+			// 	// datepickerAppendToBody: false,
+			// 	initDate: "'2015-5-15'",
 			// 	formatYear: 'yy',
 			// 	startingDay: 1
 			// };
