@@ -6,7 +6,7 @@ var RentInfoSchema = new mongoose.Schema({
 	dailyRate: Number,
 	blockDateStart: Date,
 	blockDateEnd: Date,
-	blockDates: [Date],
+	blockDates: [{blockDateStart: Date, blockDateEnd: Date}],
 	currentRenter: String,
 	numberMonthsAdvance: Number,
 	numberMonthsDeposit: Number,
