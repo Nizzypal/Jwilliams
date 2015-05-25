@@ -270,7 +270,7 @@ app.post('/createUnit', function(req, res) {
     dailyRate: req.body.rentInfo.dailyRate,
     blockDateStart: req.body.rentInfo.blockDateStart,
     blockDateEnd: req.body.rentInfo.blockDateEnd,
-    // blockDates: [Date],
+    blockDates: req.body.rentInfo.blockDates,
     currentRenter: req.body.rentInfo.currentRenter,
     numberMonthsAdvance: req.body.rentInfo.numberMonthsAdvance,
     numberMonthsDeposit: req.body.rentInfo.numberMonthsDeposit,

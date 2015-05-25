@@ -1,9 +1,11 @@
 angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $http, API_URL){
 
-  var pixHeight = 200;
-  var pixWidth = 200;
+	var vm = this;
 
-  var unit = {
+	var pixHeight = 200;
+	var pixWidth = 200;
+
+	var unit = {
 		name: "",
 		type: "",
 		floor: "",
@@ -21,11 +23,12 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
 		city: "",
 		address: "",
 		photos: []
-  };
-  //get reference of variable to scope to bind it
-  $scope.unit = unit;
+	};
 
-  var rentInfo = {
+	//get reference of variable to scope to bind it
+	$scope.unit = unit;
+
+	var rentInfo = {
 		monthlyRate: 0,
 		dailyRate: 0,
 		blockDateStart: "",
@@ -44,40 +47,43 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
 		requireID: false,
 		unitAmenities: [],
 		buildingAmenities: []
-  };
-  //get reference of variable to scope to bind it
-  $scope.rentInfo = rentInfo;
+	};
 
-  var createUnitData = {
-  	unit: unit,
-  	rentInfo: rentInfo
-  };
+	//get reference of variable to scope to bind it
+	$scope.rentInfo = rentInfo;
 
-  $scope.unitCreate = function(){
-  	alert( "Handler for .unitCreate() called." );
+	var createUnitData = {
+		unit: unit,
+		rentInfo: rentInfo
+	};
 
-  	//To determine what kind of rent this is.
-  	var shortTermValue = $('#cancellationFeeST').val();
-  	var longTermValue = $('#cancellationFeeLT').val();
-  	
-  	if (parseInt(shortTermValue) > 0){
-  		createUnitData.unit.forShortTerm = true;
-  		createUnitData.unit.forLongTerm = false;
-  	}
-  	else if (parseInt(longTermValue) > 0){
-  		createUnitData.unit.forLongTerm = true;
-  		createUnitData.unit.forShortTerm = false;
-  	}
+	//Selector variables	
 
-  	$http.post(API_URL + 'createUnit', createUnitData)
-  		.success(function(){})
-  		.error(function(err){
-  			alert('warning: ' + err.message);
-  		});  
-  };
+	$scope.unitCreate = function(){
+		alert( "Handler for .unitCreate() called." );
+
+		//To determine what kind of rent this is.
+		var shortTermValue = $('#cancellationFeeST').val();
+		var longTermValue = $('#cancellationFeeLT').val();
+
+		if (parseInt(shortTermValue) > 0){
+			createUnitData.unit.forShortTerm = true;
+			createUnitData.unit.forLongTerm = false;
+		}
+		else if (parseInt(longTermValue) > 0){
+			createUnitData.unit.forLongTerm = true;
+			createUnitData.unit.forShortTerm = false;
+		}
+
+		$http.post(API_URL + 'createUnit', createUnitData)
+			.success(function(){})
+			.error(function(err){
+				alert('warning: ' + err.message);
+			});  
+	};
 
 	$scope.addPhoto = function(){
-  		$('input#photos').click();	
+		$('input#photos').click();	
 	};
 
 	$('input#photos').on('change', function(){
@@ -92,14 +98,14 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
 		var fileName = fileObject[0].name;
 		var fileSize = fileObject.size;
 
-    	if (fileSize > 200000) {
-        	//angular.injector(['ng', 'skitchenApp']).invoke(function(alert) {
-          	alert('warning', 'Sorry,', ' File is too big.');
-        	//});
-        	return;
-      	}
+		if (fileSize > 200000) {
+	    	//angular.injector(['ng', 'skitchenApp']).invoke(function(alert) {
+	      	alert('warning', 'Sorry,', ' File is too big.');
+	    	//});
+	    	return;
+	  	}
 
-    	var s3upload = new S3Upload({
+		var s3upload = new S3Upload({
 	        s3_object_name: fileName,
 	        file_dom_selector: 'photos',
 	        s3_sign_put_url: '/sign_s3',
@@ -115,13 +121,35 @@ angular.module('jwilliamsAdmin').controller('CreateUnitCtrl', function($scope, $
 	        onError: function(status) {
 	          //status_elem.innerHTML = 'Upload error: ' + status;
 	        }
-     	});	
+	 	});	
 	});  
 
 	$scope.addBlockDate = function(){
-     	//Blockdates
-     	var currentBlockDates = $('#blockDates').val();
-     	$('#blockDates').val(currentBlockDates + "\n" + $('input#blockStart').val() + ' - ' + $('input#blockEnd').val());
+
+	  	//Selector for dates
+	  	var _startDate = $('input#blockStart').val();
+	  	var _endDate = $('input#blockEnd').val();  
+
+     	//Get the dates from the inputs	  	   	
+     	var startDate = new Date(_startDate);
+     	var endDate = new Date(_endDate);
+     	var blockDate = {blockDateStart: startDate, blockDateEnd: endDate}
+
+     	//Block Date validation
+		var validDate = createUnitData.rentInfo.blockDates.every(function(element, index){
+			if ((element.blockDateStart <= blockDate.blockDateStart <= element.blockDateEnd) ||
+				(element.blockDateStart <= blockDate.blockDateEnd <= element.blockDateEnd)) return false;
+		}, 'Date invalid');
+
+		//TODO: Improve invalid prompts
+		if (validDate){
+	     	//Put dates on the model
+	     	createUnitData.rentInfo.blockDates.push(blockDate);
+	     	
+	     	//Blockdates
+	     	var currentBlockDates = $('#blockDates').val();
+	     	$('#blockDates').val(currentBlockDates + _startDate + ' - ' + _endDate + "\n");			
+		} else {alert('Date is Invalid');}
 	};
 
 	//Add tags
