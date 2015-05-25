@@ -20,6 +20,12 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     templateUrl: '/views/main.html'
   });
 
+  $stateProvider.state('login', {
+    url: '/login',
+    templateUrl: '/views/login.html',
+    controller: 'LoginCtrl'
+  });
+
   $stateProvider.state('bgc', {
     url: '/bgc',
     templateUrl: '/views/bgc.html'
