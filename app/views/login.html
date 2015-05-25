@@ -24,8 +24,8 @@
             <h3 class="form-signin-heading"></h3>
             <hr class="colorgraph"><br>
             
-            <input type="email" class="form-control" name="Email" placeholder="Email" required="" autofocus="" />
-            <input type="password" class="form-control" name="Password" placeholder="Password" required=""/>          
+            <input type="email" class="form-control" name="Email" placeholder="Email" autofocus="" ng-model="user.email"/>
+            <input type="password" class="form-control" name="Password" placeholder="Password" required="" ng-model="user.password"/>          
            
             <button class="btn btn-lg btn-primary btn-block"  name="Submit" ng-click="submit()">Submit/Login</button>        
           </form>     
