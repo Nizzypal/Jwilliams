@@ -89,10 +89,9 @@ app.post('/register', function(req, res) {
     }
   });
 
-
-
   var newUser = new User({
-    name: user.name,
+    //name: user.name,
+    name: user.email,
     email: user.email,
     contact1: user.contact1,
     password: user.password,
@@ -100,8 +99,6 @@ app.post('/register', function(req, res) {
     subscribed: false,
     role: 'user'
   })
-
-
 
   newUser.save(function(err) {
     createSendToken(newUser, res);
@@ -120,7 +117,7 @@ app.post('/login', function(req, res) {
   User.findOne(searchUser, function(err, user) {
 
     if (!user)
-      res.status(401).send({
+      return res.status(401).send({
         message: 'Wrong email/password'
       });
 

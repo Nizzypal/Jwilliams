@@ -1,8 +1,7 @@
 <section id="">
   <div class="dark-overlay vision">
     <div class="centered  wow bounceIn">
-      <h2 ng-show="isLogin">Login</h2>
-      <h2 ng-show="!isLogin">Registration</h2>
+      <h2>Registration</h2>
     </div>    
   </div>
 </section>
@@ -11,8 +10,7 @@
     <div class="row">
       <div class="post wow bounceIn" data-wow-duration="2s" style="visibility: visible; -webkit-animation-duration: 2s;">
         <div class="centered wow bounceIn">
-          <h2 ng-show="isLogin">Welcome Back! Please Sign In</h2>
-          <h2 ng-show="!isLogin">First Timer?  Then Join Us and Register</h2>
+          <h2>First Timer?  Then Join Us and Register</h2>
         </div>
       </div>
     </div>
@@ -29,8 +27,7 @@
             <input type="email" class="form-control" name="Email" placeholder="Email" autofocus="" ng-model="user.email"/>
             <input type="password" class="form-control" name="Password" placeholder="Password" required="" ng-model="user.password"/>          
            
-            <button class="btn btn-lg btn-primary btn-block"  ng-show="isLogin" name="Submit" ng-click="submit()">Login</button>        
-            <button class="btn btn-lg btn-primary btn-block"  ng-show="!(isLogin)" name="Submit" ng-click="submit()">Register</button>        
+            <button class="btn btn-lg btn-primary btn-block"  name="Submit" ng-click="submit()">Register</button>        
           </form>     
         </div>
       </div>

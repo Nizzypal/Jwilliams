@@ -1,5 +1,5 @@
 'use strict';
-angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParams, $http, API_URL){
+angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParams, $state, $http, API_URL){
 	var vm = this;
 
 	var user = {
@@ -11,17 +11,39 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 	$scope.email = user.email;
 	$scope.password = user.password;
 
-	vm.submit = function(){
-		alert('user - ' + user.email);
+	//Determines if page is login or registration mode
+	$scope.isLogin = $stateParams.isLogin;
+	if($scope.isLogin === 'false') $scope.isLogin = false;
+	else $scope.isLogin = true;
 
-	    $http.post(API_URL + 'login', user)
-	        .success(function(newInquiry){
-	            //inquiryID = newInquiry.newInquiryID;
-	        })
-	        .error(function(err){
-	            alert('warning: ' + err.message);
-	            return false;
-	        });		
+	alert("$scope.isLogin - " + $scope.isLogin);
+
+	vm.submit = function(){
+		//alert('user - ' + user.email);
+
+	    if ($scope.isLogin){
+		    $http.post(API_URL + 'login', user)
+		        .success(function(newInquiry){
+		            //inquiryID = newInquiry.newInquiryID;
+		        })
+		        .error(function(err){
+		            alert('warning: ' + err.message);
+
+		            //if credentials are wrong, it means user has to register first
+		            $state.go('registration', {isLogin: false});     
+		            
+		            return false;
+		        });		    	
+		    } else {
+			    $http.post(API_URL + 'register', user)
+			        .success(function(newInquiry){
+			            //inquiryID = newInquiry.newInquiryID;
+			        })
+			        .error(function(err){
+			            alert('warning: ' + err.message);  
+			            return false;
+			        });			    	
+		    }
 	};
 
 	$scope.submit = vm.submit;
