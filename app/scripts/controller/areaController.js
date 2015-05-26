@@ -1,8 +1,9 @@
-angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, city, API_URL, $http) {
+angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, $stateParams, city, API_URL, $http) {
 
   $scope.city = city.value;
   $scope.units = [];
   $scope.currentUnit = {};
+  $scope.userID = $stateParams.userID;
 
   $http.get(API_URL + 'getItemsByCity/' + $scope.city).success(function(units) {
     console.log(units);
@@ -21,6 +22,7 @@ angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, city,
   $scope.clicked = function(index) {
     alert(index)
   }
+
   $scope.$on('ngRepeatFinished', function(event, data) {
     var mySwiper = new Swiper('.swiper-container', {
       //Your options here:
@@ -44,7 +46,8 @@ angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, city,
 
   $scope.goView = function(unit) {
     $state.go("viewUnit", {
-      "unitId": unit._id
+      "unitID": unit._id,
+      "userID": $scope.userID
     });
   };
 });

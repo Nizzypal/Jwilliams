@@ -21,9 +21,11 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 	vm.submit = function(){
 		//alert('user - ' + user.email);
 
+		//user is alrady a member
 	    if ($scope.isLogin){
 		    $http.post(API_URL + 'login', user)
-		        .success(function(newInquiry){
+		        .success(function(res){
+		        	$state.go('main', {userID: res.user._id, token: res.token});
 		            //inquiryID = newInquiry.newInquiryID;
 		        })
 		        .error(function(err){
@@ -34,7 +36,8 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 		            
 		            return false;
 		        });		    	
-		    } else {
+		//user is new and must register		        
+		} else {
 			    $http.post(API_URL + 'register', user)
 			        .success(function(newInquiry){
 			            //inquiryID = newInquiry.newInquiryID;

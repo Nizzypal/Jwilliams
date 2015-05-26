@@ -9,28 +9,30 @@
  * Main module of the application.
  */
 angular
-  //.module('jwilliams', ['ui.router', 'ngAnimate']);
-  .module('jwilliams', ['ui.router', 'ngAnimate', 'ui.bootstrap']);
+  .module('jwilliams', ['ui.router', 'ngAnimate']);
+  //.module('jwilliams', ['ui.router', 'ngAnimate', 'ui.bootstrap']);
 
 angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) {
 
 
   $stateProvider.state('main', {
+    //url: '/:userID?token',
     url: '/',
-    templateUrl: '/views/main.html'
+    templateUrl: '/views/main.html',
+    controller: 'MainCtrl'
   });
 
-  $stateProvider.state('registration', {
-    url: '/registration:isLogin',
-    templateUrl: '/views/login.html',
-    controller: 'LoginCtrl'
-  });
+  // $stateProvider.state('registration', {
+  //   url: '/registration/:isLogin',
+  //   templateUrl: '/views/login.html',
+  //   controller: 'LoginCtrl'
+  // });
 
-  $stateProvider.state('login', {
-    url: '/login:isLogin',
-    templateUrl: '/views/login.html',
-    controller: 'LoginCtrl'
-  });
+  // $stateProvider.state('login', {
+  //   url: '/login/:isLogin',
+  //   templateUrl: '/views/login.html',
+  //   controller: 'LoginCtrl'
+  // });
 
   $stateProvider.state('bgc', {
     url: '/bgc',
@@ -38,6 +40,7 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
 
   $stateProvider.state('makati', {
+    //url: '/makati/:userID',
     url: '/makati',
     templateUrl: '/views/city.html',
     controller: 'AreaCtrl',
@@ -53,17 +56,17 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     }
   });
 
-  $stateProvider.state('longTerm', {
-  url: '/rental/:rentalType',
-  templateUrl: '/views/city.html',
-  controller: 'LongTermCtrl'
-  });
+  // $stateProvider.state('longTerm', {
+  // url: '/rental/:rentalType',
+  // templateUrl: '/views/city.html',
+  // controller: 'LongTermCtrl'
+  // });
 
-  $stateProvider.state('shortTerm', {
-  url: '/rental/:rentalType',
-  templateUrl: '/views/city.html',
-  controller: 'ShortTermCtrl'
-  });  
+  // $stateProvider.state('shortTerm', {
+  // url: '/rental/:rentalType',
+  // templateUrl: '/views/city.html',
+  // controller: 'ShortTermCtrl'
+  // });  
 
   $stateProvider.state('subscribe', {
     url: '/subscribe',
@@ -78,28 +81,29 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
     
     $stateProvider.state('viewUnit', {
-    url: '/viewUnit/:unitId',
+    //url: '/viewUnit/:unitID?userID',
+    url: '/viewUnit/:unitID',
     templateUrl: '/views/unit.html',
     controller: 'ViewUnitCtrl'
   });
 
-    $stateProvider.state('inquiry', {
-    //url: '/viewUnit/inquiry/:inquiryID',
-    url: '/viewUnit/inquiry?inquiryID&unitID',
-    templateUrl: '/views/inquiry.html',
-    controller: 'InquiryCtrl'
-  });
+  //   $stateProvider.state('inquiry', {
+  //   //url: '/viewUnit/inquiry/:inquiryID',
+  //   url: '/viewUnit/inquiry?inquiryID&unitID',
+  //   templateUrl: '/views/inquiry.html',
+  //   controller: 'InquiryCtrl'
+  // });
 
   //    $stateProvider.state('logout',{
   //        url:'/logout',
   //        controller: 'LogoutCtrl'
   //                                    });
 
-    $stateProvider.state('reqeust-inquiry', {
-      url:'/messages',
-      templateUrl: '/views/reqeust-inquiries.html'
-      //controller:
-    });
+    // $stateProvider.state('reqeust-inquiry', {
+    //   url:'/messages',
+    //   templateUrl: '/views/reqeust-inquiries.html'
+    //   //controller:
+    // });
 
   $urlRouterProvider.otherwise('/');
 });
