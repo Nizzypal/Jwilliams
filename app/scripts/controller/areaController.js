@@ -21,30 +21,31 @@ angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, $stat
 
   $scope.clicked = function(index) {
     alert(index)
-  }
+  };
 
   $scope.$on('ngRepeatFinished', function(event, data) {
-    var mySwiper = new Swiper('.swiper-container', {
+    // var mySwiper = new Swiper('.swiper-container', {
       //Your options here:
-      mode: 'horizontal',
-      loop: false,
-//      keyboardControl: true,
-//      mousewheelControl: true,
-      slidesPerView: 3,
-      scrollbar: '.swiper-scrollbar',
-      scrollbarHide: false,
-      centeredSlides: true,
-      spaceBetween: 30,
-      grabCursor: true,
-      nextButton: '.swiper-button-next',
-      prevButton: '.swiper-button-prev'
+      // mode: 'horizontal',
+      // loop: false,
+     // keyboardControl: true,
+     // mousewheelControl: true,
+     //  slidesPerView: 3,
+     //  scrollbar: '.swiper-scrollbar',
+     //  scrollbarHide: false,
+     //  centeredSlides: true,
+     //  spaceBetween: 30,
+     //  grabCursor: true,
+     //  nextButton: '.swiper-button-next',
+     //  prevButton: '.swiper-button-prev'
+      
+    // });
 
-
-
-    });
+    // mySwiper.update(true);
   });
 
   $scope.goView = function(unit) {
+    alert('go');
     $state.go("viewUnit", {
       "unitID": unit._id,
       "userID": $scope.userID

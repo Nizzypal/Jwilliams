@@ -402,7 +402,7 @@ app.get('/getInquiries', function(req, res) {
       //res.status(200).send(messages);
     });    
   }
-})
+});
 
 //Server endpoint for creating inquiries
 app.post('/createInquiry', function(req, res) {

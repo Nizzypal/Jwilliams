@@ -22,7 +22,7 @@
     ================================================== -->
     <section id="portfolio" class="grid">
       <h2>OUR AVAILABLE UNITS</h2>
-      <div class="swiper-container" max-height="500px">
+<!--       <div class="swiper-container" max-height="500px"> -->
 
 <!--       For the dropdown menu   -->
 <!--       <div class="dropdown">
@@ -38,13 +38,13 @@
         </ul>
       </div> -->
 
-        <div class="swiper-wrapper">
+<!--         <div class="swiper-wrapper"> -->
           <div ng-repeat='unit in units' end-repeat slides='3' class="swiper-slide">
             <div class="item">
               <div class="product">
-                <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
+<!--                 <a class="add-fav tooltipHere" data-toggle="tooltip" data-original-title="Add to Wishlist" data-placement="left">
                   <i class="glyphicon glyphicon-heart"></i>
-                </a>
+                </a> -->
 
                 <div class="image">
 <!--
@@ -52,9 +52,9 @@
                     <a title="Quick View" class="btn btn-xs  btn-quickview" ng-click='toggleModal(unit)' data-target="#product-details-modal" data-toggle="modal" ng-click='toggleModal()'> Quick View </a>
                   </div>
 -->
-                  <a data-target="#product-details-modal" data-toggle="modal">
+<!--                   <a data-target="#product-details-modal" data-toggle="modal"> -->
                     <img ng-src="{{unit.photos[0]}}" alt="img" class="img-responsive">
-                  </a>
+<!--                   </a> -->
                   <!--            <div class="promotion"> <span class="new-product"> NEW</span> <span class="discount">15% OFF</span> </div>-->
                 </div>
                 <div class="description">
@@ -72,14 +72,14 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="swiper-pagination"></div>
+<!--         </div> -->
+<!--         <div class="swiper-pagination"></div> -->
 
         <!-- If we need navigation buttons -->
-        <div class="swiper-button-prev"></div>
+<!--         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
         <div class="swiper-scrollbar"></div>
-      </div>
+      </div> -->
       <div id="productslider" class="owl-carousel owl-theme">
 
 
