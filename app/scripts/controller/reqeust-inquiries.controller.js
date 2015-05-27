@@ -1,5 +1,5 @@
-'use strict';
-angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $state, API_URL){
+// 'use strict';
+angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $state, API_URL, userIDRes){
 
 	var inquiry = {
 		userID: "",
@@ -10,7 +10,7 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
 		haveBeenRepledTo: false		
 	};
 
-    $http.get(API_URL + 'getInquiries' + '?userID=111').success(function(inquiries) {
+    $http.get(API_URL + 'getInquiries' + '?userID=' + userIDRes.value).success(function(inquiries) {
       
       console.log('Inquiries - ' + inquiries);
 

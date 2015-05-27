@@ -340,7 +340,7 @@ app.get('/getInquiries', function(req, res) {
   //if (stringId == ""){
   if (userStringID != null){
     //Find all inquiries made by this user
-    Inquiry.find({'userID': '111', isInquiry: true}).lean().exec(function(err, inquiries) {
+    Inquiry.find({'userID': userStringID, isInquiry: true}).lean().exec(function(err, inquiries) {
       if (err) return console.error(err);
       //  console.log(items);
 

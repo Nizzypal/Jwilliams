@@ -16,7 +16,7 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
 
 
   $stateProvider.state('main', {
-    url: '/:userID?token',
+    url: '/?userID&token',
     //url: '/',
     templateUrl: '/views/main.html',
     controller: 'MainCtrl'
@@ -100,9 +100,20 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   //                                    });
 
     $stateProvider.state('reqeust-inquiry', {
-      url:'/messages',
-      templateUrl: '/views/reqeust-inquiries.html'
-      //controller:
+      url:'/messages:userID',
+      templateUrl: '/views/reqeust-inquiries.html',
+      controller: 'ReqInqCtrl',
+      resolve: {
+        userIDRes: function(){
+          var startNo = location.hash.search('userID=');
+          startNo = startNo + 'userID='.length;
+          var endNo = location.hash.search('&');
+          var userID = location.hash.substring(startNo, endNo);
+          return {
+            value: userID
+          };
+        }
+      }
     });
 
   $urlRouterProvider.otherwise('/');
