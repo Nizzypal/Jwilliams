@@ -89,10 +89,9 @@ app.post('/register', function(req, res) {
     }
   });
 
-
-
   var newUser = new User({
-    name: user.name,
+    //name: user.name,
+    name: user.email,
     email: user.email,
     contact1: user.contact1,
     password: user.password,
@@ -100,8 +99,6 @@ app.post('/register', function(req, res) {
     subscribed: false,
     role: 'user'
   })
-
-
 
   newUser.save(function(err) {
     createSendToken(newUser, res);
@@ -120,7 +117,7 @@ app.post('/login', function(req, res) {
   User.findOne(searchUser, function(err, user) {
 
     if (!user)
-      res.status(401).send({
+      return res.status(401).send({
         message: 'Wrong email/password'
       });
 
@@ -343,7 +340,7 @@ app.get('/getInquiries', function(req, res) {
   //if (stringId == ""){
   if (userStringID != null){
     //Find all inquiries made by this user
-    Inquiry.find({'userID': '111', isInquiry: true}).lean().exec(function(err, inquiries) {
+    Inquiry.find({'userID': userStringID, isInquiry: true}).lean().exec(function(err, inquiries) {
       if (err) return console.error(err);
       //  console.log(items);
 
@@ -405,7 +402,7 @@ app.get('/getInquiries', function(req, res) {
       //res.status(200).send(messages);
     });    
   }
-})
+});
 
 //Server endpoint for creating inquiries
 app.post('/createInquiry', function(req, res) {
