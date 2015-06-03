@@ -9,12 +9,12 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                parentInquiry: '@',
                parentUnit: '@'
             },
-            controller: function($scope, $http, API_URL){
+            controller: function($scope, $http, $stateParams, API_URL){
                 var vm = this;
 
                 //variables for new inquiry
                 var inquiryData = {
-                    userID: "111",
+                    userID: $stateParams.userID,
                     inquiryID: "",
                     unitID: "",
                     message: "",
@@ -26,6 +26,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 var inquiryID = null;
                 var messagesCollection = [];
                 var textAreaRows = 4;
+
+                var userID = $stateParams.userID;
                 //var readMessages = {};
 
                 //variable for existing inquiry
@@ -108,7 +110,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     $scope.collectionIndex++;
 
                     //For some reason the messagesCollection is updated automatically so NO need to push
-                    var nextComment = new commentModel(inquiryID,"111", $scope.unitDetails._id,messagesCollection[$scope.collectionIndex].message);
+                    var nextComment = new commentModel(inquiryID, userID, $scope.unitDetails._id,messagesCollection[$scope.collectionIndex].message);
                     //messagesCollection.push(nextComment);
                     $scope.currentMessage = messagesCollection[$scope.collectionIndex];
 
@@ -153,6 +155,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                                     '<div class="col-md-6" style="padding-left:0px;">' +
                                         '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + (scope.collectionIndex+1) + '].message"></textarea >' +
                                         //'<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[1].message"></textarea >' +
+                                        '<p>By: {{messagesCollection[' + (scope.collectionIndex+1) + '].userID}}</p>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
@@ -177,6 +180,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                                 '<div class="form-group">' +
                                     '<div class="col-md-6" style="padding-left:0px;">' +
                                         '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + (scope.collectionIndex+1) + '].message"></textarea >' +
+                                        '<p>By: {{messagesCollection[' + (scope.collectionIndex+1) + '].userID}}</p>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
@@ -208,6 +212,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                                     '<div class="col-md-6" style="padding-left:0px;">' +
                                         '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
                                         'value="' + e.message + '" ng-model="readMessages.comments[' + (i) + '].message"></textarea >' +
+                                        '<p>By: ' + scope.readMessages.comments[i].userID + '</p>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'

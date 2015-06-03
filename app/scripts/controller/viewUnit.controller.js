@@ -16,7 +16,7 @@ angular.module('jwilliams')
       photos: []
     }
 
-    $http.get(API_URL + 'getUnit' + '?q=' + $stateParams.unitId).success(function(unit) {
+    $http.get(API_URL + 'getUnit' + '?q=' + $stateParams.unitID).success(function(unit) {
       $scope.details.name = unit.name;
       $scope.details.address = unit.address;
       $scope.details.size = unit.size;
@@ -27,7 +27,7 @@ angular.module('jwilliams')
       alert('warning', "Unable to get unit");
     })
 
-    $http.get(API_URL + 'getRent' + '?q=' + $stateParams.unitId).success(function(rent) {
+    $http.get(API_URL + 'getRent' + '?q=' + $stateParams.unitID).success(function(rent) {
       $scope.details.monthlyRate = rent.monthlyRate;
       $scope.details.dailyRate = rent.dailyRate;
       $scope.details.blockDates = rent.blockDates;
@@ -36,6 +36,8 @@ angular.module('jwilliams')
     })
 
     $scope.DateNow = new Date();
+
+    $scope.userID = $stateParams.userID;
 
     // $scope.today = function() {
     //  $scope.dt = new Date();
@@ -113,11 +115,13 @@ angular.module('jwilliams')
     $scope.goInquire = function(unit) {
       //$state.go("inquiry");
 
-      var temp = angular.copy($stateParams.unitId);
+      var unitID = angular.copy($stateParams.unitID);
+      var userID = angular.copy($stateParams.userID);
       $state.go("inquiry", {
         //"userID": "",
         "inquiryID": "",
-        "unitID": temp
+        "unitID": unitID,
+        "userID": userID
       });      
     }
 

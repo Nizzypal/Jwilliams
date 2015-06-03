@@ -9,15 +9,29 @@
  * Main module of the application.
  */
 angular
-  //.module('jwilliams', ['ui.router', 'ngAnimate']);
-  .module('jwilliams', ['ui.router', 'ngAnimate', 'ui.bootstrap']);
+  .module('jwilliams', ['ui.router', 'ngAnimate']);
+  //.module('jwilliams', ['ui.router', 'ngAnimate', 'ui.bootstrap']);
 
 angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) {
 
 
   $stateProvider.state('main', {
-    url: '/',
-    templateUrl: '/views/main.html'
+    url: '/?userID&token',
+    //url: '/',
+    templateUrl: '/views/main.html',
+    controller: 'MainCtrl'
+  });
+
+  $stateProvider.state('registration', {
+    url: '/registration/:isLogin',
+    templateUrl: '/views/login.html',
+    controller: 'LoginCtrl'
+  });
+
+  $stateProvider.state('login', {
+    url: '/login/:isLogin',
+    templateUrl: '/views/login.html',
+    controller: 'LoginCtrl'
   });
 
   $stateProvider.state('bgc', {
@@ -26,7 +40,8 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
 
   $stateProvider.state('makati', {
-    url: '/makati',
+    url: '/makati/:userID',
+    //url: '/makati',
     templateUrl: '/views/city.html',
     controller: 'AreaCtrl',
     resolve: {
@@ -66,14 +81,15 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
     
     $stateProvider.state('viewUnit', {
-    url: '/viewUnit/:unitId',
+    url: '/viewUnit/:unitID?userID',
+    //url: '/viewUnit/:unitID',
     templateUrl: '/views/unit.html',
     controller: 'ViewUnitCtrl'
   });
 
     $stateProvider.state('inquiry', {
     //url: '/viewUnit/inquiry/:inquiryID',
-    url: '/viewUnit/inquiry?inquiryID&unitID',
+    url: '/viewUnit/inquiry?inquiryID&unitID&userID',
     templateUrl: '/views/inquiry.html',
     controller: 'InquiryCtrl'
   });
@@ -84,9 +100,20 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   //                                    });
 
     $stateProvider.state('reqeust-inquiry', {
-      url:'/messages',
-      templateUrl: '/views/reqeust-inquiries.html'
-      //controller:
+      url:'/messages:userID',
+      templateUrl: '/views/reqeust-inquiries.html',
+      controller: 'ReqInqCtrl',
+      resolve: {
+        userIDRes: function(){
+          var startNo = location.hash.search('userID=');
+          startNo = startNo + 'userID='.length;
+          var endNo = location.hash.search('&');
+          var userID = location.hash.substring(startNo, endNo);
+          return {
+            value: userID
+          };
+        }
+      }
     });
 
   $urlRouterProvider.otherwise('/');
