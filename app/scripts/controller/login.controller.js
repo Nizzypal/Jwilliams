@@ -1,17 +1,23 @@
 'use strict';
-angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParams, $state, $http, API_URL, UserData){
+angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParams, $state, $http, API_URL, UserDataService){
+	
 	var vm = this;
 
-	var userData = UserData
+	var userDataService = UserDataService
 
-	var user = {
+	// var user = {
+	// 	email:'',
+	// 	password:''
+	// };
+
+	$scope.user = {
 		email:'',
 		password:''
 	};
 
-	$scope.user = user;
-	$scope.email = user.email;
-	$scope.password = user.password;
+
+	// $scope.email = user.email;
+	// $scope.password = user.password;
 
 	//Determines if page is login or registration mode
 	$scope.isLogin = $stateParams.isLogin;
@@ -25,11 +31,12 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 
 		//user is alrady a member
 	    if ($scope.isLogin){
-		    $http.post(API_URL + 'login', user)
+		    //$http.post(API_URL + 'login', user)
+		    $http.post(API_URL + 'login', $scope.user)
 		        .success(function(res){
 
 		        	//Set user service information
-		        	userData.UserInfo.userID = res.user._id;
+		        	userDataService.getUserInfo().userID = res.user._id;
 
 		        	$state.go('main');
 		            //inquiryID = newInquiry.newInquiryID;

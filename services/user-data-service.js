@@ -1,19 +1,19 @@
 'user strict'
 angular.module('jwilliams')
-    .service('UserData', function(){
+    .service('UserDataService', function(){
 
-    var UserInfo = {
-        userID: '',
-        userName: ''
-    };
+        var UserInfo = {
+            userID: '',
+            userName: ''
+        };
 
-    return{
-        getUserInfo: function(){
-            return UserInfo;
-        },
-        setUserInfo: function(value){
-            UserInfo=value;
-        }
-    };
+        return{
+            getUserInfo: function(){
+                return UserInfo;
+            },
+            setUserInfo: function(value){
+                UserInfo=value;
+            }
+        };
 
-});
+    });

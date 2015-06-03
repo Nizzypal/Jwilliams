@@ -40,8 +40,8 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
 
   $stateProvider.state('makati', {
-    url: '/makati/:userID',
-    //url: '/makati',
+    //url: '/makati/:userID',
+    url: '/makati',
     templateUrl: '/views/city.html',
     controller: 'AreaCtrl',
     resolve: {
@@ -81,15 +81,16 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
     
     $stateProvider.state('viewUnit', {
-    url: '/viewUnit/:unitID?userID',
-    //url: '/viewUnit/:unitID',
+    //url: '/viewUnit/:unitID?userID',
+    url: '/viewUnit/:unitID',
     templateUrl: '/views/unit.html',
     controller: 'ViewUnitCtrl'
   });
 
     $stateProvider.state('inquiry', {
     //url: '/viewUnit/inquiry/:inquiryID',
-    url: '/viewUnit/inquiry?inquiryID&unitID&userID',
+    //url: '/viewUnit/inquiry?inquiryID&unitID&userID',
+    url: '/viewUnit/inquiry',
     templateUrl: '/views/inquiry.html',
     controller: 'InquiryCtrl'
   });

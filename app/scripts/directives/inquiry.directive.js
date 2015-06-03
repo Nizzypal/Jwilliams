@@ -9,12 +9,13 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                parentInquiry: '@',
                parentUnit: '@'
             },
-            controller: function($scope, $http, $stateParams, API_URL){
+            controller: function($scope, $http, $stateParams, API_URL, UserDataService){
                 var vm = this;
+                var userID = UserDataService.getUserInfo().userID;
 
                 //variables for new inquiry
                 var inquiryData = {
-                    userID: $stateParams.userID,
+                    userID: userID,
                     inquiryID: "",
                     unitID: "",
                     message: "",
@@ -27,7 +28,6 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 var messagesCollection = [];
                 var textAreaRows = 4;
 
-                var userID = $stateParams.userID;
                 //var readMessages = {};
 
                 //variable for existing inquiry
