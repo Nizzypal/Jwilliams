@@ -1,6 +1,8 @@
 'use strict';
-angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParams, $state, $http, API_URL){
+angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParams, $state, $http, API_URL, UserData){
 	var vm = this;
+
+	var userData = UserData
 
 	var user = {
 		email:'',
@@ -25,7 +27,11 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 	    if ($scope.isLogin){
 		    $http.post(API_URL + 'login', user)
 		        .success(function(res){
-		        	$state.go('main', {userID: res.user._id, token: res.token});
+
+		        	//Set user service information
+		        	userData.UserInfo.userID = res.user._id;
+
+		        	$state.go('main');
 		            //inquiryID = newInquiry.newInquiryID;
 		        })
 		        .error(function(err){
@@ -38,15 +44,15 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 		        });		    	
 		//user is new and must register		        
 		} else {
-			    $http.post(API_URL + 'register', user)
-			        .success(function(newInquiry){
-			            //inquiryID = newInquiry.newInquiryID;
-			        })
-			        .error(function(err){
-			            alert('warning: ' + err.message);  
-			            return false;
-			        });			    	
-		    }
+		    $http.post(API_URL + 'register', user)
+		        .success(function(newInquiry){
+		            //inquiryID = newInquiry.newInquiryID;
+		        })
+		        .error(function(err){
+		            alert('warning: ' + err.message);  
+		            return false;
+		        });			    	
+		}
 	};
 
 	$scope.submit = vm.submit;

@@ -16,8 +16,8 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
 
 
   $stateProvider.state('main', {
-    url: '/?userID&token',
-    //url: '/',
+    //url: '/?userID&token',
+    url: '/',
     templateUrl: '/views/main.html',
     controller: 'MainCtrl'
   });
