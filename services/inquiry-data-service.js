@@ -4,7 +4,7 @@ angular.module('jwilliams')
 
 		var InquiryInfo = {
 	        inquiryID: '',
-	        inquiryName: ''
+	        inquiryUnitID: ''
 	    };
 
         return{

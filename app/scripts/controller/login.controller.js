@@ -36,7 +36,7 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 		        .success(function(res){
 
 		        	//Set user service information
-		        	userDataService.getUserInfo().userID = res.user._id;
+		        	userDataService.setUserInfo({userID: res.user._id, userName: res.user.email});
 
 		        	$state.go('main');
 		            //inquiryID = newInquiry.newInquiryID;

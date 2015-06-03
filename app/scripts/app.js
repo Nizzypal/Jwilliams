@@ -101,20 +101,20 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   //                                    });
 
     $stateProvider.state('reqeust-inquiry', {
-      url:'/messages:userID',
+      url:'/messages',
       templateUrl: '/views/reqeust-inquiries.html',
-      controller: 'ReqInqCtrl',
-      resolve: {
-        userIDRes: function(){
-          var startNo = location.hash.search('userID=');
-          startNo = startNo + 'userID='.length;
-          var endNo = location.hash.search('&');
-          var userID = location.hash.substring(startNo, endNo);
-          return {
-            value: userID
-          };
-        }
-      }
+      controller: 'ReqInqCtrl'
+      // resolve: {
+      //   userIDRes: function(){
+      //     var startNo = location.hash.search('userID=');
+      //     startNo = startNo + 'userID='.length;
+      //     var endNo = location.hash.search('&');
+      //     var userID = location.hash.substring(startNo, endNo);
+      //     return {
+      //       value: userID
+      //     };
+      //   }
+      // }
     });
 
   $urlRouterProvider.otherwise('/');

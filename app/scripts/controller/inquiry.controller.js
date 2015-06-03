@@ -1,4 +1,4 @@
-angular.module('jwilliams').controller('InquiryCtrl', function($scope, $stateParams, UnitDataService, InquiryDataService){
+angular.module('jwilliams').controller('InquiryCtrl', function($scope, $stateParams, InquiryDataService){
 	$scope.inquiryID = InquiryDataService.getInquiryInfo().inquiryID;
-	$scope.unitID = UnitDataService.getUnitInfo().unitID;
+	$scope.unitID = InquiryDataService.getInquiryInfo().inquiryUnitID;
 });
