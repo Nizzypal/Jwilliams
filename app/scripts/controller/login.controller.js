@@ -1,15 +1,23 @@
 'use strict';
-angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParams, $state, $http, API_URL){
+angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParams, $state, $http, API_URL, UserDataService){
+	
 	var vm = this;
 
-	var user = {
+	var userDataService = UserDataService
+
+	// var user = {
+	// 	email:'',
+	// 	password:''
+	// };
+
+	$scope.user = {
 		email:'',
 		password:''
 	};
 
-	$scope.user = user;
-	$scope.email = user.email;
-	$scope.password = user.password;
+
+	// $scope.email = user.email;
+	// $scope.password = user.password;
 
 	//Determines if page is login or registration mode
 	$scope.isLogin = $stateParams.isLogin;
@@ -23,9 +31,14 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 
 		//user is alrady a member
 	    if ($scope.isLogin){
-		    $http.post(API_URL + 'login', user)
+		    //$http.post(API_URL + 'login', user)
+		    $http.post(API_URL + 'login', $scope.user)
 		        .success(function(res){
-		        	$state.go('main', {userID: res.user._id, token: res.token});
+
+		        	//Set user service information
+		        	userDataService.setUserInfo({userID: res.user._id, userName: res.user.email});
+
+		        	$state.go('main');
 		            //inquiryID = newInquiry.newInquiryID;
 		        })
 		        .error(function(err){
@@ -38,15 +51,15 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 		        });		    	
 		//user is new and must register		        
 		} else {
-			    $http.post(API_URL + 'register', user)
-			        .success(function(newInquiry){
-			            //inquiryID = newInquiry.newInquiryID;
-			        })
-			        .error(function(err){
-			            alert('warning: ' + err.message);  
-			            return false;
-			        });			    	
-		    }
+		    $http.post(API_URL + 'register', user)
+		        .success(function(newInquiry){
+		            //inquiryID = newInquiry.newInquiryID;
+		        })
+		        .error(function(err){
+		            alert('warning: ' + err.message);  
+		            return false;
+		        });			    	
+		}
 	};
 
 	$scope.submit = vm.submit;

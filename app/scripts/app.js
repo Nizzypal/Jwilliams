@@ -16,8 +16,8 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
 
 
   $stateProvider.state('main', {
-    url: '/?userID&token',
-    //url: '/',
+    //url: '/?userID&token',
+    url: '/',
     templateUrl: '/views/main.html',
     controller: 'MainCtrl'
   });
@@ -40,8 +40,8 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
 
   $stateProvider.state('makati', {
-    url: '/makati/:userID',
-    //url: '/makati',
+    //url: '/makati/:userID',
+    url: '/makati',
     templateUrl: '/views/city.html',
     controller: 'AreaCtrl',
     resolve: {
@@ -81,15 +81,16 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   });
     
     $stateProvider.state('viewUnit', {
-    url: '/viewUnit/:unitID?userID',
-    //url: '/viewUnit/:unitID',
+    //url: '/viewUnit/:unitID?userID',
+    url: '/viewUnit/:unitID',
     templateUrl: '/views/unit.html',
     controller: 'ViewUnitCtrl'
   });
 
     $stateProvider.state('inquiry', {
     //url: '/viewUnit/inquiry/:inquiryID',
-    url: '/viewUnit/inquiry?inquiryID&unitID&userID',
+    //url: '/viewUnit/inquiry?inquiryID&unitID&userID',
+    url: '/viewUnit/inquiry',
     templateUrl: '/views/inquiry.html',
     controller: 'InquiryCtrl'
   });
@@ -100,20 +101,20 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
   //                                    });
 
     $stateProvider.state('reqeust-inquiry', {
-      url:'/messages:userID',
+      url:'/messages',
       templateUrl: '/views/reqeust-inquiries.html',
-      controller: 'ReqInqCtrl',
-      resolve: {
-        userIDRes: function(){
-          var startNo = location.hash.search('userID=');
-          startNo = startNo + 'userID='.length;
-          var endNo = location.hash.search('&');
-          var userID = location.hash.substring(startNo, endNo);
-          return {
-            value: userID
-          };
-        }
-      }
+      controller: 'ReqInqCtrl'
+      // resolve: {
+      //   userIDRes: function(){
+      //     var startNo = location.hash.search('userID=');
+      //     startNo = startNo + 'userID='.length;
+      //     var endNo = location.hash.search('&');
+      //     var userID = location.hash.substring(startNo, endNo);
+      //     return {
+      //       value: userID
+      //     };
+      //   }
+      // }
     });
 
   $urlRouterProvider.otherwise('/');
