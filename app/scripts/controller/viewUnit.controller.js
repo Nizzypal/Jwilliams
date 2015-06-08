@@ -1,9 +1,7 @@
 'use strict';
 
-
-
 angular.module('jwilliams')
-  .controller('ViewUnitCtrl', function($scope, $http, $state, API_URL, $stateParams) {
+  .controller('ViewUnitCtrl', function($scope, $http, $state, API_URL, $stateParams, UserDataService, UnitDataService) {
 
     $scope.details = {
       name: '',
@@ -15,6 +13,11 @@ angular.module('jwilliams')
       dailyRate: '',
       photos: []
     }
+
+    UnitDataService.setUnitInfo({unitID: $stateParams.unitID});
+
+    //Get user info
+    $scope.userID = UserDataService.getUserInfo().userID;
 
     $http.get(API_URL + 'getUnit' + '?q=' + $stateParams.unitID).success(function(unit) {
       $scope.details.name = unit.name;
@@ -36,8 +39,6 @@ angular.module('jwilliams')
     })
 
     $scope.DateNow = new Date();
-
-    $scope.userID = $stateParams.userID;
 
     // $scope.today = function() {
     //  $scope.dt = new Date();
@@ -107,22 +108,17 @@ angular.module('jwilliams')
 
 
 
-
-
-
-
-
     $scope.goInquire = function(unit) {
       //$state.go("inquiry");
 
       var unitID = angular.copy($stateParams.unitID);
-      var userID = angular.copy($stateParams.userID);
-      $state.go("inquiry", {
-        //"userID": "",
-        "inquiryID": "",
-        "unitID": unitID,
-        "userID": userID
-      });      
+      var userID = angular.copy($scope.userID);
+      $state.go("inquiry");
+      // $state.go("inquiry", {
+      //   "inquiryID": "",
+      //   "unitID": unitID,
+      //   "userID": userID
+      // });      
     }
 
     $scope.$on('ngRepeatFinished', function(event, data) {

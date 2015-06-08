@@ -1,22 +1,24 @@
-angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, $stateParams, city, API_URL, $http) {
+angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, $http, city, API_URL, UserDataService) {
 
+  //Get City info
   $scope.city = city.value;
   $scope.units = [];
   $scope.currentUnit = {};
-  $scope.userID = $stateParams.userID;
+
+  //Get user info
+  $scope.userID = UserDataService.getUserInfo().userID;
 
   $http.get(API_URL + 'getItemsByCity/' + $scope.city).success(function(units) {
     console.log(units);
     $scope.units = units;
   }).error(function(err) {
-    alert('warning', "Unable to get meals");
+    alert('warning', "Unable to get units");
   });
 
   $scope.modalShown = false;
   $scope.toggleModal = function(unit) {
     $scope.currentUnit = unit;
     $scope.modalShown = !$scope.modalShown;
-
   };
 
   $scope.clicked = function(index) {
@@ -46,9 +48,6 @@ angular.module('jwilliams').controller('AreaCtrl', function($scope,$state, $stat
 
   $scope.goView = function(unit) {
     alert('go');
-    $state.go("viewUnit", {
-      "unitID": unit._id,
-      "userID": $scope.userID
-    });
+    $state.go("viewUnit", {"unitID": unit._id});
   };
 });

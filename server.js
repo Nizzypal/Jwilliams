@@ -841,26 +841,30 @@ app.get('/typeOfAvailability', function(req, res) {
 })
 
 app.post('/userInfo', function(req, res) {
-  if (!req.headers.authorization) {
 
-    console.log("You are not authorized, please login, to get user info");
-    return res.status(401).send({
-      message: 'You are not authorized, please login'
-    });
-  }
-  var token = req.headers.authorization.split(' ')[1];
-  var payload = jwt.decode(token, "shh..");
+  // if (!req.headers.authorization) {
 
-  if (!payload.sub) {
+  //   console.log("You are not authorized, please login, to get user info");
+  //   return res.status(401).send({
+  //     message: 'You are not authorized, please login'
+  //   });
+  // }
+  // var token = req.headers.authorization.split(' ')[1];
+  // var payload = jwt.decode(token, "shh..");
 
-    console.log("You are not authorized, please login, to get user info");
-    res.status(401).send({
-      message: 'Authentication failed'
+  // if (!payload.sub) {
 
-    });
-  }
+  //   console.log("You are not authorized, please login, to get user info");
+  //   res.status(401).send({
+  //     message: 'Authentication failed'
 
-  var userId = mongoose.Types.ObjectId(payload.sub);
+  //   });
+  // }
+
+  //var userId = mongoose.Types.ObjectId(payload.sub);
+
+  var stringID = req.query.q;
+  var userId = mongoose.Types.ObjectId(stringID);
   User.findById(userId, function(err, foundUser) {
     //        console.log("payload:"+payload.sub);
     //    console.log("foundUser:"+foundUser);
