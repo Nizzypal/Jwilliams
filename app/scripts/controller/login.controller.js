@@ -51,9 +51,10 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 		        });		    	
 		//user is new and must register		        
 		} else {
-		    $http.post(API_URL + 'register', user)
+		    $http.post(API_URL + 'register', $scope.user)
 		        .success(function(newInquiry){
-		            //inquiryID = newInquiry.newInquiryID;
+		            userDataService.setUserInfo({userID: newInquiry.user._id, userName: newInquiry.user.email});
+		        	$state.go('main');
 		        })
 		        .error(function(err){
 		            alert('warning: ' + err.message);  

@@ -2167,6 +2167,16 @@ table tbody tr:hover{
   width: 150px;
 }
 
+/* LOGIN PAGE*/
+input[name='Email']{
+  color: black;
+}
+
+input[name='Password']{
+  color: black;
+}
+
+
 /* COMMON STYLES */
 .spacer10{height:10px;}
 .spacer20{height:20px;}
