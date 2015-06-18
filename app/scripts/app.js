@@ -24,7 +24,7 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
 
   $stateProvider.state('registration', {
     url: '/registration/:isLogin',
-    templateUrl: '/views/login.html',
+    templateUrl: '/views/signup.html',
     controller: 'LoginCtrl'
   });
 
