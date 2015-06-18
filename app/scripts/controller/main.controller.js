@@ -11,4 +11,8 @@ angular.module('jwilliams').controller('MainCtrl', function($scope, $stateParams
 	$scope.userID = $stateParams.userID;
 
 	$scope.submit = vm.submit;
+
+    $scope.goRegister = function(unit) {
+      $state.go("registration");   
+    }	
 });
