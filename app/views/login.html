@@ -2,7 +2,6 @@
   <div class="dark-overlay vision">
     <div class="centered  wow bounceIn">
       <h2 ng-show="isLogin">Login</h2>
-      <h2 ng-show="!isLogin">Registration</h2>
     </div>    
   </div>
 </section>
@@ -12,7 +11,6 @@
       <div class="post wow bounceIn" data-wow-duration="2s" style="visibility: visible; -webkit-animation-duration: 2s;">
         <div class="centered wow bounceIn">
           <h2 ng-show="isLogin">Welcome Back! Please Sign In</h2>
-          <h2 ng-show="!isLogin">First Timer?  Then Join Us and Register</h2>
         </div>
       </div>
     </div>
@@ -26,12 +24,12 @@
             <h3 class="form-signin-heading"></h3>
             <hr class="colorgraph"><br>
             
-            <div class="col-md-6 col-xs-12 col-sm-12 margbottom30">
-              <input type="email" class="col-md-12 form-input-field futurab" name="Email" placeholder="Email" autofocus="" ng-model="user.email"/>
-              <input type="password" class="col-md-12 form-input-field futurab" name="Password" placeholder="Password" required="" ng-model="user.password"/>          
+            <div class="col-md-12 col-xs-12 col-sm-12 margbottom30">
+              <input type="email" class="form-input-field futurab" name="Email" placeholder="Email" autofocus="" ng-model="user.email"/>
+              <input type="password" class="form-input-field futurab" name="Password" placeholder="Password" required="" ng-model="user.password"/>          
              
               <!-- <button class="btn btn-lg btn-primary btn-block"  ng-show="isLogin" name="Submit" ng-click="submit()">Login</button> -->
-              <a class=" col-md-6 signsub block caps centerT futurab col-md-10 col-md-offset-1 margbottom20 margtop40" href="#" name="Submit" ng-click="submit()">LOGIN</a>        
+              <a class="login signsub block caps centerT futurab col-md-offset-1 margbottom20 margtop40" href="#" name="Submit" ng-click="submit()">LOGIN</a>        
             <div>
           </form>     
         </div>
