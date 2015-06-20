@@ -2174,6 +2174,7 @@ input[name='Email']{
   margin: 0 auto;
   margin-bottom: 20px;
   width: 50%;
+  font-size: medium;
 }
 
 input[name='Password']{
@@ -2182,6 +2183,7 @@ input[name='Password']{
   margin: 0 auto;
   margin-bottom: 20px;
   width: 50%;
+  font-size: medium;
 }
 
 a.login{
