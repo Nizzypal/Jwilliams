@@ -44,14 +44,14 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 		        	//Set user service information
 		        	userDataService.setUserInfo({userID: res.user._id, userName: res.user.email});
 
-		        	$state.go('main');
+		        	$state.go('main', {'userName': res.user.email});
 		            //inquiryID = newInquiry.newInquiryID;
 		        })
 		        .error(function(err){
 		            alert('warning: ' + err.message);
 
 		            //if credentials are wrong, it means user has to register first
-		            $state.go('registration', {isLogin: false});     
+		            //$state.go('registration', {isLogin: false});     
 		            
 		            return false;
 		        });		    	

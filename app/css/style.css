@@ -2170,10 +2170,24 @@ table tbody tr:hover{
 /* LOGIN PAGE*/
 input[name='Email']{
   color: black;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 50%;
 }
 
 input[name='Password']{
   color: black;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+a.login{
+  display: block;
+  margin: 0 auto;
+  width: 30%;
 }
 
 
