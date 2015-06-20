@@ -73,11 +73,9 @@ app.use(function(req, res, next) {
 app.post('/register', function(req, res) {
   var user = req.body;
 
-
   var searchUser = {
     email: user.email
   };
-
 
   User.findOne(searchUser, function(err, user) {
 
@@ -477,36 +475,46 @@ app.post('/editItem', function(req, res) {
 
 app.post('/editUser', function(req, res) {
 
-  if (!req.headers.authorization) {
-    return res.status(401).send({
-      message: 'You are not authorized, please login'
-    });
-  }
+  // if (!req.headers.authorization) {
+  //   return res.status(401).send({
+  //     message: 'You are not authorized, please login'
+  //   });
+  // }
 
-  var token = req.headers.authorization.split(' ')[1];
-  var payload = jwt.decode(token, "shh..");
+  // var token = req.headers.authorization.split(' ')[1];
+  // var payload = jwt.decode(token, "shh..");
 
-  if (!payload.sub) {
-    res.status(401).send({
-      message: 'Authentication failed'
-    });
-  }
+  // if (!payload.sub) {
+  //   res.status(401).send({
+  //     message: 'Authentication failed'
+  //   });
+  // }
 
-  var contact1 = req.body.editFields.contact1;
-  var address1 = req.body.editFields.address1;
+  // var contact1 = req.body.editFields.contact1;
+  // var address1 = req.body.editFields.address1;
+  //var userID = req.body.userID;
+  var email = req.body.email;
+  var contact1 = '';
+  var address1 = '';
   var address2 = '';
   var address3 = '';
   var subscribed = false;
 
-  if (req.body.editFields.address2) address2 = req.body.editFields.address2;
-  if (req.body.editFields.address3) address3 = req.body.editFields.address3;
+  // if (req.body.editFields.address2) address2 = req.body.editFields.address2;
+  // if (req.body.editFields.address3) address3 = req.body.editFields.address3;
+  if (req.body.address2) contact1 = req.body.contact1;
+  if (req.body.address3) address1 = req.body.address1;
+  if (req.body.address2) address2 = req.body.address2;
+  if (req.body.address3) address3 = req.body.address3;
 
-  var itemId = mongoose.Types.ObjectId(payload.sub);
+  //var itemId = mongoose.Types.ObjectId(payload.sub);
+  var itemId = mongoose.Types.ObjectId(req.body._id);
 
   User.update({
     _id: itemId
   }, {
     $set: {
+      email: email,
       contact1: contact1,
       address1: address1,
       address2: address2,
@@ -844,7 +852,7 @@ app.post('/userInfo', function(req, res) {
 
   // if (!req.headers.authorization) {
 
-  //   console.log("You are not authorized, please login, to get user info");
+  //   console.log("You are not authorized, please login, to get info");
   //   return res.status(401).send({
   //     message: 'You are not authorized, please login'
   //   });

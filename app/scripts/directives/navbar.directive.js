@@ -16,7 +16,14 @@ angular.module('jwilliams').directive('jwNavbarActions', function(){
                 }
 
                 $scope.login = function(){
-                    $state.go("login", {"isLogin": true});
+
+                    //Check user name to know if login or registration will be done
+                    if ($scope.username === "Login" ){
+                        $state.go("login", {"isLogin": true});
+                    }
+                    else {
+                        $state.go("registration", {"isLogin": "edit"});
+                    }
                 };
             },
             link: function($scope, $element, $attrs, $controller){
