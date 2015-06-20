@@ -63,7 +63,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     
                     }).error(function(err) {
                       alert('warning', "Unable to get inqiury");
-                    })   
+                    });  
                 };
 
                 //variable for unit to be inquired about
@@ -76,7 +76,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
 
                     }).error(function(err) {
                       alert('warning', "Unable to get unit");
-                    })                
+                    });              
 
                 }                
 

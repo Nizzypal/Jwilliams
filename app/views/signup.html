@@ -3,7 +3,8 @@
 <section id="">
   <div class="dark-overlay vision">
     <div class="centered  wow bounceIn">
-      <h2 ng-show="isLogin">SIGN UP</h2>
+      <h2 ng-show="isLogin && isLogin != 'edit'">SIGN UP</h2>
+      <h2 ng-show="isLogin === 'edit'">EDIT PROFILE</h2>
     </div>    
   </div>
 </section>
@@ -92,7 +93,7 @@
 
 										<input type="email" class="col-md-12 form-input-field futurab" placeholder="Email" ng-model="user.email">
 
-										<input type="text" class="col-md-12 form-input-field futurab" placeholder="Contact Number" ng-model="user.contactNumber">
+										<input type="text" class="col-md-12 form-input-field futurab" placeholder="Contact Number" ng-model="user.contact1">
 
 										<input type="password" class="col-md-12 form-input-field futurab" placeholder="Password" ng-model="user.password">
 
