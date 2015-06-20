@@ -5,21 +5,12 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 
 	var userDataService = UserDataService
 
-	// var user = {
-	// 	email:'',
-	// 	password:''
-	// };
-
 	$scope.user = {
 		name:'',
 		email:'',
 		password:'',
 		contact1:''
 	};
-
-
-	// $scope.email = user.email;
-	// $scope.password = user.password;
 
 	//Determines if page is login or registration mode
 	$scope.isLogin = $stateParams.isLogin;
