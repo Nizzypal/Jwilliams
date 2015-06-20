@@ -26,11 +26,13 @@
             <h3 class="form-signin-heading"></h3>
             <hr class="colorgraph"><br>
             
-            <input type="email" class="form-control" name="Email" placeholder="Email" autofocus="" ng-model="user.email"/>
-            <input type="password" class="form-control" name="Password" placeholder="Password" required="" ng-model="user.password"/>          
-           
-            <button class="btn btn-lg btn-primary btn-block"  ng-show="isLogin" name="Submit" ng-click="submit()">Login</button>        
-            <button class="btn btn-lg btn-primary btn-block"  ng-show="!(isLogin)" name="Submit" ng-click="submit()">Register</button>        
+            <div class="col-md-6 col-xs-12 col-sm-12 margbottom30">
+              <input type="email" class="col-md-12 form-input-field futurab" name="Email" placeholder="Email" autofocus="" ng-model="user.email"/>
+              <input type="password" class="col-md-12 form-input-field futurab" name="Password" placeholder="Password" required="" ng-model="user.password"/>          
+             
+              <!-- <button class="btn btn-lg btn-primary btn-block"  ng-show="isLogin" name="Submit" ng-click="submit()">Login</button> -->
+              <a class=" col-md-6 signsub block caps centerT futurab col-md-10 col-md-offset-1 margbottom20 margtop40" href="#" name="Submit" ng-click="submit()">LOGIN</a>        
+            <div>
           </form>     
         </div>
       </div>

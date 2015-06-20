@@ -11,8 +11,10 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 	// };
 
 	$scope.user = {
+		name:'',
 		email:'',
-		password:''
+		password:'',
+		contactNumber:''
 	};
 
 
@@ -21,6 +23,8 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 
 	//Determines if page is login or registration mode
 	$scope.isLogin = $stateParams.isLogin;
+
+	//Convert string to boolean
 	if($scope.isLogin === 'false') $scope.isLogin = false;
 	else $scope.isLogin = true;
 
@@ -28,6 +32,8 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 
 	vm.submit = function(){
 		//alert('user - ' + user.email);
+
+		$scope.user.name = $scope.firstName + " " + $scope.lastName;
 
 		//user is alrady a member
 	    if ($scope.isLogin){
