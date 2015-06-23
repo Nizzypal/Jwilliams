@@ -17,14 +17,14 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
 
   $stateProvider.state('main', {
     //url: '/?userID&token',
-    url: '/',
+    url: '/:userName',
     templateUrl: '/views/main.html',
     controller: 'MainCtrl'
   });
 
   $stateProvider.state('registration', {
-    url: '/registration/:isLogin',
-    templateUrl: '/views/login.html',
+    url: '/registration:isLogin/',
+    templateUrl: '/views/signup.html',
     controller: 'LoginCtrl'
   });
 

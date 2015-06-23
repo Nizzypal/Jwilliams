@@ -12,7 +12,7 @@ angular.module('jwilliams')
                 return UserInfo;
             },
             setUserInfo: function(value){
-                UserInfo=value;
+                UserInfo = value;
             }
         };
 

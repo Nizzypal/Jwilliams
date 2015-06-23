@@ -26,6 +26,11 @@
 
   <link href="bower_components/OwlCarousel/owl-carousel/owl.carousel.css" rel="stylesheet">
   <link href="bower_components/OwlCarousel/owl-carousel/owl.theme.css" rel="stylesheet">
+
+  <!-- CUSTOM SCRIPTS/CSS -->
+  <link href="css/custom.css" rel="stylesheet">
+
+
   <!-- Favicons
     ================================================== -->
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -73,32 +78,33 @@
         <!-- Your logo here-->
       </div>
 
+      <div jw-navbar-actions></div>
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
+<!--       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right"> -->
           <!--            <li><a class="page-scroll" href="#banner">Home</a></li>-->
-          <li><a class="page-scroll"  ui-sref="login({isLogin: 'true'})">SIGNUP/LOGIN</a>
+<!--           <li><a class="page-scroll" ui-sref="login({isLogin: 'true'})">Login</a>
           </li>
-
           <li><a class="page-scroll" href="admin/views/admin.html">Admin</a>
           </li>
           <li><a class="page-scroll" ui-sref="longTerm({rentalType: 'longTerm'})">Rent</a>
           </li>
           <li><a class="page-scroll" ui-sref="longTerm({rentalType: 'shortTerm'})">Vacation Homes</a>
-          </li>
+          </li> -->
 
           <!--            <li><a class="page-scroll" ui-sref="subscribe">Subscirbe</a></li>-->
           <!--            <li><a class="page-scroll" href="#portfolio">Units</a></li>-->
 
-          <li><a class="page-scroll" href="">Contact</a>
-          </li>
+<!--           <li><a class="page-scroll" href="">Contact</a>
+          </li> -->
 <!--           <li><a class="page-scroll" href="views/reqeust-inquiries.html">Billing</a>
           </li> -->
-          <li><a class="page-scroll" ui-sref="reqeust-inquiry">Billing</a>
-          </li>          
+<!--           <li><a class="page-scroll" ui-sref="reqeust-inquiry">Billing</a>
+          </li>       -->    
           <!--            <li><a href="blog.html">Blog</a></li>-->
-        </ul>
-      </div>
+<!--         </ul>
+      </div> -->
+
       <!-- End navbar-collapse -->
     </div>
     <!-- End container -->
@@ -190,6 +196,60 @@
   <script type="text/javascript" src="js/main.js"></script>
 
 
+
+<!-- CUSTOM SCRIPTS/CSS -->
+<!-- Custom functions -->
+<script src="plugins/assets/js/functions.js"></script>
+
+<!-- Picker UI--> 
+<script src="plugins/assets/js/jquery-ui.js"></script>
+<link href="plugins/assets/css/jquery-ui.css" rel="stylesheet">
+
+
+<!-- Easing -->
+<script src="plugins/assets/js/jquery.easing.js"></script>
+
+<!-- Nicescroll  -->  
+<script src="plugins/assets/js/jquery.nicescroll.min.js"></script>
+
+<!-- Custom Select -->
+<script type='text/javascript' src='plugins/assets/js/jquery.customSelect.js'></script> 
+
+
+<!-- CAROUSEL -->
+<!-- <link href="plugins/carousel/carousel.css" rel="stylesheet"> -->
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+<![endif]-->
+
+
+<!-- FONTS -->  
+<link href='http://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:700,400,300,300italic' rel='stylesheet' type='text/css'> 
+
+<!-- REVOLUTION BANNER CSS SETTINGS -->
+<link href="plugins/revolution/css/fullscreen.css" rel="stylesheet" media="screen">
+<link href="plugins/revolution/css/settings.css" rel="stylesheet" media="screen">
+  
+<!-- This page JS -->
+<script type="text/javascript" src="plugins/assets/js/js-index3.js"></script> 
+
+<!-- jQuery KenBurn Slider  -->
+<script type="text/javascript" src="plugins/revolution/js/jquery.themepunch.revolution.min.js"></script>  
+
+<!-- CarouFredSel -->
+<script src="plugins/assets/js/jquery.carouFredSel-6.2.1-packed.js"></script>
+<script src="plugins/assets/js/helper-plugins/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="plugins/assets/js/helper-plugins/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="plugins/assets/js/helper-plugins/jquery.transit.min.js"></script>
+<script type="text/javascript" src="plugins/assets/js/helper-plugins/jquery.ba-throttle-debounce.min.js"></script>
+
+
+
+
+
   <script src="bower_components/OwlCarousel/owl-carousel/owl.carousel.js"></script>
 
   <script src="scripts/app.js"></script>
@@ -209,7 +269,8 @@
 
   <!-- DIRECTIVES -->
   <script type="text/javascript" src="/app/scripts/directives/inquiry.directive.js"></script>
-  <script type="text/javascript" src="/app/scripts/directives/datepicker.directive.js"></script>
+ <script type="text/javascript" src="/app/scripts/directives/navbar.directive.js"></script>
+   <script type="text/javascript" src="/app/scripts/directives/datepicker.directive.js"></script>
 
   <!-- SERVICES -->
   <script src="/services/user-data-service.js"></script>
