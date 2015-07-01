@@ -63,7 +63,8 @@ var _ = require('underscore');
 var fs = require('fs');
 var config = require('./services/config.js')
 var model = {
-  verifyUrl: 'http://localhost:3000/auth/verifyEmail?token=',
+  //verifyUrl: 'http://localhost:3000/auth/verifyEmail?token=',/auth/verifyEmail
+  verifyUrl: 'http://localhost:3030/auth/verifyEmail?email=hil123rami@gmail.com',
   title: 'psJw',
   subTitle: 'Thanks for signing up',
   body: 'Please verify your email address by clicking the button below.'
@@ -1375,6 +1376,44 @@ function getHtml(token){
   //model.verifyUrl += token;
 
   return template(model);
+}
+
+app.get('/auth/verifyEmail', function handler(req, res){
+  var token = req.query.token;
+
+  //var payload = jwt.decode(token, config.EMAIL_SECRET);
+
+  //var email = payload.sub;
+  var email = req.query.email;
+
+  if(!email){
+    return handleError(res);
+  }
+
+  User.findOne({email: email}, function(err, user) {
+
+    if(err){
+      return res.status(500); 
+    }
+
+    if (!user) {
+      return handleError(res);
+    }
+
+    // if(!user.active){
+    //   user.active = true;
+
+      //return res.redirect('');
+    //}
+
+  });
+
+})
+
+function handleError(res){
+  return res.status(401).send({
+    message: 'Authentication failed.  Unable to verify email'
+  });
 }
 
 
