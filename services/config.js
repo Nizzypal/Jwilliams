@@ -1,3 +1,1 @@
-angular.module.exports = {
-	EMAIL_SECRET: 'something'
-}
+exports.EMAIL_SECRET = 'something';

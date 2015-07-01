@@ -1,32 +1,34 @@
-var _ = require('underscore');
-var fs = require('fs');
-var jwt = require('./services/jwt.js');
+// var _ = require('underscore');
+// var fs = require('fs');
+// var jwt = require('services/jwt.js');
 
-var model = {
-	verifyUrl: 'http://localhost:3000/auth/verifyEmail?token=',
-	title: 'psJw',
-	subTitle: 'Thanks for signing up',
-	body: 'Please verify your email address by clicking the button below.'
-}
-exports.sendMail = function(email){
-	var payload = {
-		sub: email
-	}
+// var model = {
+// 	verifyUrl: 'http://localhost:3000/auth/verifyEmail?token=',
+// 	title: 'psJw',
+// 	subTitle: 'Thanks for signing up',
+// 	body: 'Please verify your email address by clicking the button below.'
+// }
+// exports.sendMail = function(email){
+// 	var payload = {
+// 		sub: email
+// 	}
 
-	var token = jwt.encode(payload, config.EMAIL_SECRET);
-}
+// 	var token = jwt.encode(payload, config.EMAIL_SECRET);
 
-_.templateSettings = {
-  interpolate: /\{\{(.+?)\}\}/g
-};
+// 	console.log(getHtml(token));
+// }
 
-function getHtml(token){
-	var path = '/views/createUnit.html';
-	var html = fs.readFileSync(path, encoding = 'utf8');
+// _.templateSettings = {
+//   interpolate: /\{\{(.+?)\}\}/g
+// };
 
-	var template = _.template(html);
+// function getHtml(token){
+// 	var path = '/views/createUnit.html';
+// 	var html = fs.readFileSync(path, encoding = 'utf8');
 
-	model.verifyUrl += token;
+// 	var template = _.template(html);
 
-	return template(model);
-}
+// 	model.verifyUrl += token;
+
+// 	return template(model);
+// }

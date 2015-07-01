@@ -9,11 +9,6 @@ var Message = require('./models/message.js');
 var Rent = require('./models/rent.js');
 var Inquiry = require('./models/inquiry.js');
 
-//Services
-var emailVerification = require('./services/email-verification.js');
-
-emailVerification.send('fake@fake.com');
-
 var path = require('path');
 var request = require('request');
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
@@ -54,14 +49,32 @@ generator.on('token', function(token) {
   token.accessToken = token.accessToken;;
 });
 
-
-
-
 var app = express();
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY || 'AKIAJK42ZM2U5NOUDDFQ';
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY || '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';
 var S3_BUCKET = process.env.S3_BUCKET || 'jwilliams-s3bucket';
+
+
+//Email Services
+//var emailVerification = require('./services/email-verification.js');
+//emailVerification.send('fake@fake.com');
+var _ = require('underscore');
+var fs = require('fs');
+var config = require('./services/config.js')
+var model = {
+  verifyUrl: 'http://localhost:3000/auth/verifyEmail?token=',
+  title: 'psJw',
+  subTitle: 'Thanks for signing up',
+  body: 'Please verify your email address by clicking the button below.'
+};
+_.templateSettings = {
+  interpolate: /\{\{(.+?)\}\}/g
+};
+sendEmail('fake@fake.com');
+
+
+
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -137,7 +150,10 @@ app.post('/login', function(req, res) {
       createSendToken(user, res);
 
     });
-  })
+  });
+
+  //send(reqUser.email);
+
 });
 
 function createSendToken(user, res) {
@@ -591,7 +607,8 @@ var transporter = nodemailer.createTransport(({
     from: 'hil123rami@gmail.com',
     to: 'richfabros@jwmgi.com',
     subject: 'Sent Message',
-    text: message
+    text: message,
+    html: getHtml()
   }, function(err, response) {
     console.log(err || response.response);
   });
@@ -1319,6 +1336,50 @@ app.post('/auth/google/auth/google', function(req, res) {
   });
 })
 
+
+//Email Service functions
+function sendEmail(email){
+  var payload = {
+    sub: email
+  }
+
+  var transporter = nodemailer.createTransport(({
+      service: 'gmail',
+      auth: {
+          xoauth2: generator
+      }
+  }));
+
+  // send mail
+  transporter.sendMail({
+    from: 'hil123rami@gmail.com',
+    to: 'hil123rami@gmail.com',
+    subject: 'Sent Message',
+    html: getHtml()
+  }, function(err, response) {
+    console.log(err || response.response);
+  });
+
+
+  //var token = jwt.encode(payload, config.EMAIL_SECRET);
+
+  console.log(getHtml(token));
+}
+
+function getHtml(token){
+  var path = './app/views/email-verification.html';
+  var html = fs.readFileSync(path, encoding = 'utf8');
+
+  var template = _.template(html);
+
+  //model.verifyUrl += token;
+
+  return template(model);
+}
+
+
+
+//Config Stuff
 mongoose.connect('mongodb://jwmgiadmin:WYNE012!!!@ds041561.mongolab.com:41561/jwmgi');
 
 //app.set('views', __dirname + '/app/');
