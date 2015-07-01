@@ -1,12 +1,18 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+
 //Model Requires
 var User = require('./models/user.js');
 var Item = require('./models/item.js');
 var Message = require('./models/message.js');
 var Rent = require('./models/rent.js');
 var Inquiry = require('./models/inquiry.js');
+
+//Services
+var emailVerification = require('./services/email-verification.js');
+
+emailVerification.send('fake@fake.com');
 
 var path = require('path');
 var request = require('request');
@@ -18,6 +24,7 @@ var q = require('q');
 //Mailschimp API related code
 var MailChimpAPI = require('mailchimp').MailChimpAPI;
 var apiKey = '7c9449737b73d44ba6fd130fba22a56b-us10';
+
 try {
   var api = new MailChimpAPI(apiKey, {
     version: '2.0'
