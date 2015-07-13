@@ -1,0 +1,1 @@
+exports.EMAIL_SECRET = 'something';
