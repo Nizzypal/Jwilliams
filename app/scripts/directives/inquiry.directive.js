@@ -97,6 +97,9 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                         $scope.readMessages.comments.forEach(getUserName);
 
                         $scope.tempInnerIndex = 0;
+
+                        //Set the flag which says what kind of message is being saved
+                        $scope.addingInquiry = false;                        
                     
                     }).error(function(err) {
                       alert('warning', "Unable to get inqiury");
@@ -294,7 +297,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 //scope.$watch('readMessages.comments', initialize, true);   
                 //scope.$watch('tempInnerIndex', initialize, true);   
                 scope.$watch(function(){
-                    return scope.tempInnerIndex;
+                    //return scope.tempInnerIndex;
+                    return scope.addingInquiry;
                 }, initialize, true);   
 
 
@@ -312,6 +316,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                         //Update messagesCollection and relevant iterator
                         scope.messagesCollection.push(scope.readMessages.baseInquiry);
                         //scope.collectionIndex++;
+
                     }
 
 
@@ -328,6 +333,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                                                 '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
                                                 'value="' + e.message + '" ng-model="readMessages.comments[' + (i) + '].message"></textarea >' +
                                                 '<p>By: ' + scope.readMessages.comments[scope.tempInnerIndex].userName + '</p>' +
+                                                //'<p>By: ' + scope.userName + '</p>' +
                                             '</div>' +
                                         '</div>' +
                                     '</div>'
@@ -338,13 +344,26 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                                 scope.collectionIndex++;                           
 
                                 //Update innerIndex first
-                                scope.tempInnerIndex++;
+                                scope.tempInnerIndex++;                               
 
                                 // var html = $('div#inquireRoot').clone().html();   
                                 // var newElement = $compile(html)(scope);
                                 // element.html('');
                                 // element.append(newElement);                                
                             });
+
+                            // Add last blank comment box
+                            $(    '<div class="row">' +
+                                    '<div class="spacer10"></div>' + 
+                                    '<div class="form-group">' +
+                                        '<div class="col-md-6" style="padding-left:0px;">' +
+                                            '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
+                                            'value="" ng-model="messagesCollection[' + (scope.collectionIndex+1) + '].message"></textarea >' +
+                                            '<p>By: ' + scope.userName + '</p>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>'
+                            ).insertBefore('div#inquireRoot div.row:last-child');  
 
                         } else {
                             //For the instance that there is an inquiry but no comments
