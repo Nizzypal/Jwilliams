@@ -9,7 +9,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                parentInquiry: '@',
                parentUnit: '@'
             },
-            controller: function($scope, $http, $stateParams, API_URL, UserDataService){
+            controller: function($scope, $http, $stateParams, API_URL, UserDataService, UnitDataService){
                 var vm = this;
                 var userID = UserDataService.getUserInfo().userID;
                 var userName = UserDataService.getUserInfo().userName;
@@ -95,8 +95,14 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 vm.inquiryCreate = function (inquiryData, messagesCollection){
 
                     //Fill the inquiry object with relevant information
+                    //inquiryData.unitID = $scope.unitDetails._id;
+
+                    //Get unit info from service
+                    inquiryData = UnitDataService.getUnitInfo();
+                    //Get date for inquiry
                     inquiryData.dateOfInquiry = new Date().toUTCString();
-                    inquiryData.unitID = $scope.unitDetails._id;
+                    inquiryData.userID = userID;
+                    inquiryData.isInquiry = true; 
 
                     $http.post(API_URL + 'createInquiry', inquiryData)
                         .success(function(newInquiry){
