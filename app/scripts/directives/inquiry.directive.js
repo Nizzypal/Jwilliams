@@ -305,24 +305,26 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                             // element.append(newElement);                                
                         });
 
+                    } else {
+
                         //For the instance that there is an inquiry but no comments
                         $(    '<div class="row">' +
                                 '<div class="spacer10"></div>' + 
                                 '<div class="form-group">' +
                                     '<div class="col-md-6" style="padding-left:0px;">' +
                                         '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
-                                        'value="' + e.message + '" ng-model="readMessages.comments[' + (i) + '].message"></textarea >' +
+                                        'value="''" ng-model="readMessages.comments[0].message"></textarea >' +
                                         '<p>By: ' + scope.readMessages.comments[scope.tempInnerIndex].userName + '</p>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
-                        ).insertBefore('div#inquireRoot div.row:last-child'); 
-
-                        var html = $('div#inquireRoot').clone().html();   
-                        var newElement = $compile(html)(scope);
-                        element.html('');
-                        element.append(newElement);                            
+                        ).insertBefore('div#inquireRoot div.row:last-child');                     
                     }
+
+                    var html = $('div#inquireRoot').clone().html();   
+                    var newElement = $compile(html)(scope);
+                    element.html('');
+                    element.append(newElement);                           
                   
 
                     // //Place comments of that inquiry
