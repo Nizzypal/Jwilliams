@@ -1,22 +1,29 @@
 
 <div id="inquireRoot" class="col-md-12">
 
-  <h2 class="text-left"> {{unitDetails.name}}</h2>
-  <h3 class="product-code text-left"> {{unitDetails.size}} sqm.,
-             {{unitDetails.bedroomCount}} Bedrooms,</h3>
-  <h3 class="product-code text-left"> {{unitDetails.bathroomCount}} Bathrooms, </h3>
-  <h3 class="product-code text-left" ng-show="unitDetails.powderCount"> {{unitDetails.powderCount}} Powder rooms </h3>
+  <div class="row">
 
-  <div class="unitDetails-description text-left">
-    <p>Beautiful home. Furnished by interior designer William Sanchez.</p>
-  </div>
-  <br/>
+    <h2 class="product-code text-left"> <span class="price-sales">{{unitDetails.name}}</span></h2>
+    <h3 class="product-code text-left"> {{unitDetails.size}} sqm.,
+               {{unitDetails.bedroomCount}} Bedrooms,</h3>
+    <h3 class="product-code text-left"> {{unitDetails.bathroomCount}} Bathrooms, </h3>
+    <h3 class="product-code text-left" ng-show="unitDetails.powderCount"> {{unitDetails.powderCount}} Powder rooms </h3>
 
-  <div class="product-price text-left"> <span class="price-sales"> Monthly Rate Php {{unitDetails.monthlyRate}}</span> 
-  </div>
-  <div class="product-price text-left"> <span class="price-sales"> Daily Rate Php {{unitDetails.dailyRate}}</span>
-  </div>
 
+  {{unitDetails.name}}
+  {{unitDetails.size}} 
+
+    <div class="unitDetails-description text-left">
+      <p>Beautiful home. Furnished by interior designer William Sanchez.</p>
+    </div>
+    <br/>
+
+    <div class="product-price text-left"> <span class="price-sales"> Monthly Rate Php {{unitDetails.monthlyRate}}</span> 
+    </div>
+    <div class="product-price text-left"> <span class="price-sales"> Daily Rate Php {{unitDetails.dailyRate}}</span>
+    </div>
+
+  </div>
   <div class="row">
     <div class="spacer10"></div>
     <div class="form-group">

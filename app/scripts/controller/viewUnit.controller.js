@@ -15,6 +15,8 @@ angular.module('jwilliams')
     }
 
     UnitDataService.setUnitInfo({unitID: $stateParams.unitID});
+    //Reset Inquiry data since inquiries would be based on unit
+    InquiryDataService.setInquiryInfo({inquiryID: ""});
 
     //Get user info
     $scope.userID = UserDataService.getUserInfo().userID;
