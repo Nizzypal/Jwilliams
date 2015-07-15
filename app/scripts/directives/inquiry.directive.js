@@ -124,9 +124,12 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
 
                 $scope.inquiry = inquiryData;
                 //$scope.comment = commentData;
+
+                $scope.addingInquiry = true;
+                $scope.addingComment = false;
                 $scope.messagesCollection = messagesCollection;
                 $scope.collectionIndex = 0;
-                $scope.currentMessage = messagesCollection[$scope.collectionIndex];
+                //$scope.currentMessage = messagesCollection[$scope.collectionIndex];
                 // $scope.readMessages = {
                 //     baseInquiry: {},
                 //     comments: []
@@ -140,7 +143,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                         inquiryData.unitID = $scope.unitDetails._id;
                     } else {
                         //When you're creating an inquiry
-                        inquiryData.message - inqiury.message;
+                        inquiryData.message = inqiury.message;
                     }
 
                     //Get unit info from service
@@ -174,6 +177,10 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     //$scope.collectionIndex++;
                     //$scope.currentMessage = messagesCollection[$scope.collectionIndex];
 
+                    //Set the flag which says what kind of message is being saved
+                    $scope.addingInquiry = false;
+                    $scope.addingComment = true;
+
                     return true;
                 };
                 
@@ -184,10 +191,23 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                      //Adjust index So that the next area can be bound properly
                     $scope.collectionIndex++;
 
+                    messagesCollection.push(commentData);
+
+                    //Determine if inquiry is read or made
+                    var inquiryIDToBeUsed
+                    if (inquiryID != null){
+                        inquiryIDToBeUsed = inquiryID;
+                    } else {
+                        inquiryIDToBeUsed = messagesCollection[0].id;
+                    }
+
                     //For some reason the messagesCollection is updated automatically so NO need to push
-                    var nextComment = new commentModel(inquiryID, userID, userName, $scope.unitDetails._id,messagesCollection[$scope.collectionIndex].message);
-                    //messagesCollection.push(nextComment);
-                    $scope.currentMessage = messagesCollection[$scope.collectionIndex];
+                    var nextComment = new commentModel(inquiryIDToBeUsed, userID, userName, $scope.unitDetails._id,
+                        messagesCollection[$scope.collectionIndex].message);
+                    
+                    //Place the new comment in the collection
+                    messagesCollection[$scope.collectionIndex] = nextComment;
+                    //$scope.currentMessage = messagesCollection[$scope.collectionIndex];
 
 
                     $http.post(API_URL + 'createInquiry', nextComment)
@@ -256,7 +276,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                                 '<div class="form-group">' +
                                     '<div class="col-md-6" style="padding-left:0px;">' +
                                         '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ng-model="messagesCollection[' + (scope.collectionIndex+1) + '].message"></textarea >' +
-                                        '<p>By: {{messagesCollection[' + (scope.collectionIndex+1) + '].userName}}</p>' +
+                                        //'<p>By: {{messagesCollection[' + (scope.collectionIndex+1) + '].userName}}</p>' +
+                                        '<p>By: {{messagesCollection[' + (scope.collectionIndex) + '].userName}}</p>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>'
@@ -283,6 +304,14 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     //Place inquiry - involves changing its model but since this is always called, checks first if there is a preloaded inquiry
                     if (!(scope.readMessages == null)) {
                       $('textarea#inquire').attr('ng-model', 'readMessages.baseInquiry.message');  
+                        
+                        //set relevant button
+                        $('button#inquire').hide();
+                        $('button#comment').show();
+
+                        //Update messagesCollection and relevant iterator
+                        scope.messagesCollection.push(scope.readMessages.baseInquiry);
+                        //scope.collectionIndex++;
                     }
 
 
@@ -304,6 +333,13 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                                     '</div>'
                                 ).insertBefore('div#inquireRoot div.row:last-child'); 
 
+                                //Update messagesCollection and relevant iterator
+                                scope.messagesCollection.push(scope.readMessages.comments[scope.tempInnerIndex]);
+                                scope.collectionIndex++;                           
+
+                                //Update innerIndex first
+                                scope.tempInnerIndex++;
+
                                 // var html = $('div#inquireRoot').clone().html();   
                                 // var newElement = $compile(html)(scope);
                                 // element.html('');
@@ -317,7 +353,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                                     '<div class="form-group">' +
                                         '<div class="col-md-6" style="padding-left:0px;">' +
                                             '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
-                                            'value="" ng-model="readMessages.comments[0].message"></textarea >' +
+                                            'value="" ng-model="messagesCollection[' + (scope.collectionIndex+1) + '].message"></textarea >' +
                                             '<p>By: ' + scope.userName + '</p>' +
                                         '</div>' +
                                     '</div>' +
