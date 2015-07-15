@@ -16,7 +16,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 var userName = UserDataService.getUserInfo().userName;
                 var unit = UnitDataService.getUnitInfo();
 
-                $scope.tempInnerIndex = 0
+                $scope.tempInnerIndex = '';
 
                 //variables for new inquiry
                 var inquiryData = {
@@ -285,7 +285,27 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
 
 
                     //Place comments of that inquiry
-                    scope.readMessages.comments.forEach(function(e, i, a){
+                    if (scope.readMessages.comments){
+                        scope.readMessages.comments.forEach(function(e, i, a){
+                            $(    '<div class="row">' +
+                                    '<div class="spacer10"></div>' + 
+                                    '<div class="form-group">' +
+                                        '<div class="col-md-6" style="padding-left:0px;">' +
+                                            '<textarea id="" rows="' + scope.textAreaRows + '" placeholder="Put comment here..." class="form-control input-sm" style="float:left" ' + 
+                                            'value="' + e.message + '" ng-model="readMessages.comments[' + (i) + '].message"></textarea >' +
+                                            '<p>By: ' + scope.readMessages.comments[scope.tempInnerIndex].userName + '</p>' +
+                                        '</div>' +
+                                    '</div>' +
+                                '</div>'
+                            ).insertBefore('div#inquireRoot div.row:last-child'); 
+
+                            // var html = $('div#inquireRoot').clone().html();   
+                            // var newElement = $compile(html)(scope);
+                            // element.html('');
+                            // element.append(newElement);                                
+                        });
+
+                        //For the instance that there is an inquiry but no comments
                         $(    '<div class="row">' +
                                 '<div class="spacer10"></div>' + 
                                 '<div class="form-group">' +
@@ -301,8 +321,9 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                         var html = $('div#inquireRoot').clone().html();   
                         var newElement = $compile(html)(scope);
                         element.html('');
-                        element.append(newElement);                                
-                    });                    
+                        element.append(newElement);                            
+                    }
+                  
 
                     // //Place comments of that inquiry
                     // scope.readMessages.comments.forEach(function(e, i, a){
