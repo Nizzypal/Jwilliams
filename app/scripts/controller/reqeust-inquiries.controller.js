@@ -1,6 +1,6 @@
  'use strict';
 //angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $state, API_URL, userIDRes){
-angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $state, API_URL, UserDataService, InquiryDataService){
+angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $state, API_URL, UserDataService, UnitDataService, InquiryDataService){
 
 	var inquiry = {
 		userID: "",
@@ -12,6 +12,9 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
 	};
 
   $scope.userID = UserDataService.getUserInfo().userID;
+
+  //Set unit ID to null since we want to view all inquiries by this user
+  UnitDataService.setUnitInfo({unitID: ''});
 
   $http.post(API_URL + 'userInfo' + '?q=' + $scope.userID).success(function(userInfo) {
       

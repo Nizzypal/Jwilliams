@@ -56,15 +56,18 @@ angular.module('jwilliams').directive('jwDatepicker', function(){
 
 			scope.$watch(function(scope) { return scope.blockedDates }, function(){
 				
-				var temp = JSON.parse(scope.blockedDates);
-				alert();
-				if (temp.length > 0){
-					temp.forEach(function(element, index){
-						if (new Date(element.blockDateStart).getMonth() == (new Date().getMonth())){
-							datesThisMonth.push(element);
-						}
-					});
+				if (scope.blockedDates != null){
+					var temp = JSON.parse(scope.blockedDates);
+					alert();
+					if (temp.length > 0){
+						temp.forEach(function(element, index){
+							if (new Date(element.blockDateStart).getMonth() == (new Date().getMonth())){
+								datesThisMonth.push(element);
+							}
+						});
+					}					
 				}
+
 			});
 
 			function blockDatesSelect (indexDate){
