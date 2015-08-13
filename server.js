@@ -334,7 +334,7 @@ app.post('/createUnit', function(req, res) {
 });
 
 //Server endpoint for getting A unit
-app.get('/getUnit', function(req, res) {
+app.get('/getUnitB', function(req, res) {
 
   var unitID = req.query.unitID;
 

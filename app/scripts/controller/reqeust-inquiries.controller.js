@@ -38,7 +38,7 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
 
       var indexholder = i;
       //get unit of the inquiry
-      $http.get(API_URL + 'getUnit' + '?unitID=' + $scope.inquiries[i].unitID).success(function(unit) {
+      $http.get(API_URL + 'getUnitB' + '?unitID=' + $scope.inquiries[i].unitID).success(function(unit) {
         
         
         console.log('Unit - ' + unit);
