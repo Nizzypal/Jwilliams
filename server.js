@@ -349,7 +349,10 @@ app.get('/getInquiries', function(req, res) {
   //   });
   // }
 
+  //For getting the comments on an inquiry
   var stringId = req.query.q;
+
+  //For getting inquiries of a said user
   var userStringID = req.query.userID;
 
   var baseInquiry = {};
@@ -360,6 +363,8 @@ app.get('/getInquiries', function(req, res) {
 
   //Get all inquiries
   //if (stringId == ""){
+
+  //This means that 
   if (userStringID != null){
     //Find all inquiries made by this user
     Inquiry.find({'userID': userStringID, isInquiry: true}).lean().exec(function(err, inquiries) {
@@ -369,61 +374,86 @@ app.get('/getInquiries', function(req, res) {
       res.json(inquiries);
       return;
     });    
+
   } else {
-    var inquiryID = mongoose.Types.ObjectId(stringId);
-    Inquiry.findById(inquiryID, function(err, foundInquiry) {
 
-      baseInquiry.id = foundInquiry._id.toString();
-      baseInquiry.userID = foundInquiry.userID;
-      baseInquiry.unitID = foundInquiry.unitID;
-      baseInquiry.message = foundInquiry.message;
-      baseInquiry.dateOfInquiry = foundInquiry.dateOfInquiry;
-      baseInquiry.isInquiry = foundInquiry.isInquiry;
-      baseInquiry.haveBeenRepledTo = foundInquiry.haveBeenRepledTo;
+    //Means comments are being gotten
+    if (stringId != undefined && stringId != ''){
 
-      returnInquiries.baseInquiry = baseInquiry;
+      //Get Inquiry and associated comments
+      var inquiryID = mongoose.Types.ObjectId(stringId);
+      Inquiry.findById(inquiryID, function(err, foundInquiry) {
 
-      Inquiry.find({'inquiryID': baseInquiry.id}, function(err, foundComments){
-        if (err) {
-          res.status(500).send({
-            message: 'problem with getting inquiries encountered'
-          });
-          return;
-        }      
+        baseInquiry.id = foundInquiry._id.toString();
+        baseInquiry.userID = foundInquiry.userID;
+        baseInquiry.unitID = foundInquiry.unitID;
+        baseInquiry.message = foundInquiry.message;
+        baseInquiry.dateOfInquiry = foundInquiry.dateOfInquiry;
+        baseInquiry.isInquiry = foundInquiry.isInquiry;
+        baseInquiry.haveBeenRepledTo = foundInquiry.haveBeenRepledTo;
 
-        if (foundComments.length > 0) {
-          returnInquiries.comments = foundComments;
+        returnInquiries.baseInquiry = baseInquiry;
 
+        Inquiry.find({'inquiryID': baseInquiry.id}, function(err, foundComments){
+          if (err) {
+            res.status(500).send({
+              message: 'problem with getting inquiries encountered'
+            });
+            return;
+          }      
+
+          if (foundComments.length > 0) {
+            returnInquiries.comments = foundComments;
+
+            console.log(foundComments);
+            res.status(200).send(returnInquiries); 
+            return;       
+          }
+          
           console.log(foundComments);
-          res.status(200).send(returnInquiries); 
-          return;       
-        }
+          res.status(200).send(returnInquiries);          
+
+        });
+      });  
+
+    }
+
+    // var inquiryID = mongoose.Types.ObjectId(stringId);
+    // Inquiry.findById(inquiryID, function(err, foundInquiry) {
+
+    //   baseInquiry.id = foundInquiry._id.toString();
+    //   baseInquiry.userID = foundInquiry.userID;
+    //   baseInquiry.unitID = foundInquiry.unitID;
+    //   baseInquiry.message = foundInquiry.message;
+    //   baseInquiry.dateOfInquiry = foundInquiry.dateOfInquiry;
+    //   baseInquiry.isInquiry = foundInquiry.isInquiry;
+    //   baseInquiry.haveBeenRepledTo = foundInquiry.haveBeenRepledTo;
+
+    //   returnInquiries.baseInquiry = baseInquiry;
+
+    //   Inquiry.find({'inquiryID': baseInquiry.id}, function(err, foundComments){
+    //     if (err) {
+    //       res.status(500).send({
+    //         message: 'problem with getting inquiries encountered'
+    //       });
+    //       return;
+    //     }      
+
+    //     if (foundComments.length > 0) {
+    //       returnInquiries.comments = foundComments;
+
+    //       console.log(foundComments);
+    //       res.status(200).send(returnInquiries); 
+    //       return;       
+    //     }
         
-        console.log(foundComments);
-        res.status(200).send(returnInquiries);          
+    //     console.log(foundComments);
+    //     res.status(200).send(returnInquiries);          
 
-      });
-
-      // } 
-
-      // if (foundInquiry) {
-      //   var foundInquiryView = {};
-      //   foundInquiryView._id = foundInquiry._id.toString();
-      //   foundInquiryView.name = foundInquiry.name;
-      //   foundInquiryView.address = foundInquiry.address;
-      //   foundInquiryView.size = foundInquiry.size;
-      //   foundInquiryView.bathroomCount = foundInquiry.bathroomCount;
-      //   foundInquiryView.powderCount = foundInquiry.powderCount;
-
-      //   console.log(foundInquiryView);
-      //   res.status(200).send(foundInquiryView);
-      //   return;
-      // }
-
-      //console.log(messages);
-      //res.status(200).send(messages);
-    });    
+    //   });
+    // });    
   }
+  
 });
 
 //Server endpoint for creating inquiries

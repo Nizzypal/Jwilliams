@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('jwilliams')
-  .controller('ViewUnitCtrl', function($scope, $http, $state, API_URL, $stateParams, UserDataService, UnitDataService) {
+  .controller('ViewUnitCtrl', function($scope, $http, $state, API_URL, $stateParams, UserDataService, UnitDataService, InquiryDataService) {
 
     $scope.details = {
       name: '',
@@ -15,6 +15,8 @@ angular.module('jwilliams')
     }
 
     UnitDataService.setUnitInfo({unitID: $stateParams.unitID});
+    //Reset Inquiry data since inquiries would be based on unit
+    InquiryDataService.setInquiryInfo({inquiryID: ""});
 
     //Get user info
     $scope.userID = UserDataService.getUserInfo().userID;
@@ -39,6 +41,27 @@ angular.module('jwilliams')
     })
 
     $scope.DateNow = new Date();
+
+    //Get the inquiries by this user
+    $http.get(API_URL + 'getInquiries' + '?userID=' + $scope.userID).success(function(inquiries) {
+      
+      console.log('Inquiries - ' + inquiries);
+
+      $scope.inquiries = inquiries;
+
+      //get the inquiry for this unit
+      if($scope.inquiries.length > 0){
+          for (var i = 0; i < $scope.inquiries.length; i++){
+              if ($scope.inquiries[i].unitID == UnitDataService.getUnitInfo().unitID){
+                  $scope.parentInquiry = $scope.inquiries[i];
+              }
+          }                         
+      }   
+
+    }).error(function(err) {
+      alert('warning', "Unable to get inquiries");
+    });        
+
 
     // $scope.today = function() {
     //  $scope.dt = new Date();
@@ -109,10 +132,15 @@ angular.module('jwilliams')
 
 
     $scope.goInquire = function(unit) {
-      //$state.go("inquiry");
 
-      var unitID = angular.copy($stateParams.unitID);
-      var userID = angular.copy($scope.userID);
+      if ($scope.parentInquiry){
+        InquiryDataService.setInquiryInfo({inquiryID: $scope.parentInquiry._id,
+        inquiryUnitID: $scope.parentInquiry.unitID});        
+      }
+
+      // var unitID = angular.copy($stateParams.unitID);
+      // var userID = angular.copy($scope.userID);
+
       $state.go("inquiry");
       // $state.go("inquiry", {
       //   "inquiryID": "",
