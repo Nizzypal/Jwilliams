@@ -11,8 +11,10 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
 		haveBeenRepledTo: false		
 	};
 
+  //get user info
   $scope.userID = UserDataService.getUserInfo().userID;
 
+  //get user email
   $http.post(API_URL + 'userInfo' + '?q=' + $scope.userID).success(function(userInfo) {
       
       $scope.userName = userInfo.user.email;
@@ -21,11 +23,29 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
     alert('warning', "Unable to get userInfo");
   })    
 
+  //get inquiries of user
   $http.get(API_URL + 'getInquiries' + '?userID=' + $scope.userID).success(function(inquiries) {
-    
-    console.log('Inquiries - ' + inquiries);
 
+    //Log and stick to scope
+    console.log('Inquiries - ' + inquiries);
     $scope.inquiries = inquiries;
+
+    for (var i = 0; i < $scope.inquiries.length; i++){
+      $scope.inquiries[i].unitName = '';
+
+      var indexholder = i;
+      //get unit of the inquiry
+      $http.get(API_URL + 'getUnit' + '?unitID=' + $scope.inquiries[i].unitID).success(function(unit) {
+        
+        
+        console.log('Unit - ' + unit);
+        $scope.inquiries[indexholder].unitName = unit[0].name;
+
+      }).error(function(err) {
+        alert('warning', "Unable to get unit name");
+      });
+    }
+
   }).error(function(err) {
     alert('warning', "Unable to get inquiries");
   });

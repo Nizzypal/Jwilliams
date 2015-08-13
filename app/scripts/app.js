@@ -8,9 +8,7 @@
  *
  * Main module of the application.
  */
-angular
-  .module('jwilliams', ['ui.router', 'ngAnimate']);
-  //.module('jwilliams', ['ui.router', 'ngAnimate', 'ui.bootstrap']);
+angular.module('jwilliams', ['ui.router', 'ngAnimate']);
 
 angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) {
 
@@ -104,6 +102,7 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
       url:'/messages',
       templateUrl: '/views/reqeust-inquiries.html',
       controller: 'ReqInqCtrl'
+    });
       // resolve: {
       //   userIDRes: function(){
       //     var startNo = location.hash.search('userID=');
@@ -115,7 +114,6 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
       //     };
       //   }
       // }
-    });
 
   $urlRouterProvider.otherwise('/');
 });
@@ -187,5 +185,3 @@ angular.module('jwilliams').directive('endRepeat', ['$timeout',
 
 //constants
 .constant('API_URL', 'http://localhost:3030/')
-// .constant('PIX_HEIGHT', 200);
-// .constant('PIX_WIDTH', 200);

@@ -28,6 +28,7 @@ angular.module('jwilliams').directive('jwNavbarActions', function(){
             },
             link: function($scope, $element, $attrs, $controller){
                  
+                 //watch if the username is already changed and if so reflect it on the navbar
                  $scope.$on('USER_DEFINED', function (event, args) {
                     $scope.username = args.username;
                     $('a#login').html($scope.username);
