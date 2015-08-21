@@ -21,9 +21,9 @@ angular.module('jwilliams').directive('jwNavbarActions', function(){
                     if ($scope.username === "Login" ){
                         $state.go("login", {"isLogin": true});
                     }
-                    else {
-                        $state.go("registration", {"isLogin": "edit"});
-                    }
+                    // else {
+                    //     $state.go("registration", {"isLogin": "edit"});
+                    // }
                 };
             },
             link: function($scope, $element, $attrs, $controller){
