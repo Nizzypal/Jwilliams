@@ -21,18 +21,16 @@
       <table class="table table-bordered" >
         <thead>
           <tr>
-            <th>UNIT</th>
-            <th>LAST UPDATED</th>
-            <th>DATE OF INQUIRY</th>
+            <th style="text-align: center;">UNIT</th>
+            <th style="text-align: center;">LAST UPDATED</th>
+            <th style="text-align: center;">DATE OF INQUIRY</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="inquiry in inquiries" data-href='url://viewUnit/inquiry:{{inquiry.userID}}' ng-click="goInquire(inquiry)">
-            <td>{{userName}}</td><td>{{inquiry.userID}}</td><td>{{inquiry.dateOfInquiry}}</td>
+            <!--<td>{{userName}}</td><td>{{inquiry.userID}}</td><td>{{inquiry.dateOfInquiry}}</td>-->
+            <td>{{inquiry.unitName}}</td><td>{{inquiry.dateOfInquiry}}</td><td>{{inquiry.dateOfInquiry}}</td>
           </tr>
-<!--           <tr class="">
-            <td>TEST</td>
-          </tr> -->
         </tbody>
       </table>
       </div>
