@@ -223,6 +223,7 @@ app.post('/submitItem', function(req, res) {
     name: itemName
   };
 
+  //Check if item already exists
   Item.findOne(searchItem, function(err, existingItem) {
 
     if (existingItem) {
@@ -233,6 +234,7 @@ app.post('/submitItem', function(req, res) {
     }
   });
 
+  //item is saved if new
   var newItem = new Item({
     name: itemName,
     price: itemPrice,
@@ -331,6 +333,35 @@ app.post('/createUnit', function(req, res) {
 
 });
 
+//Server endpoint for getting A unit
+app.get('/getUnitB', function(req, res) {
+
+  var unitID = req.query.unitID;
+
+  // var baseInquiry = {};
+  // var returnInquiries = {
+  //   baseInquiry: {},
+  //   comments: []
+  // };
+
+  //Get all inquiries
+  //if (stringId == ""){
+  if (unitID != null){
+
+    //Find all inquiries made by this user
+    Item.find({'_id': unitID}).lean().exec(function(err, unit) {
+      if (err) return console.error(err);
+
+      res.json(unit);
+      return;
+    }); 
+
+  } else {
+    //Error message   
+  }
+});
+
+//Server endpoint for getting inquiries
 app.get('/getInquiries', function(req, res) {
 
   //Authentication stuff

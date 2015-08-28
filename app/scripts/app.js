@@ -8,16 +8,15 @@
  *
  * Main module of the application.
  */
-angular
-  .module('jwilliams', ['ui.router', 'ngAnimate']);
-  //.module('jwilliams', ['ui.router', 'ngAnimate', 'ui.bootstrap']);
+angular.module('jwilliams', ['ui.router', 'ngAnimate']);
 
 angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) {
 
 
   $stateProvider.state('main', {
     //url: '/?userID&token',
-    url: '/:userName',
+    //url: '/:userName',
+    url: '/',
     templateUrl: '/views/main.html',
     controller: 'MainCtrl'
   });
@@ -90,7 +89,8 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
     $stateProvider.state('inquiry', {
     //url: '/viewUnit/inquiry/:inquiryID',
     //url: '/viewUnit/inquiry?inquiryID&unitID&userID',
-    url: '/viewUnit/inquiry',
+    //url: '/viewUnit/inquiry',
+    url: '/inquiry',
     templateUrl: '/views/inquiry.html',
     controller: 'InquiryCtrl'
   });
@@ -104,6 +104,7 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
       url:'/messages',
       templateUrl: '/views/reqeust-inquiries.html',
       controller: 'ReqInqCtrl'
+    });
       // resolve: {
       //   userIDRes: function(){
       //     var startNo = location.hash.search('userID=');
@@ -115,7 +116,6 @@ angular.module('jwilliams').config(function($stateProvider, $urlRouterProvider) 
       //     };
       //   }
       // }
-    });
 
   $urlRouterProvider.otherwise('/');
 });
@@ -187,5 +187,3 @@ angular.module('jwilliams').directive('endRepeat', ['$timeout',
 
 //constants
 .constant('API_URL', 'http://localhost:3030/')
-// .constant('PIX_HEIGHT', 200);
-// .constant('PIX_WIDTH', 200);

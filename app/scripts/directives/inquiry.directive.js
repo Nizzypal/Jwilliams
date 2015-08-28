@@ -34,6 +34,15 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 var messagesCollection = [];
                 var textAreaRows = 4;
 
+                // //we put needed variables in the $scope
+                // $scope.textAreaRows = textAreaRows;
+                // $scope.userName = userName;
+
+                // $scope.addingInquiry = true;
+                // $scope.addingComment = false;
+                // $scope.messagesCollection = messagesCollection;
+                // $scope.collectionIndex = 0;                
+
                 //Get user name to display in inquiry/comment box
                 function getUserName(element, index, array){                   
 
@@ -113,13 +122,30 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     $http.get(API_URL + 'getUnit' + '?q=' + $scope.parentUnit).success(function(unitDetails) {
                         
                         //places the unit details in the scope so that it can be used in the link function
+                        //$scope.unitDetails = unitDetails;
                         $scope.unitDetails = unitDetails;
-
+                        $scope.unitName = unitDetails.name;
+                        
+                        //Initialize the page w/ all the needed info
+                        // /pageInit();
+        
                     }).error(function(err) {
                       alert('warning', "Unable to get unit");
                     });              
 
-                }                
+                }      
+
+                // function pageInit(){
+                //     //To resolve weird binded stuff not showing
+                //     //$scope.unitName = $scope.unitDetails.name;
+                //     $scope.unitName = $scope.unitDetails.name;
+
+                //     $scope.inquiry = inquiryData;
+                //     $scope.$apply();
+                // }          
+
+                //To resolve weird binded stuff not showing
+                $scope.unitName = $scope.unitDetails.name;
 
                 //we put needed variables in the $scope
                 $scope.textAreaRows = textAreaRows;
@@ -132,11 +158,6 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 $scope.addingComment = false;
                 $scope.messagesCollection = messagesCollection;
                 $scope.collectionIndex = 0;
-                //$scope.currentMessage = messagesCollection[$scope.collectionIndex];
-                // $scope.readMessages = {
-                //     baseInquiry: {},
-                //     comments: []
-                // };
 
                 vm.inquiryCreate = function (inquiryData, messagesCollection){
 
@@ -191,7 +212,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
 
                 vm.commentCreate = function (commentData, messagesCollection){
 
-                     //Adjust index So that the next area can be bound properly
+                    //Adjust index So that the next area can be bound properly
                     $scope.collectionIndex++;
 
                     messagesCollection.push(commentData);
@@ -300,6 +321,15 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     //return scope.tempInnerIndex;
                     return scope.addingInquiry;
                 }, initialize, true);   
+
+                // scope.$watch(function(){
+                //     return scope.unitDetails;
+                // }, function(newval,oldval){
+                //     if (scope.unitDetails){
+                //         scope.unitName = scope.unitDetails.name;
+                //         scope.$apply();
+                //     }
+                // }, true);                   
 
 
                 //Function used for initialization of pre-loaded inquiry/comments
