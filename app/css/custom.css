@@ -2869,6 +2869,35 @@ table tbody tr:hover{
    background-color: grey;
 }
 
+.loader {
+	height: 100%;
+	background-color: black;
+	/*opacity: 0.9;*/
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1;
+	text-align:center;
+	position: fixed;
+	z-index: 99999999;
+}
+
+.image-loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);	
+}
+
+.text-loader{
+    top: 50%;
+    position: relative;
+    font-size: x-large;
+    margin-top: 5px;	
+}
+
 /* DATEPICKER */
 .full button span {
   background-color: limegreen;

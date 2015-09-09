@@ -1,6 +1,6 @@
 'user strict'
 angular.module('jwilliams')
-	.service('UnitDataService', function($http, API_URL){
+	.service('UnitDataService', function($http, $q, API_URL){
 
 		var UnitInfo = {
 	        unitID: '',
@@ -8,8 +8,13 @@ angular.module('jwilliams')
 	    };
 
         var self = this;
+        self.isLoaded = false;
 
         return{
+            isLoaded: function(){
+                return self.isLoaded;
+            },
+
             getUnitInfo: function(){
                 return UnitInfo;
             },
@@ -19,7 +24,9 @@ angular.module('jwilliams')
             },
 
             getUnitInfoFromDB: function(parentUnit){
-                 $http.get(API_URL + 'getUnit' + '?q=' + parentUnit).success(function(unitDetails) {
+                var deferred = $q.defer();
+
+                $http.get(API_URL + 'getUnit' + '?q=' + parentUnit).success(function(unitDetails) {
                     
                     UnitInfo.unitName = unitDetails.name;
                     UnitInfo.unitType = unitDetails.type;
@@ -39,12 +46,16 @@ angular.module('jwilliams')
                     UnitInfo.unitAddress = unitDetails.address;
                     UnitInfo.unitPhotos = unitDetails.photos;
 
-                    return true;
+                    self.isLoaded = true;
+
+                    deferred.resolve();
     
                 }).error(function(err) {
-                  alert('warning', "Unable to get unit");
-                  return false;
-                });                                
+                    alert('warning', "Unable to get unit");
+                    return false;
+                }); 
+
+                return deferred.promise;                               
             }
         };
 
