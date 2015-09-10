@@ -5,15 +5,17 @@ angular.module('jwilliams').controller('InquiryCtrl', function($scope, $statePar
 	$scope.finishLoad = false;
 	$scope.inquiryID = InquiryDataService.getInquiryInfo().inquiryID;
 	$scope.unitDataService = UnitDataService;
+	self.unitDataService = UnitDataService;
 
-
+	$scope.unitDetails = UnitDataService.getUnitInfo();
 
 	if ($scope.inquiryID){
 		//Get unit from inquiry - This is for when you come from the inquiries page
 		$scope.unitID = InquiryDataService.getInquiryInfo().inquiryUnitID;
 		UnitDataService.getUnitInfoFromDB($scope.unitID)
 			.then(function(data){
-				$scope.finishLoad = true;
+				//$scope.finishLoad = true;
+				initPage(data);
 			}, function(err){
 				alert('warning', "Unable to get unit");
 				$scope.finishLoad =  false;
@@ -28,7 +30,7 @@ angular.module('jwilliams').controller('InquiryCtrl', function($scope, $statePar
 		UnitDataService.getUnitInfoFromDB($scope.unitID)
 			.then(function(data){
 				$scope.finishLoad = true;
-				$state.go($state.current, {}, {reload: true});
+				//$state.go($state.current, {}, {reload: true});
 			}, function(err){
 				alert('warning', "Unable to get unit");
 				$scope.finishLoad =  false;
@@ -39,6 +41,14 @@ angular.module('jwilliams').controller('InquiryCtrl', function($scope, $statePar
 	} 
 
 	$scope.userID = UserDataService.getUserInfo().userID;
+
+	function initPage(data){
+		$scope.finishLoad = true;
+		$scope.unitDataService.isLoaded();
+		self.unitDataService.isLoaded();
+		$scope.unitDetails = $scope.unitDataService.getUnitInfo();
+		$scope.$apply();
+	}
 
 	function prepareData(unitID){
 		var bool = true;

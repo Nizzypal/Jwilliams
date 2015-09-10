@@ -8,7 +8,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
             scope: {
                parentInquiry: '@',
                parentUnit: '@',
-               userID: '@'
+               userID: '@',
+               ngModel: '='
             },
             controller: function($scope, $http, $stateParams, API_URL, UserDataService, UnitDataService){
                 var vm = this;
@@ -117,23 +118,29 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 }
 
                 //variable for unit to be inquired about
-                if ($scope.parentUnit){
+                // if ($scope.parentUnit){
 
-                    $http.get(API_URL + 'getUnit' + '?q=' + $scope.parentUnit).success(function(unitDetails) {
+                //     $http.get(API_URL + 'getUnit' + '?q=' + $scope.parentUnit).success(function(unitDetails) {
                         
-                        //places the unit details in the scope so that it can be used in the link function
-                        //$scope.unitDetails = unitDetails;
-                        $scope.unitDetails = unitDetails;
-                        $scope.unitName = unitDetails.name;
+                //         //places the unit details in the scope so that it can be used in the link function
+                //         //$scope.unitDetails = unitDetails;
+                //         $scope.unitDetails = unitDetails;
+                //         $scope.unitName = unitDetails.name;
                         
-                        //Initialize the page w/ all the needed info
-                        // /pageInit();
+                //         //Initialize the page w/ all the needed info
+                //         // /pageInit();
         
-                    }).error(function(err) {
-                      alert('warning', "Unable to get unit");
-                    });              
+                //     }).error(function(err) {
+                //       alert('warning', "Unable to get unit");
+                //     });              
 
-                }      
+                // }      
+
+                //Get UNIT data 
+                $scope.unitDetails = UnitDataService.getUnitInfo();
+                //$scope.unitName = unitDetails.name;
+                //To resolve weird binded stuff not showing
+                $scope.unitName = $scope.unitDetails.name;
 
                 // function pageInit(){
                 //     //To resolve weird binded stuff not showing
@@ -144,8 +151,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 //     $scope.$apply();
                 // }          
 
-                //To resolve weird binded stuff not showing
-                $scope.unitName = $scope.unitDetails.name;
+
 
                 //we put needed variables in the $scope
                 $scope.textAreaRows = textAreaRows;
@@ -256,7 +262,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     this.haveBeenRepledTo = false;       
                 };      
             },
-            link: function(scope, element, attrs, controller){
+            link: function($state, scope, element, attrs, controller, UnitDataService){
 
                 if (scope.messagesCollection.length > 0){
                     $('button#inquire').hide();
@@ -321,6 +327,15 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     //return scope.tempInnerIndex;
                     return scope.addingInquiry;
                 }, initialize, true);   
+
+                scope.$watch(function(){
+                    return scope.ngModel;
+                }, function(newval, oldval){
+                    scope.unitName = scope.unitDetails.unitName;
+                    scope.unitDetails = scope.ngModel;
+                    scope.$apply();
+                    $state.go($state.current, {}, {reload: true});
+                }, true);
 
                 // scope.$watch(function(){
                 //     return scope.unitDetails;

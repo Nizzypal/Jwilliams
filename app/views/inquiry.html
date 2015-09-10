@@ -20,9 +20,9 @@
     <!-- Portfolio Section
     ================================================== -->
     <section id="" class="">
-      <div jw-inquiry parent-inquiry="{{inquiryID}}" parent-unit="{{unitID}}" user-id="{{userID}}"></div>
+      <div jw-inquiry parent-inquiry="{{inquiryID}}" parent-unit="{{unitID}}" user-id="{{userID}}" ng-model="unitDetails"></div>
     </section>
     <!-- End Portfolio Section -->
     
-    <div class="loader" ng-show="{{!unitDataService.isLoaded()}}"><img class="image-loader" src="../images/loader.gif"><div class="text-loader">LOADING...</div></div>
+    <div class="loader" ng-show="!(unitDataService.isLoaded())"><img class="image-loader" src="../images/loader.gif"><div class="text-loader">LOADING...</div></div>
   </div> <!--end of container -->
