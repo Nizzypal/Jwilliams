@@ -287,6 +287,8 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
             },
             link: function(scope, element, attrs, controller, UnitDataService){
 
+                var origHTML = $('div#inquireRoot').children().clone();
+
                 if (scope.messagesCollection.length > 0){
                     $('button#inquire').hide();
                     $('button#comment').show();
@@ -362,24 +364,15 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
                     if (scope.ngModel.inquiryDetails){
                         scope.readMessages = scope.ngModel.inquiryDetails;
                         scope.tempInnerIndex = 0;
+                        scope.collectionIndex = 0;
+                        //?
+                        scope.messagesCollection = [];
                         initialize();
                     }
 
                     //Set the flag which says what kind of message is being saved
                     //scope.addingInquiry = false;                      
-
-                    scope.$apply();
-                    //$state.go($state.current, {}, {reload: true});
-                }, true);
-
-                // scope.$watch(function(){
-                //     return scope.unitDetails;
-                // }, function(newval,oldval){
-                //     if (scope.unitDetails){
-                //         scope.unitName = scope.unitDetails.name;
-                //         scope.$apply();
-                //     }
-                // }, true);                   
+                }, true);                
 
 
                 //Function used for initialization of pre-loaded inquiry/comments
@@ -395,18 +388,20 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
 
                         //Update messagesCollection and relevant iterator
                         scope.messagesCollection.push(scope.readMessages.baseInquiry);
-                        //scope.collectionIndex++;
 
                     }
-
 
                     //Place comments of that inquiry
                     if (scope.readMessages){
 
+                        //Reset rootElement
+                        element.html('');
+                        element.append(origHTML);
+
                         if (scope.readMessages.comments.length > 0){
 
                             scope.readMessages.comments.forEach(function(e, i, a){
-                                $(    '<div class="row">' +
+                                $(  '<div class="row">' +
                                         '<div class="spacer10"></div>' + 
                                         '<div class="form-group">' +
                                             '<div class="col-md-6" style="padding-left:0px;">' +
@@ -424,12 +419,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
                                 scope.collectionIndex++;                           
 
                                 //Update innerIndex first
-                                scope.tempInnerIndex++;                               
-
-                                // var html = $('div#inquireRoot').clone().html();   
-                                // var newElement = $compile(html)(scope);
-                                // element.html('');
-                                // element.append(newElement);                                
+                                scope.tempInnerIndex++;                                                              
                             });
 
                             // Add last blank comment box
@@ -457,7 +447,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
                                         '</div>' +
                                     '</div>' +
                                 '</div>'
-                            ).insertBefore('div#inquireRoot div.row:last-child');                                
+                            ).insertBefore('div#inquireRoot div.row:last-child');   
                         }
 
                     } else {                 
@@ -465,8 +455,11 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
 
                     var html = $('div#inquireRoot').clone().html();   
                     var newElement = $compile(html)(scope);
+
                     element.html('');
-                    element.append(newElement);                           
+                    //element.empty();
+                    element.append(newElement); 
+                      
                   
 
                     // //Place comments of that inquiry
