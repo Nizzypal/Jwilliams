@@ -48,7 +48,7 @@ angular.module('jwilliams')
 
                     self.isLoaded = true;
 
-                    deferred.resolve();
+                    deferred.resolve("unit");
     
                 }).error(function(err) {
                     alert('warning', "Unable to get unit");

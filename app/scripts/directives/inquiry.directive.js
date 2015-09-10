@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('jwilliams').directive('jwInquiry', function($compile){
+angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
         return {
             restrict: 'AE',
             templateUrl: 'app/views/inquiry.tpl.html',
@@ -11,7 +11,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                userID: '@',
                ngModel: '='
             },
-            controller: function($scope, $http, $stateParams, API_URL, UserDataService, UnitDataService){
+            controller: function($scope, $http, $stateParams, $state, API_URL, UserDataService, UnitDataService, InquiryDataService){
                 var vm = this;
                 var userID = UserDataService.getUserInfo().userID;
                 var userName = UserDataService.getUserInfo().userName;
@@ -96,28 +96,28 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
 
                 // }
 
-                //variable for existing inquiry
-                if ($scope.parentInquiry){
+                // //variable for existing inquiry
+                // if ($scope.parentInquiry){
 
-                    $http.get(API_URL + 'getInquiries' + '?q=' + $scope.parentInquiry + '').success(function(inquiries) {
-                        //places the inquiries in the scope so that it can be used in the link function
-                        $scope.readMessages = inquiries;
+                //     $http.get(API_URL + 'getInquiries' + '?q=' + $scope.parentInquiry + '').success(function(inquiries) {
+                //         //places the inquiries in the scope so that it can be used in the link function
+                //         $scope.readMessages = inquiries;
 
-                        //Give username info to the messages
-                        $scope.readMessages.comments.forEach(getUserName);
+                //         //Give username info to the messages
+                //         $scope.readMessages.comments.forEach(getUserName);
 
-                        $scope.tempInnerIndex = 0;
+                //         $scope.tempInnerIndex = 0;
 
-                        //Set the flag which says what kind of message is being saved
-                        $scope.addingInquiry = false;                        
+                //         //Set the flag which says what kind of message is being saved
+                //         $scope.addingInquiry = false;                        
                     
-                    }).error(function(err) {
-                      alert('warning', "Unable to get inqiury");
-                    })                
+                //     }).error(function(err) {
+                //       alert('warning', "Unable to get inqiury");
+                //     })                
 
-                }
+                // }
 
-                //variable for unit to be inquired about
+                ////variable for unit to be inquired about
                 // if ($scope.parentUnit){
 
                 //     $http.get(API_URL + 'getUnit' + '?q=' + $scope.parentUnit).success(function(unitDetails) {
@@ -137,10 +137,17 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 // }      
 
                 //Get UNIT data 
-                $scope.unitDetails = UnitDataService.getUnitInfo();
-                //$scope.unitName = unitDetails.name;
-                //To resolve weird binded stuff not showing
-                $scope.unitName = $scope.unitDetails.name;
+                if ($scope.parentUnit){
+                    $scope.unitDetails = UnitDataService.getUnitInfo();
+                    //$scope.unitName = unitDetails.name;
+                    //To resolve weird binded stuff not showing
+                    $scope.unitName = $scope.unitDetails.name;                    
+                }
+
+                //Get INQUIRY data
+                if ($scope.parentInquiry){
+                   $scope.readMessages = InquiryDataService.Inq2();
+                }
 
                 // function pageInit(){
                 //     //To resolve weird binded stuff not showing
@@ -260,9 +267,25 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                     this.dateOfInquiry = new Date().toUTCString();
                     this.isInquiry = false;
                     this.haveBeenRepledTo = false;       
-                };      
+                };     
+
+                // $scope.$watch(function(){
+                //     return $scope.ngModel;
+                // }, function(newval, oldval){
+
+                //     $scope.unitName = $scope.ngModel.unitDetails.unitName;
+                //     $scope.unitDetails = $scope.ngModel.unitDetails;
+
+                //     $scope.readMessages = $scope.ngModel.inquiryDetails;
+                //     $scope.tempInnerIndex = 0;
+                //     //Set the flag which says what kind of message is being saved
+                //     //$scope.addingInquiry = false;                      
+
+                //     $scope.$apply();
+                //     $state.go($state.current, {}, {reload: true});
+                // }, true);                 
             },
-            link: function($state, scope, element, attrs, controller, UnitDataService){
+            link: function(scope, element, attrs, controller, UnitDataService){
 
                 if (scope.messagesCollection.length > 0){
                     $('button#inquire').hide();
@@ -331,10 +354,22 @@ angular.module('jwilliams').directive('jwInquiry', function($compile){
                 scope.$watch(function(){
                     return scope.ngModel;
                 }, function(newval, oldval){
-                    scope.unitName = scope.unitDetails.unitName;
-                    scope.unitDetails = scope.ngModel;
+
+                    if (scope.ngModel.unitDetails){
+                        scope.unitName = scope.ngModel.unitDetails.unitName;
+                        scope.unitDetails = scope.ngModel.unitDetails;
+                    }
+                    if (scope.ngModel.inquiryDetails){
+                        scope.readMessages = scope.ngModel.inquiryDetails;
+                        scope.tempInnerIndex = 0;
+                        initialize();
+                    }
+
+                    //Set the flag which says what kind of message is being saved
+                    //scope.addingInquiry = false;                      
+
                     scope.$apply();
-                    $state.go($state.current, {}, {reload: true});
+                    //$state.go($state.current, {}, {reload: true});
                 }, true);
 
                 // scope.$watch(function(){
