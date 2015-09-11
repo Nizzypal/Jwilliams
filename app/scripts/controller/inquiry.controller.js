@@ -16,11 +16,11 @@ angular.module('jwilliams').controller('InquiryCtrl', function($scope, $statePar
 	$scope.dataModel = {};
 
 	if ($scope.inquiryID){
+		
 		//Get unit from inquiry - This is for when you come from the inquiries page
 		$scope.unitID = InquiryDataService.getInquiryInfo().inquiryUnitID;
 		UnitDataService.getUnitInfoFromDB($scope.unitID)
 			.then(function(data){
-				//$scope.finishLoad = true;
 				initPage(data);
 			}, function(err){
 				alert('warning', "Unable to get unit");
@@ -49,9 +49,6 @@ angular.module('jwilliams').controller('InquiryCtrl', function($scope, $statePar
 				alert('warning', "Unable to get unit");
 				$scope.finishLoad =  false;
 			});		
-		// if (prepareData($scope.unitID) == true){
-		// 	self.finishLoad=true;
-		// }
 	} 
 
 	$scope.userID = UserDataService.getUserInfo().userID;
@@ -70,16 +67,16 @@ angular.module('jwilliams').controller('InquiryCtrl', function($scope, $statePar
 		//$scope.$apply();
 	}
 
-	function prepareData(unitID){
-		var bool = true;
-		// UnitDataService.getUnitInfoFromDB(unitID)
-		// 	.then(function(data){
-		// 		return true;
-		// 	}, function(err){
-		// 		alert('warning', "Unable to get unit");
-		// 		return false;
-		// 	});
-	};
+	// function prepareData(unitID){
+	// 	var bool = true;
+	// 	// UnitDataService.getUnitInfoFromDB(unitID)
+	// 	// 	.then(function(data){
+	// 	// 		return true;
+	// 	// 	}, function(err){
+	// 	// 		alert('warning', "Unable to get unit");
+	// 	// 		return false;
+	// 	// 	});
+	// };
 
 	function tempCallback(){
 

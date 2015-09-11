@@ -33,16 +33,7 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
 
                 var inquiryID = null;
                 var messagesCollection = [];
-                var textAreaRows = 4;
-
-                // //we put needed variables in the $scope
-                // $scope.textAreaRows = textAreaRows;
-                // $scope.userName = userName;
-
-                // $scope.addingInquiry = true;
-                // $scope.addingComment = false;
-                // $scope.messagesCollection = messagesCollection;
-                // $scope.collectionIndex = 0;                
+                var textAreaRows = 4;         
 
                 //Get user name to display in inquiry/comment box
                 function getUserName(element, index, array){                   
@@ -148,17 +139,6 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
                 if ($scope.parentInquiry){
                    $scope.readMessages = InquiryDataService.Inq2();
                 }
-
-                // function pageInit(){
-                //     //To resolve weird binded stuff not showing
-                //     //$scope.unitName = $scope.unitDetails.name;
-                //     $scope.unitName = $scope.unitDetails.name;
-
-                //     $scope.inquiry = inquiryData;
-                //     $scope.$apply();
-                // }          
-
-
 
                 //we put needed variables in the $scope
                 $scope.textAreaRows = textAreaRows;

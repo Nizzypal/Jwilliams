@@ -14,7 +14,9 @@ angular.module('jwilliams')
       photos: []
     }
 
+    //Set and then get unit info
     UnitDataService.setUnitInfo({unitID: $stateParams.unitID});
+    UnitDataService.getUnitInfoFromDB($stateParams.unitID);
     //Reset Inquiry data since inquiries would be based on unit
     InquiryDataService.setInquiryInfo({inquiryID: ""});
 
