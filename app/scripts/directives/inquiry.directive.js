@@ -157,10 +157,11 @@ angular.module('jwilliams').directive('jwInquiry', function($compile, $state){
                     //Fill the inquiry object with relevant information
                     if ($scope.unitDetails){
                         //For the case where you came from a pre selected inquiry
-                        inquiryData.unitID = $scope.unitDetails._id;
+                        inquiryData.unitID = $scope.unitDetails.unitID;
+                        inquiryData.message = inquiryData.message;
                     } else {
                         //When you're creating an inquiry
-                        inquiryData.message = inqiury.message;
+                        inquiryData.message = inquiryData.message;
                     }
 
                     //Get unit info from service

@@ -35,7 +35,7 @@ angular.module('jwilliams').controller('LoginCtrl', function($scope, $stateParam
 		$scope.isLogin = true;
 	}
 
-	alert("$scope.isLogin - " + $scope.isLogin);
+	//alert("$scope.isLogin - " + $scope.isLogin);
 
 	vm.submit = function(){
 		//alert('user - ' + user.email);
