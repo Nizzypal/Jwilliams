@@ -37,16 +37,26 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
       $scope.inquiries[i].unitName = '';
 
       var indexholder = i;
-      //get unit of the inquiry
-      $http.get(API_URL + 'getUnitB' + '?unitID=' + $scope.inquiries[i].unitID).success(function(unit) {
-        
-        
-        console.log('Unit - ' + unit);
-        $scope.inquiries[indexholder].unitName = unit[0].name;
 
-      }).error(function(err) {
-        alert('warning', "Unable to get unit name");
-      });
+      //get unit of the inquiry
+      UnitDataService.getUnitInfoFromDB($scope.inquiries[i].unitID)
+        .then(function(data){
+          $scope.inquiries[indexholder].unitName = UnitDataService.getUnitInfo().name;
+          $scope.inquiries[indexholder].address =UnitDataService.getUnitInfo().address;
+        }, function(err){
+          alert('warning', "Unable to get unit");
+          $scope.finishLoad =  false;
+        });
+
+      //Original method of getting unit info
+      // $http.get(API_URL + 'getUnitB' + '?unitID=' + $scope.inquiries[i].unitID).success(function(unit) {
+      //   console.log('Unit - ' + unit);
+      //   $scope.inquiries[indexholder].unitName = unit[0].name;
+
+      // }).error(function(err) {
+      //   alert('warning', "Unable to get unit name");
+      // });
+
     }
 
   }).error(function(err) {
