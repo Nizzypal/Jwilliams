@@ -41,8 +41,8 @@ angular.module('jwilliams').controller('ReqInqCtrl', function($scope, $http, $st
       //get unit of the inquiry
       UnitDataService.getUnitInfoFromDB($scope.inquiries[i].unitID)
         .then(function(data){
-          $scope.inquiries[indexholder].unitName = UnitDataService.getUnitInfo().name;
-          $scope.inquiries[indexholder].address =UnitDataService.getUnitInfo().address;
+          $scope.inquiries[indexholder].unit = UnitDataService.getUnitInfo().unitName;
+          $scope.inquiries[indexholder].address = UnitDataService.getUnitInfo().unitAddress;
         }, function(err){
           alert('warning', "Unable to get unit");
           $scope.finishLoad =  false;

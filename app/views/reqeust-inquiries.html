@@ -22,6 +22,7 @@
         <thead>
           <tr>
             <th style="text-align: center;">UNIT</th>
+            <th style="text-align: center;">ADDRESS</th>            
             <th style="text-align: center;">LAST UPDATED</th>
             <th style="text-align: center;">DATE OF INQUIRY</th>
           </tr>
@@ -29,7 +30,7 @@
         <tbody>
           <tr ng-repeat="inquiry in inquiries" data-href='url://viewUnit/inquiry:{{inquiry.userID}}' ng-click="goInquire(inquiry)">
             <!--<td>{{userName}}</td><td>{{inquiry.userID}}</td><td>{{inquiry.dateOfInquiry}}</td>-->
-            <td>{{inquiry.unitName}}</td><td>{{inquiry.address}}</td><td>{{inquiry.dateOfInquiry}}</td><td>{{inquiry.dateOfInquiry}}</td>
+            <td>{{inquiry.unit}}</td><td>{{inquiry.address}}</td><td>{{inquiry.dateOfInquiry}}</td><td>{{inquiry.dateOfInquiry}}</td>
           </tr>
         </tbody>
       </table>
