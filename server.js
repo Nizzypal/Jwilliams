@@ -2,6 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+var mongo = require('mongodb');
+var version = mongo.version;
+
 //Model Requires
 var User = require('./models/user.js');
 var Item = require('./models/item.js');
@@ -1480,7 +1483,12 @@ function handleError(res){
 
 
 //Config Stuff
+console.log('mongoose-' + mongoose.version);
 mongoose.connect('mongodb://jwmgiadmin:WYNE012!!!@ds041561.mongolab.com:41561/jwmgi');
+//mongoose.connect('mongodb://testadmin:testadmin@ds041561.mongolab.com:41561/jwmgi?connectTimeoutMS=300000');
+//mongoose.connect('mongodb://jon:jon@ds051534.mongolab.com:51534/jontestdb');
+
+
 
 //app.set('views', __dirname + '/app/');
 //app.set('view engine','jade');
